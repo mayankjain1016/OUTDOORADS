@@ -70,7 +70,7 @@ export function Testimonials() {
               
               {/* Quote */}
               <blockquote className="text-base text-primary-700 leading-relaxed font-medium">
-                "{t.quote}"
+                &quot;{t.quote}&quot;
               </blockquote>
             </motion.div>
           ))}

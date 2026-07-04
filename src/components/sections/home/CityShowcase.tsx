@@ -41,7 +41,7 @@ export function CityShowcase() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-primary-900 mb-6"
           >
-            Dominating India's <br className="hidden md:block" />
+            Dominating India&apos;s <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-accent">Key Markets</span>
           </motion.h2>
           <motion.p
