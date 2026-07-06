@@ -92,6 +92,7 @@ export const INDUSTRIES: Industry[] = [
   { id: "ind-5", name: "FMCG" },
   { id: "ind-6", name: "Entertainment" },
   { id: "ind-7", name: "Finance" },
+  { id: "ind-8", name: "Healthcare" },
 ];
 
 export const GALLERY: GalleryItem[] = [

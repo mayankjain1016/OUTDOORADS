@@ -1,130 +1,237 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, ChevronDown, Check } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
+import { CITIES, MEDIA_INVENTORY } from "@/data";
+import { MediaType } from "@/types";
 
-export function Hero() {
+function HeroDropdown({ 
+  value, 
+  options, 
+  onChange, 
+  label,
+  defaultLabel
+}: { 
+  value: string | null, 
+  options: { id: string, name: string }[], 
+  onChange: (val: string) => void,
+  label: string,
+  defaultLabel: string
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(opt => opt.id === value) || { id: "", name: defaultLabel };
+
   return (
-    <section className="relative min-h-screen pt-32 pb-20 bg-black overflow-hidden flex flex-col items-center">
-      
-      {/* Cinematic Background Image Overlay */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <Image 
-          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2500&auto=format&fit=crop"
-          alt="Urban cityscape background"
-          fill
-          priority
-          className="object-cover opacity-30 grayscale"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-transparent" />
+    <div className="relative group w-full sm:w-auto flex-1" ref={dropdownRef}>
+      <div 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex flex-col px-6 py-2.5 rounded-full bg-transparent hover:bg-white/5 transition-colors duration-200 cursor-pointer w-full"
+      >
+        <span className="text-[11px] font-medium tracking-wide text-white/50 mb-0.5 text-left">{label}</span>
+        <div className="flex items-center justify-between">
+          <span className={`text-[15px] font-semibold truncate ${value ? 'text-white' : 'text-white/80'}`}>
+            {selectedOption.name}
+          </span>
+          <ChevronDown className={`w-3.5 h-3.5 ml-2 transition-transform duration-200 ${isOpen ? "rotate-180 text-white" : "text-white/40"}`} />
+        </div>
       </div>
 
-      {/* Background ambient glow */}
-      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80%] h-[50%] bg-zinc-800/30 blur-[120px] rounded-full pointer-events-none z-0" />
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 mt-3 w-full min-w-[240px] bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 py-1.5"
+          >
+            <div className="max-h-60 overflow-y-auto no-scrollbar flex flex-col p-1.5 gap-0.5">
+              <div 
+                onClick={() => { onChange(""); setIsOpen(false); }}
+                className={`px-4 py-2.5 rounded-xl text-[14px] font-medium cursor-pointer transition-colors ${
+                  !value ? "bg-white/10 text-white" : "text-white/60 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                {defaultLabel}
+              </div>
+              {options.map((opt) => (
+                <div 
+                  key={opt.id}
+                  onClick={() => { onChange(opt.id); setIsOpen(false); }}
+                  className={`px-4 py-2.5 rounded-xl text-[14px] font-medium cursor-pointer transition-colors flex items-center justify-between ${
+                    value === opt.id ? "bg-white/10 text-white" : "text-white/60 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {opt.name}
+                  {value === opt.id && <Check className="w-4 h-4" />}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
+export function Hero() {
+  const router = useRouter();
+  const [selectedCityId, setSelectedCityId] = useState<string | null>(null);
+  const [selectedMediaType, setSelectedMediaType] = useState<MediaType | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+
+  const availableMediaTypes = useMemo(() => {
+    if (!selectedCityId) return [];
+    const mediaInCity = MEDIA_INVENTORY.filter((m) => m.cityId === selectedCityId);
+    const types = new Set(mediaInCity.map((m) => m.type));
+    return Array.from(types);
+  }, [selectedCityId]);
+
+  const availableLocations = useMemo(() => {
+    if (!selectedCityId) return [];
+    let media = MEDIA_INVENTORY.filter((m) => m.cityId === selectedCityId);
+    if (selectedMediaType) {
+      media = media.filter((m) => m.type === selectedMediaType);
+    }
+    const locations = new Set(media.map((m) => m.area));
+    return Array.from(locations);
+  }, [selectedCityId, selectedMediaType]);
+
+  const handleSearch = () => {
+    router.push("/city-showcase");
+  };
+
+  return (
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      
+      {/* Edge-to-Edge Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="https://images.unsplash.com/photo-1555448248-2571daf6344b?q=80&w=2000&auto=format&fit=crop"
+          alt="Premium Billboard Advertising"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Dark Gradient Overlay for perfect text readability */}
+        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950/90" />
+      </div>
+
+      {/* Top Centered Content */}
+      <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center pt-24">
         
-        {/* Apple-style pill */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+        {/* Ultra-Clean Dark Pill UI */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
+          className="w-full max-w-[800px] mx-auto mb-16 relative z-40"
         >
-          <Link href="/inventory" className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 transition-all duration-300 group">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <span className="text-xs font-semibold text-zinc-300 tracking-wide uppercase">
-              New Inventory Added
-            </span>
-            <ChevronRight className="h-3 w-3 text-zinc-500 group-hover:text-white transition-colors" />
-          </Link>
+          <div className="flex flex-col md:flex-row items-center justify-between p-2 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] sm:rounded-full shadow-2xl">
+            
+            <div className="flex flex-col sm:flex-row items-center w-full md:w-auto flex-1 px-1">
+              <HeroDropdown 
+                value={selectedCityId}
+                options={CITIES}
+                onChange={(val) => {
+                  setSelectedCityId(val);
+                  setSelectedMediaType(null);
+                  setSelectedLocation(null);
+                }}
+                label="Location"
+                defaultLabel="Any City"
+              />
+              <div className="hidden sm:block w-[1px] h-10 bg-white/10 mx-1" />
+              <HeroDropdown 
+                value={selectedMediaType}
+                options={availableMediaTypes.map(t => ({ id: t, name: t }))}
+                onChange={(val) => {
+                  setSelectedMediaType(val ? (val as MediaType) : null);
+                  setSelectedLocation(null);
+                }}
+                label="Media Type"
+                defaultLabel="All Types"
+              />
+              <div className="hidden sm:block w-[1px] h-10 bg-white/10 mx-1" />
+              <HeroDropdown 
+                value={selectedLocation}
+                options={availableLocations.map(l => ({ id: l, name: l }))}
+                onChange={(val) => setSelectedLocation(val || null)}
+                label="Area"
+                defaultLabel="All Areas"
+              />
+            </div>
+
+            <div 
+              onClick={handleSearch}
+              className="mt-3 md:mt-0 ml-0 md:ml-3 flex w-full md:w-14 h-12 md:h-14 items-center justify-center rounded-[1.5rem] md:rounded-full bg-brand-blue hover:bg-blue-500 text-white transition-colors duration-200 cursor-pointer shadow-lg shrink-0"
+            >
+               <Search className="w-5 h-5" />
+            </div>
+            
+          </div>
         </motion.div>
 
         <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-[7rem] font-medium tracking-tighter text-white leading-[0.95] mb-6 font-heading"
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-5xl md:text-7xl lg:text-[7.5rem] font-light tracking-tight text-white leading-[1.05] mb-6 max-w-5xl"
         >
-          The Future of <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-400 to-zinc-600">
-            Out-of-Home.
-          </span>
+          Premium Outdoor <br className="hidden md:block" />
+          <span className="text-white/70">Advertising.</span>
         </motion.h1>
 
         <motion.p 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="text-lg md:text-xl text-zinc-400 font-light max-w-2xl mx-auto mb-10 leading-relaxed"
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-lg md:text-xl text-white/80 font-light max-w-2xl mb-16 leading-relaxed"
         >
-          Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network with a single click.
+          Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
         </motion.p>
 
+        {/* Clean Metrics Row */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center gap-4 mb-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="flex items-center justify-center gap-12 md:gap-24"
         >
-          <Link href="/contact">
-            <Button size="lg" className="w-full sm:w-auto h-12 px-8 rounded-full bg-white text-black hover:bg-zinc-200 transition-all font-semibold text-sm">
-              Start Your Campaign
-            </Button>
-          </Link>
-          <Link href="/inventory" className="group">
-            <div className="flex items-center gap-2 text-sm font-semibold text-zinc-300 hover:text-white transition-colors px-6 py-3">
-              Explore Locations
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </Link>
+          <div className="text-center">
+            <span className="text-4xl md:text-5xl font-light text-white block mb-2">5M+</span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">Daily Views</span>
+          </div>
+          <div className="w-px h-12 bg-white/20" />
+          <div className="text-center">
+            <span className="text-4xl md:text-5xl font-light text-white block mb-2">200+</span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">Premium Sites</span>
+          </div>
+          <div className="w-px h-12 bg-white/20 hidden sm:block" />
+          <div className="text-center hidden sm:block">
+            <span className="text-4xl md:text-5xl font-light text-white block mb-2">Pan India</span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">Active Regions</span>
+          </div>
         </motion.div>
+
       </div>
 
-      {/* Massive Cinematic Image Reveal */}
-      <motion.div
-        initial={{ opacity: 0, y: 60, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-        className="relative w-[95%] max-w-7xl mx-auto aspect-[16/9] md:aspect-[21/9] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-zinc-800/50 shadow-2xl shadow-black"
-      >
-        <Image 
-          src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2500&auto=format&fit=crop"
-          alt="Premium Digital Billboard"
-          fill
-          priority
-          className="object-cover scale-105 hover:scale-110 transition-transform duration-[10s] ease-out"
-        />
-        
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
-
-        {/* Floating Glassmorphic Stats */}
-        <div className="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
-          <div className="flex gap-4">
-            <div className="backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl p-4 md:p-6 flex flex-col">
-              <span className="text-3xl md:text-4xl font-bold text-white mb-1">5M+</span>
-              <span className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-400 font-semibold">Daily Reach</span>
-            </div>
-            <div className="backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl p-4 md:p-6 flex flex-col hidden sm:flex">
-              <span className="text-3xl md:text-4xl font-bold text-white mb-1">200+</span>
-              <span className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-400 font-semibold">Premium Sites</span>
-            </div>
-          </div>
-          
-          <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-full px-6 py-3 flex items-center gap-3">
-            <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm font-medium text-white tracking-wide">Network is fully operational</span>
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 }

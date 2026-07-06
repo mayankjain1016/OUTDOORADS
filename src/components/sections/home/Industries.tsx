@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { INDUSTRIES } from "@/data";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { Car, Building2, Gem, Smartphone, ShoppingCart, Clapperboard, Briefcase, Plane } from "lucide-react";
+import { Car, Building2, Gem, Smartphone, ShoppingCart, Clapperboard, Briefcase, Activity, Plane } from "lucide-react";
 
 const getIndustryIcon = (name: string) => {
   switch (name) {
@@ -14,6 +14,7 @@ const getIndustryIcon = (name: string) => {
     case "FMCG": return <ShoppingCart className="h-6 w-6" />;
     case "Entertainment": return <Clapperboard className="h-6 w-6" />;
     case "Finance": return <Briefcase className="h-6 w-6" />;
+    case "Healthcare": return <Activity className="h-6 w-6" />;
     default: return <Plane className="h-6 w-6" />;
   }
 };

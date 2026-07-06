@@ -2,7 +2,6 @@ import { Hero } from "@/components/sections/home/Hero";
 import { Stats } from "@/components/sections/home/Stats";
 import { FeaturedMedia } from "@/components/sections/home/FeaturedMedia";
 import { FeaturedCities } from "@/components/sections/home/FeaturedCities";
-import { CityShowcase } from "@/components/sections/home/CityShowcase";
 import { Industries } from "@/components/sections/home/Industries";
 import { LogoWall } from "@/components/sections/home/LogoWall";
 import { Testimonials } from "@/components/sections/home/Testimonials";
@@ -16,7 +15,6 @@ export default function Home() {
       <LogoWall />
       <Stats />
       <FeaturedCities />
-      <CityShowcase />
       <FeaturedMedia />
       <Industries />
       <Process />
