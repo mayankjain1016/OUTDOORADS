@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "@/logo.jpeg";
-import { ArrowRight } from "lucide-react";
+
 
 
 export function Footer() {
@@ -22,8 +21,10 @@ export function Footer() {
           <div className="lg:col-span-5 space-y-8 pr-8">
             <Link href="/" className="inline-flex items-center group">
               <Image 
-                src={logoImg}
+                src="/LOGO.png"
                 alt="ApexOOH Logo"
+                width={200}
+                height={50}
                 className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-xl"
               />
             </Link>

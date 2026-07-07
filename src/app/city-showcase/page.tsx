@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CITIES, MEDIA_INVENTORY } from "@/data";
 import { MediaType } from "@/types";
-import { MapPin, Search, Maximize, Activity, Navigation2, ArrowUpRight, ChevronDown, Monitor, Check } from "lucide-react";
+import { MapPin, Search, Maximize, Activity, Navigation2, ChevronDown, Monitor, Check } from "lucide-react";
 import Image from "next/image";
 
 function CustomDropdown({ 
@@ -18,7 +18,7 @@ function CustomDropdown({
   value: string | null, 
   options: { id: string, name: string }[], 
   onChange: (val: string) => void,
-  icon: any,
+  icon: React.ElementType,
   label: string,
   defaultLabel: string
 }) {
@@ -99,11 +99,17 @@ export default function CityShowcase() {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const availableMediaTypes = useMemo(() => {
-    if (!selectedCityId) return [];
-    const mediaInCity = MEDIA_INVENTORY.filter((m) => m.cityId === selectedCityId);
-    const types = new Set(mediaInCity.map((m) => m.type));
-    return Array.from(types);
-  }, [selectedCityId]);
+    return [
+      "Hoarding",
+      "Unipole",
+      "Pole Kiosk",
+      "Traffic Booth",
+      "Billboard",
+      "Digital Screen",
+      "Bus Shelter",
+      "Wall Wrap"
+    ];
+  }, []);
 
   const availableLocations = useMemo(() => {
     if (!selectedCityId) return [];

@@ -21,7 +21,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const useDarkText = isScrolled || pathname !== "/";
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +38,7 @@ export function Navbar() {
         <div 
           className={cn(
             "pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-            "bg-white/95 backdrop-blur-2xl shadow-[0_8px_40px_rgb(0,0,0,0.12)] border border-zinc-200/80 rounded-full p-2 w-full max-w-6xl",
+            "bg-white/95 backdrop-blur-2xl shadow-[0_8px_40px_rgb(0,0,0,0.12)] border border-zinc-200/80 rounded-full p-2 w-full max-w-[1226px]",
             isScrolled ? "scale-y-100 translate-y-0" : "scale-y-100 translate-y-0"
           )}
         >

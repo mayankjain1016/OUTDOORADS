@@ -2,139 +2,143 @@
 
 import { motion } from "framer-motion";
 import { CLIENTS, STATS } from "@/data";
-import { SectionHeading } from "@/components/shared/SectionHeading";
 import Image from "next/image";
 
-export default function Clients() {
-  const categories = Array.from(new Set(CLIENTS.map(c => c.category)));
+import { Network } from "lucide-react";
 
+export default function Clients() {
   return (
-    <div className="min-h-screen pt-24 bg-primary-foreground">
+    <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
       
+      {/* Background Gradient */}
+      <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-slate-50 z-0 pointer-events-none" />
+
       {/* Hero Section */}
-      <section className="py-20 bg-primary-950 text-white">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8 text-center max-w-4xl">
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold font-heading mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+      <section className="relative z-10 pt-32 pb-16 flex flex-col justify-center">
+        <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center">
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200 mb-6"
           >
-            The Brands We <span className="text-brand-accent">Elevate</span>
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-primary-300"
+            <Network className="w-4 h-4 text-brand-blue animate-pulse" />
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
+              Our Network
+            </span>
+          </motion.div>
+
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-black font-heading tracking-tight text-slate-900 mb-4 max-w-5xl"
+          >
+            The Brands We <span className="text-brand-blue">Elevate</span>
+          </motion.h2>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-slate-500 max-w-2xl mx-auto mb-16"
           >
             Join hundreds of industry leaders who trust ApexOOH for their nationwide outdoor campaigns.
           </motion.p>
-          
+
+          {/* Clean Centered Metrics Pill */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-primary-800"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap items-center justify-center gap-8 md:gap-16 bg-white border border-slate-100 rounded-[2.5rem] px-10 py-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
           >
             <div className="text-center">
-              <h3 className="text-4xl font-bold text-white mb-2">{STATS.happyClients}+</h3>
-              <p className="text-sm text-primary-400 uppercase tracking-wider">Active Clients</p>
+              <span className="text-4xl md:text-5xl font-light text-slate-900 block mb-2">{STATS.happyClients}+</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Active Clients</span>
             </div>
+            <div className="w-px h-12 bg-slate-100 hidden sm:block" />
             <div className="text-center">
-              <h3 className="text-4xl font-bold text-white mb-2">{STATS.campaignsExecuted}+</h3>
-              <p className="text-sm text-primary-400 uppercase tracking-wider">Campaigns</p>
+              <span className="text-4xl md:text-5xl font-light text-slate-900 block mb-2">{STATS.campaignsExecuted}+</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Campaigns</span>
             </div>
+            <div className="w-px h-12 bg-slate-100 hidden sm:block" />
             <div className="text-center">
-              <h3 className="text-4xl font-bold text-white mb-2">98%</h3>
-              <p className="text-sm text-primary-400 uppercase tracking-wider">Retention Rate</p>
+              <span className="text-4xl md:text-5xl font-light text-slate-900 block mb-2">98%</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Retention Rate</span>
             </div>
+            <div className="w-px h-12 bg-slate-100 hidden sm:block" />
             <div className="text-center">
-              <h3 className="text-4xl font-bold text-white mb-2">{STATS.yearsOfExperience}</h3>
-              <p className="text-sm text-primary-400 uppercase tracking-wider">Years Experience</p>
+              <span className="text-4xl md:text-5xl font-light text-slate-900 block mb-2">{STATS.yearsOfExperience}</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Years Exp.</span>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Categorized Logo Wall */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <SectionHeading 
-            title="Our Partners" 
-            subtitle="From Fortune 500 companies to rising startups, we deliver impact across all industries."
-          />
-
-          <div className="mt-16 space-y-20">
-            {categories.map((category) => (
-              <div key={category}>
-                <h3 className="text-2xl font-heading font-semibold text-primary-900 border-b border-primary-100 pb-4 mb-8">
-                  {category}
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                  {CLIENTS.filter(c => c.category === category).map((client, i) => (
-                    <motion.div
-                      key={client.id}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05 }}
-                      className="group flex flex-col items-center justify-center p-6 rounded-2xl border border-primary-50 bg-primary-50/30 hover:bg-white hover:shadow-xl transition-all duration-300"
-                    >
-                      <div className="relative h-16 w-32 mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
-                        {/* Placeholder for actual logos */}
-                        <div className="absolute inset-0 flex items-center justify-center font-bold text-xl text-primary-800">
-                          {client.name}
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                  {/* Mock empty slots for grid fullness */}
-                  {[...Array(3)].map((_, i) => (
-                     <div key={`empty-${category}-${i}`} className="hidden lg:block opacity-0" />
-                  ))}
+      {/* Infinite Marquee Logo Wall with Logos Only (Straight, Clean) */}
+      <section className="relative py-24 overflow-hidden bg-white">
+        
+        {/* Dual Marquees with Client Logos */}
+        <div className="relative flex flex-col gap-12 group pb-24">
+          
+          {/* Fading Edges */}
+          <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          
+          {/* Row 1 - Left to Right */}
+          <div className="relative flex overflow-hidden">
+            <div className="animate-marquee-left whitespace-nowrap flex items-center shrink-0">
+              {[...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
+                <div 
+                  key={`r1-${client.id}-${i}`}
+                  className="mx-6 flex items-center justify-center p-6 rounded-full bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all duration-500 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                >
+                  <div className="relative h-24 w-24 md:h-28 md:w-28 rounded-full overflow-hidden grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <Image src={client.logoUrl} alt="Partner Logo" fill className="object-cover" />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Collaboration */}
-      <section className="py-24 bg-brand-blue text-white overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-full md:w-1/2 relative z-10">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/20 border border-white/30 text-sm font-semibold mb-6">
-                Featured Collaboration
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold font-heading mb-6">
-                Redefining Tech Launches
-              </h2>
-              <p className="text-blue-100 text-lg mb-8 leading-relaxed max-w-lg">
-                When TechGiant wanted to launch their latest smartphone, they chose ApexOOH for a synchronized takeover of digital screens across 15 major cities, resulting in a record-breaking day-one sales volume.
-              </p>
-              <blockquote className="text-xl font-heading border-l-4 border-brand-accent pl-6 mb-6">
-                &quot;The most coordinated and impactful outdoor campaign we&apos;ve ever executed in India.&quot;
-                <footer className="mt-4 text-sm font-sans font-semibold">— Priya Patel, VP Brand Strategy, TechGiant</footer>
-              </blockquote>
+              ))}
             </div>
-            <div className="w-full md:w-1/2 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <Image 
-                src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&q=80" 
-                alt="TechGiant Campaign" 
-                fill 
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
-                <div>
-                  <p className="text-white font-bold text-2xl font-heading mb-1">TechGiant Z-Series Launch</p>
-                  <p className="text-primary-300 text-sm">Nationwide DOOH Takeover</p>
+          </div>
+
+          {/* Row 2 - Right to Left */}
+          <div className="relative flex overflow-hidden">
+            <div className="animate-marquee-right whitespace-nowrap flex items-center shrink-0" style={{ transform: 'translateX(-20%)' }}>
+              {[...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS].reverse().map((client, i) => (
+                <div 
+                  key={`r2-${client.id}-${i}`}
+                  className="mx-6 flex items-center justify-center p-6 rounded-full bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all duration-500 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                >
+                  <div className="relative h-24 w-24 md:h-28 md:w-28 rounded-full overflow-hidden grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <Image src={client.logoUrl} alt="Partner Logo" fill className="object-cover" />
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
+
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes marqueeLeft {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-20%); }
+          }
+          @keyframes marqueeRight {
+            0% { transform: translateX(-20%); }
+            100% { transform: translateX(0%); }
+          }
+          .animate-marquee-left {
+            animation: marqueeLeft 35s linear infinite;
+          }
+          .animate-marquee-right {
+            animation: marqueeRight 35s linear infinite;
+          }
+          .group:hover .animate-marquee-left,
+          .group:hover .animate-marquee-right {
+            animation-play-state: paused;
+          }
+        `}} />
       </section>
     </div>
   );

@@ -5,46 +5,61 @@ import { INDUSTRIES } from "@/data";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Car, Building2, Gem, Smartphone, ShoppingCart, Clapperboard, Briefcase, Activity, Plane } from "lucide-react";
 
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 const getIndustryIcon = (name: string) => {
   switch (name) {
-    case "Automotive": return <Car className="h-6 w-6" />;
-    case "Real Estate": return <Building2 className="h-6 w-6" />;
-    case "Jewelry": return <Gem className="h-6 w-6" />;
-    case "Technology": return <Smartphone className="h-6 w-6" />;
-    case "FMCG": return <ShoppingCart className="h-6 w-6" />;
-    case "Entertainment": return <Clapperboard className="h-6 w-6" />;
-    case "Finance": return <Briefcase className="h-6 w-6" />;
-    case "Healthcare": return <Activity className="h-6 w-6" />;
-    default: return <Plane className="h-6 w-6" />;
+    case "Automotive": return <Car className="h-8 w-8" />;
+    case "Real Estate": return <Building2 className="h-8 w-8" />;
+    case "Jewelry": return <Gem className="h-8 w-8" />;
+    case "Technology": return <Smartphone className="h-8 w-8" />;
+    case "FMCG": return <ShoppingCart className="h-8 w-8" />;
+    case "Entertainment": return <Clapperboard className="h-8 w-8" />;
+    case "Finance": return <Briefcase className="h-8 w-8" />;
+    case "Healthcare": return <Activity className="h-8 w-8" />;
+    default: return <Plane className="h-8 w-8" />;
   }
 };
 
 export function Industries() {
   return (
-    <section className="py-24 md:py-32 bg-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-100 via-slate-50 to-slate-50 pointer-events-none" />
+
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <SectionHeading 
           title="Industries We Dominate" 
           subtitle="Our tailored outdoor media solutions deliver high-impact results and unrivaled visibility across all major sectors."
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 mt-20 border-l border-t border-zinc-200">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-20">
           {INDUSTRIES.map((industry, i) => (
-            <motion.div
-              key={industry.id}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.5 }}
-              className="group flex flex-col items-center justify-center p-12 bg-white border-r border-b border-zinc-200 hover:bg-zinc-50 transition-colors cursor-default"
-            >
-              <div className="text-zinc-400 group-hover:text-zinc-900 transition-colors duration-300 mb-6">
-                {getIndustryIcon(industry.name)}
-              </div>
-              <h4 className="font-heading font-semibold text-sm text-zinc-900 text-center tracking-wide">
-                {industry.name}
-              </h4>
-            </motion.div>
+            <Link key={industry.id} href={`/gallery?industry=${industry.name}`}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                className="group relative flex flex-col items-center justify-center p-8 md:p-10 bg-white rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 cursor-pointer overflow-hidden h-full"
+              >
+                {/* Background hover effect */}
+                <div className="absolute inset-0 bg-slate-950 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+
+                <div className="relative z-10 text-slate-400 group-hover:text-white transition-all duration-300 mb-6 group-hover:scale-110">
+                  {getIndustryIcon(industry.name)}
+                </div>
+                
+                <h4 className="relative z-10 font-bold text-lg md:text-xl text-slate-900 group-hover:text-white transition-colors duration-300 text-center tracking-tight">
+                  {industry.name}
+                </h4>
+                
+                <div className="relative z-10 mt-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center text-white text-sm font-semibold tracking-wide">
+                  View Gallery <ArrowRight className="w-4 h-4 ml-1.5" />
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

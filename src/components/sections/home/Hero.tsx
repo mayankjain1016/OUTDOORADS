@@ -122,26 +122,44 @@ export function Hero() {
       {/* Edge-to-Edge Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src="https://images.unsplash.com/photo-1555448248-2571daf6344b?q=80&w=2000&auto=format&fit=crop"
+          src="/images/Hero_image.jpeg"
           alt="Premium Billboard Advertising"
           fill
           className="object-cover"
           priority
         />
-        {/* Dark Gradient Overlay for perfect text readability */}
-        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950/90" />
       </div>
 
-      {/* Top Centered Content */}
-      <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center pt-24">
+      {/* Left Aligned Text Content */}
+      <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col pt-24 pb-16 h-full justify-center">
         
-        {/* Ultra-Clean Dark Pill UI */}
+        <div className="max-w-3xl mr-auto text-left">
+          <motion.h1 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl md:text-7xl lg:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6 -ml-1 md:-ml-2"
+          >
+            Premium Outdoor <br className="hidden md:block" />
+            <span className="text-brand-blue">Advertising.</span>
+          </motion.h1>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg md:text-xl text-gray-900 font-medium leading-relaxed mb-16"
+          >
+            Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
+          </motion.p>
+        </div>
+
+        {/* Ultra-Clean Dark Pill UI - Centered */}
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-[800px] mx-auto mb-16 relative z-40"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          className="w-full max-w-[800px] relative z-40 mx-auto"
         >
           <div className="flex flex-col md:flex-row items-center justify-between p-2 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] sm:rounded-full shadow-2xl">
             
@@ -185,48 +203,6 @@ export function Hero() {
                <Search className="w-5 h-5" />
             </div>
             
-          </div>
-        </motion.div>
-
-        <motion.h1 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl md:text-7xl lg:text-[7.5rem] font-light tracking-tight text-white leading-[1.05] mb-6 max-w-5xl"
-        >
-          Premium Outdoor <br className="hidden md:block" />
-          <span className="text-white/70">Advertising.</span>
-        </motion.h1>
-
-        <motion.p 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-lg md:text-xl text-white/80 font-light max-w-2xl mb-16 leading-relaxed"
-        >
-          Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
-        </motion.p>
-
-        {/* Clean Metrics Row */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="flex items-center justify-center gap-12 md:gap-24"
-        >
-          <div className="text-center">
-            <span className="text-4xl md:text-5xl font-light text-white block mb-2">5M+</span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">Daily Views</span>
-          </div>
-          <div className="w-px h-12 bg-white/20" />
-          <div className="text-center">
-            <span className="text-4xl md:text-5xl font-light text-white block mb-2">200+</span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">Premium Sites</span>
-          </div>
-          <div className="w-px h-12 bg-white/20 hidden sm:block" />
-          <div className="text-center hidden sm:block">
-            <span className="text-4xl md:text-5xl font-light text-white block mb-2">Pan India</span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">Active Regions</span>
           </div>
         </motion.div>
 

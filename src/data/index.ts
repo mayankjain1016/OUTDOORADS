@@ -100,6 +100,10 @@ export const GALLERY: GalleryItem[] = [
   { id: "gal-2", campaignTitle: "Luxury Living Spaces", industryId: "ind-2", industryName: "Real Estate", cityName: "Bangalore", imageUrl: "https://images.unsplash.com/photo-1559828551-ddb663556094?w=800&q=80" },
   { id: "gal-3", campaignTitle: "Diwali Gold Fest", industryId: "ind-3", industryName: "Jewelry", cityName: "Delhi", imageUrl: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?w=800&q=80" },
   { id: "gal-4", campaignTitle: "Smartphone Launch", industryId: "ind-4", industryName: "Technology", cityName: "Hyderabad", imageUrl: "https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?w=800&q=80" },
+  { id: "gal-5", campaignTitle: "Summer Refresh Fest", industryId: "ind-5", industryName: "FMCG", cityName: "Chennai", imageUrl: "https://images.unsplash.com/photo-1556881286-fc6915169721?w=800&q=80" },
+  { id: "gal-6", campaignTitle: "Blockbuster Premiere", industryId: "ind-6", industryName: "Entertainment", cityName: "Mumbai", imageUrl: "https://images.unsplash.com/photo-1485001211100-880bb6e7d953?w=800&q=80" },
+  { id: "gal-7", campaignTitle: "Secure Your Future", industryId: "ind-7", industryName: "Finance", cityName: "Delhi", imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" },
+  { id: "gal-8", campaignTitle: "24/7 Care Network", industryId: "ind-8", industryName: "Healthcare", cityName: "Bangalore", imageUrl: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80" },
 ];
 
 export const CLIENTS: Client[] = [
