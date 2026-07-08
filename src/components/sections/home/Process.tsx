@@ -29,7 +29,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section className="py-24 md:py-32 bg-zinc-50 border-t border-zinc-200">
+    <section className="py-16 md:py-24 lg:py-32 bg-zinc-50 border-t border-zinc-200">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <SectionHeading 
           title="How We Work" 

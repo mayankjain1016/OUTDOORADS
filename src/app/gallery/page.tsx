@@ -97,7 +97,7 @@ export default function Gallery() {
     : GALLERY.filter(item => item.industryName === selectedIndustry);
 
   return (
-    <div className="relative min-h-screen bg-white text-slate-900 pb-32 overflow-hidden">
+    <div className="relative min-h-screen bg-white text-slate-900 pb-16 md:pb-32 overflow-hidden">
       
       {/* Background Gradient */}
       <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-slate-50 z-0 pointer-events-none" />

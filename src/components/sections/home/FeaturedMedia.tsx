@@ -11,7 +11,7 @@ export function FeaturedMedia() {
   const featured = MEDIA_INVENTORY.slice(0, 3); // Top 3
 
   return (
-    <section className="py-24 md:py-32 bg-zinc-50 border-t border-zinc-100">
+    <section className="py-16 md:py-24 lg:py-32 bg-zinc-50 border-t border-zinc-100">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-zinc-100">
           <SectionHeading 
@@ -60,16 +60,7 @@ export function FeaturedMedia() {
                   {media.locationDetails}
                 </h3>
                 
-                <div className="mt-auto pt-6 border-t border-zinc-100 flex justify-between items-center">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Dimensions</span>
-                    <span className="text-sm text-zinc-900 font-medium">{media.size}</span>
-                  </div>
-                  
-                  <div className={`py-1.5 px-4 rounded-full text-[10px] font-bold uppercase tracking-widest ${media.availability === 'Available' ? 'bg-emerald-50 text-emerald-700' : 'bg-zinc-50 text-zinc-500'}`}>
-                    {media.availability}
-                  </div>
-                </div>
+
               </div>
               
               {/* Entire card link */}

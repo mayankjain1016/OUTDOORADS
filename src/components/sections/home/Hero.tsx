@@ -58,7 +58,7 @@ function HeroDropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 mt-3 w-full min-w-[240px] bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 py-1.5"
+            className="absolute top-full left-0 mt-3 w-full min-w-[200px] sm:min-w-[240px] bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 py-1.5"
           >
             <div className="max-h-60 overflow-y-auto no-scrollbar flex flex-col p-1.5 gap-0.5">
               <div 
@@ -138,7 +138,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl lg:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6 -ml-1 md:-ml-2"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6 -ml-1 md:-ml-2"
           >
             Premium Outdoor <br className="hidden md:block" />
             <span className="text-brand-blue">Advertising.</span>

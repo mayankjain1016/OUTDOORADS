@@ -25,7 +25,7 @@ export default function Inventory() {
   }, [selectedCityId, selectedArea]);
 
   return (
-    <div className="relative min-h-screen pt-32 pb-24 bg-slate-50 overflow-hidden text-slate-900">
+    <div className="relative min-h-screen pt-32 pb-16 md:pb-24 bg-slate-50 overflow-hidden text-slate-900">
       
       {/* Background Gradient */}
       <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-slate-50 z-0 pointer-events-none" />

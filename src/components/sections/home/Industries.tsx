@@ -24,7 +24,7 @@ const getIndustryIcon = (name: string) => {
 
 export function Industries() {
   return (
-    <section className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+    <section className="py-16 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-100 via-slate-50 to-slate-50 pointer-events-none" />
 

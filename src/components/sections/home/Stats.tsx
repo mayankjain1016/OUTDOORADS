@@ -46,7 +46,7 @@ export function Stats() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-zinc-50">
+    <section className="py-16 md:py-24 lg:py-32 bg-zinc-50">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         
         <div className="mb-20">
@@ -70,7 +70,7 @@ export function Stats() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 lg:divide-x divide-zinc-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 lg:divide-x divide-zinc-200">
           {statsList.map((stat, index) => (
             <motion.div 
               key={index}

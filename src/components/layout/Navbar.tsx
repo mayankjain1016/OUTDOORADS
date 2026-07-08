@@ -4,13 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Home, Map, LayoutGrid, Users, ImageIcon, Phone } from "lucide-react";
+import { Menu, X, Home, Map, LayoutGrid, Users, ImageIcon, Phone, Info, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
   { name: "Home", href: "/", icon: <Home className="w-4 h-4" /> },
+  { name: "About Us", href: "/about", icon: <Info className="w-4 h-4" /> },
+  { name: "Services", href: "/services", icon: <Briefcase className="w-4 h-4" /> },
   { name: "Showcase", href: "/city-showcase", icon: <Map className="w-4 h-4" /> },
   { name: "Inventory", href: "/inventory", icon: <LayoutGrid className="w-4 h-4" /> },
   { name: "Clients", href: "/clients", icon: <Users className="w-4 h-4" /> },
@@ -71,20 +73,20 @@ export function Navbar() {
                   <span className={cn("transition-transform duration-300", isActive ? "scale-110" : "group-hover:scale-110")}>
                     {link.icon}
                   </span>
-                  <span>{link.name}</span>
+                  <span className="whitespace-nowrap">{link.name}</span>
                 </Link>
               );
             })}
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center pl-6 pr-2">
+          <div className="hidden lg:flex items-center pl-6 pr-2 shrink-0">
             <Link href="/contact">
               <Button 
-                className="rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 border-none bg-brand-blue text-white shadow-lg shadow-brand-blue/20 hover:bg-blue-600 hover:scale-105 flex items-center gap-2"
+                className="rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 border-none bg-brand-blue text-white shadow-lg shadow-brand-blue/20 hover:bg-blue-600 hover:scale-105 flex items-center gap-2 whitespace-nowrap"
               >
-                <Phone className="w-4 h-4" />
-                Contact Sales
+                <Phone className="w-4 h-4 shrink-0" />
+                <span className="whitespace-nowrap">Contact Sales</span>
               </Button>
             </Link>
           </div>
@@ -136,7 +138,7 @@ export function Navbar() {
                   <div className="p-2 bg-white rounded-xl shadow-sm border border-zinc-100">
                     {link.icon}
                   </div>
-                  <span className="text-lg">{link.name}</span>
+                  <span className="text-lg whitespace-nowrap">{link.name}</span>
                 </Link>
               ))}
             </div>

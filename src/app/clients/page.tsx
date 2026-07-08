@@ -51,7 +51,7 @@ export default function Clients() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center justify-center gap-8 md:gap-16 bg-white border border-slate-100 rounded-[2.5rem] px-10 py-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+            className="flex flex-wrap items-center justify-center gap-8 md:gap-16 bg-white border border-slate-100 rounded-[2.5rem] px-6 md:px-10 py-6 md:py-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
           >
             <div className="text-center">
               <span className="text-4xl md:text-5xl font-light text-slate-900 block mb-2">{STATS.happyClients}+</span>
@@ -77,7 +77,7 @@ export default function Clients() {
       </section>
 
       {/* Infinite Marquee Logo Wall with Logos Only (Straight, Clean) */}
-      <section className="relative py-24 overflow-hidden bg-white">
+      <section className="relative py-16 md:py-24 overflow-hidden bg-white">
         
         {/* Dual Marquees with Client Logos */}
         <div className="relative flex flex-col gap-12 group pb-24">

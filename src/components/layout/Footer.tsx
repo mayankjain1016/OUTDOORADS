@@ -18,7 +18,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
           
           {/* Brand Col */}
-          <div className="lg:col-span-5 space-y-8 pr-8">
+          <div className="lg:col-span-5 space-y-8 lg:pr-8">
             <Link href="/" className="inline-flex items-center group">
               <Image 
                 src="/LOGO.png"
