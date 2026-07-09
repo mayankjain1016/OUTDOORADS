@@ -201,7 +201,7 @@ export default function CityShowcase() {
               />
             </div>
 
-            <div className="mt-4 md:mt-0 mx-2 hidden md:flex items-center justify-center px-6 py-3 rounded-xl bg-brand-blue hover:bg-blue-700 text-white font-semibold transition-colors cursor-pointer shadow-sm">
+            <div className="mt-3 md:mt-0 mx-2 flex items-center justify-center w-full md:w-auto px-6 py-3 rounded-xl bg-brand-blue hover:bg-blue-700 text-white font-semibold transition-colors cursor-pointer shadow-sm">
                <Search className="w-4 h-4 mr-2" />
                Search
             </div>

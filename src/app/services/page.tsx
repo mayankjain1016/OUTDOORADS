@@ -257,8 +257,8 @@ export default function Services() {
       </section>
 
       {/* Featured Services - Magazine Style Alternating Layout */}
-      <section className="relative z-10 py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12 space-y-32">
+      <section className="relative z-10 py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-6 md:px-12 space-y-16 md:space-y-32">
           {premiumServices.map((service, index) => (
             <ParallaxServiceCard key={service.id} service={service} index={index} />
           ))}
@@ -330,7 +330,7 @@ export default function Services() {
       </section>
 
       {/* How it Works / Process Section - Ultra Premium Image Cards */}
-      <section className="relative z-10 py-32 bg-slate-50 overflow-hidden">
+      <section className="relative z-10 py-16 md:py-32 bg-slate-50 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <div className="max-w-4xl">
@@ -345,7 +345,7 @@ export default function Services() {
                   Our Process
                 </span>
               </motion.div>
-              <h2 className="text-5xl md:text-7xl font-black font-heading tracking-tight mb-6 text-slate-900 leading-[1.1]">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight mb-6 text-slate-900 leading-[1.1]">
                 How We Launch Your Campaign
               </h2>
               <p className="text-xl md:text-2xl text-slate-500 font-light max-w-2xl">
@@ -363,7 +363,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 whileHover={{ y: -10 }}
-                className="group relative h-[350px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900"
+                className="group relative h-[280px] sm:h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900"
               >
                 {/* Background Image */}
                 <Image 
@@ -402,7 +402,7 @@ export default function Services() {
       </section>
 
       {/* CTA Section - Premium Breakout Layout */}
-      <section className="relative z-10 py-40 bg-white overflow-visible">
+      <section className="relative z-10 py-16 md:py-40 bg-white overflow-visible">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-6xl mx-auto relative">
             

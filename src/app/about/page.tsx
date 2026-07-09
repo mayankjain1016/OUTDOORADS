@@ -266,7 +266,7 @@ export default function About() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-lg text-gray-500 max-w-2xl mx-auto"
             >
-              For over a decade, we have been at the forefront of out-of-home advertising, connecting brands with their audiences through larger-than-life experiences.
+              For five decades, we have been at the forefront of out-of-home advertising, connecting brands with their audiences through larger-than-life experiences.
             </motion.p>
           </div>
           
@@ -279,7 +279,7 @@ export default function About() {
               className="flex flex-col md:flex-row items-center justify-between p-6 md:p-8 bg-white border border-gray-200 rounded-2xl shadow-sm gap-8 md:gap-0"
             >
               <div className="text-center group flex-1">
-                <span className="text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-1 group-hover:scale-110 transition-transform"><Counter end={10} suffix="+" /></span>
+                <span className="text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-1 group-hover:scale-110 transition-transform"><Counter end={STATS.yearsOfExperience} suffix="+" /></span>
                 <span className="text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Years Exp</span>
               </div>
               
@@ -303,7 +303,7 @@ export default function About() {
 
       {/* Magazine Style Alternating Layout - Mission & Vision */}
       <section className="relative z-10 py-32 bg-white">
-        <div className="container mx-auto px-6 md:px-12 space-y-40">
+        <div className="container mx-auto px-6 md:px-12 space-y-20 md:space-y-40">
           {storyHighlights.map((highlight, index) => (
             <StoryHighlightItem key={highlight.id} highlight={highlight} index={index} />
           ))}
@@ -311,7 +311,7 @@ export default function About() {
       </section>
 
       {/* Specialty Services Bento Grid style for Core Values */}
-      <section className="relative z-10 py-32 bg-slate-50 border-y border-slate-100">
+      <section className="relative z-10 py-16 md:py-32 bg-slate-50 border-y border-slate-100">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -357,7 +357,7 @@ export default function About() {
       </section>
 
       {/* Editorial Style Leadership Section */}
-      <section className="relative z-10 py-32 bg-white">
+      <section className="relative z-10 py-16 md:py-32 bg-white">
         <div className="container mx-auto px-6 md:px-12">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <motion.div
@@ -467,7 +467,7 @@ export default function About() {
                 </span>
               </div>
               
-              <h2 className="text-5xl md:text-7xl font-black font-heading text-white mb-8 tracking-tight max-w-4xl mx-auto leading-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-heading text-white mb-8 tracking-tight max-w-4xl mx-auto leading-tight">
                 Ready to make <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-400">history?</span>
               </h2>
               <p className="text-zinc-400 text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-light leading-relaxed">

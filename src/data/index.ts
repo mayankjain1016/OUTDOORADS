@@ -123,6 +123,6 @@ export const STATS: Statistics = {
   happyClients: 850,
   premiumLocations: 5400,
   citiesCovered: 45,
-  yearsOfExperience: 15,
+  yearsOfExperience: 50,
   teamMembers: 120,
 };

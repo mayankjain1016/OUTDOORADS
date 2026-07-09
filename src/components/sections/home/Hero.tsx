@@ -138,7 +138,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6 -ml-1 md:-ml-2"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6 -ml-1 md:-ml-2"
           >
             Premium Outdoor <br className="hidden md:block" />
             <span className="text-brand-blue">Advertising.</span>
@@ -148,7 +148,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-gray-900 font-medium leading-relaxed mb-16"
+          className="text-base md:text-xl text-gray-900 font-medium leading-relaxed mb-12 md:mb-16"
           >
             Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
           </motion.p>
@@ -198,9 +198,10 @@ export function Hero() {
 
             <div 
               onClick={handleSearch}
-              className="mt-3 md:mt-0 ml-0 md:ml-3 flex w-full md:w-14 h-12 md:h-14 items-center justify-center rounded-[1.5rem] md:rounded-full bg-brand-blue hover:bg-blue-500 text-white transition-colors duration-200 cursor-pointer shadow-lg shrink-0"
+              className="mt-3 md:mt-0 ml-0 md:ml-3 flex w-full md:w-14 h-12 md:h-14 items-center justify-center gap-2 rounded-[1.5rem] md:rounded-full bg-brand-blue hover:bg-blue-500 text-white transition-colors duration-200 cursor-pointer shadow-lg shrink-0 font-bold text-sm px-4 md:px-0"
             >
                <Search className="w-5 h-5" />
+               <span className="md:hidden font-bold">Search Inventory</span>
             </div>
             
           </div>
