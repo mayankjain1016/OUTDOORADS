@@ -142,7 +142,7 @@ export default function About() {
       y: 0, 
       transition: { type: "spring", damping: 20, stiffness: 100 } 
     }
-  };
+  } as any;
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
