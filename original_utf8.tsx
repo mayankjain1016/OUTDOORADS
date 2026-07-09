@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Shield, Target, Zap, Globe, Users, TrendingUp, Building, ArrowRight, CheckCircle2, Mail, Link as LinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,95 +37,6 @@ function Counter({ end, suffix = "", prefix = "" }: { end: number, suffix?: stri
       {prefix}{count}
       <span className="text-slate-400 font-bold">{suffix}</span>
     </span>
-  );
-}
-
-function StoryHighlightItem({ highlight, index }: { highlight: any; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const yImage = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
-
-  return (
-    <div ref={ref} className={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-      {/* Image Side with Parallax and 3D Hover */}
-      <motion.div 
-        initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full lg:w-1/2 relative perspective-[1200px]"
-      >
-        <motion.div 
-          whileHover={{ rotateY: index % 2 === 0 ? 5 : -5, rotateX: 2, scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 200, damping: 20 }}
-          className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-slate-100/50"
-        >
-          <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply z-10 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none" />
-          <motion.div style={{ y: yImage }} className="absolute inset-0 -top-[20%] h-[140%] w-full">
-            <Image 
-              src={highlight.image} 
-              alt={highlight.title} 
-              fill 
-              className="object-cover transition-transform duration-1000 group-hover:scale-110" 
-            />
-          </motion.div>
-          
-          {/* Glassmorphism badge */}
-          <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-xl p-5 rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center space-x-5 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 border border-white/20">
-            <div className="p-4 bg-brand-blue/10 rounded-2xl text-brand-blue">
-              {highlight.icon}
-            </div>
-            <div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-1">Core Pillar</p>
-              <p className="text-base font-bold text-slate-900">{highlight.title}</p>
-            </div>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Text Side with Parallax */}
-      <motion.div 
-        style={{ y: yText }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full lg:w-1/2 space-y-8"
-      >
-        <div className="inline-flex items-center space-x-3 text-brand-blue mb-2">
-          <div className="p-2 bg-brand-blue/10 rounded-lg">
-            {highlight.icon}
-          </div>
-          <span className="text-sm font-bold uppercase tracking-[0.2em]">Purpose</span>
-        </div>
-        
-        <h2 className="text-5xl lg:text-6xl font-black font-heading text-slate-900 leading-tight tracking-tight">
-          {highlight.title}
-        </h2>
-        
-        <p className="text-xl text-slate-600 leading-relaxed font-light">
-          {highlight.description}
-        </p>
-
-        <div className="grid sm:grid-cols-2 gap-6 pt-6">
-          {highlight.features.map((feature: string, i: number) => (
-            <motion.div 
-              key={i} 
-              whileHover={{ x: 5 }}
-              className="flex items-start space-x-3 cursor-default"
-            >
-              <CheckCircle2 className="w-6 h-6 text-brand-blue shrink-0 mt-0.5" />
-              <span className="text-slate-700 font-semibold">{feature}</span>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </div>
   );
 }
 
@@ -236,67 +147,116 @@ export default function About() {
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
       
-      {/* Centered Showcase-Style Hero */}
-      <section className="relative pt-32 pb-24 bg-gray-50 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-gray-50 z-0 pointer-events-none" />
+      {/* Modern Bento Gallery Hero */}
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-white overflow-hidden min-h-[70vh] flex items-center">
+        {/* Very subtle background grain */}
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.02] mix-blend-overlay pointer-events-none" />
 
-        <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-4 md:px-0 text-center mb-10">
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+            
+            {/* Text Side (Smaller, cleaner) */}
+            <div className="w-full lg:w-5/12 flex flex-col items-start text-left pt-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center space-x-3 bg-slate-50 px-5 py-2 rounded-full mb-8 border border-slate-200"
+              >
+                <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                  Our Story
+                </span>
+              </motion.div>
+
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col items-start justify-start overflow-hidden mb-6"
+              >
+                <motion.h1 
+                  variants={wordVariants}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black font-heading tracking-tight text-slate-900 leading-[1.05] mb-2"
+                >
+                  Pioneering <br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-500">
+                    Urban Media.
+                  </span>
+                </motion.h1>
+              </motion.div>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-lg font-light mb-12"
+              >
+                For over a decade, we have been at the forefront of out-of-home advertising, connecting brands with their audiences through larger-than-life experiences.
+              </motion.p>
+              
+              {/* Compact Stats */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="flex items-center gap-4 sm:gap-8 md:gap-12"
+              >
+                <div className="group">
+                  <div className="text-4xl md:text-4xl font-black font-heading text-slate-900 mb-1 group-hover:text-brand-blue transition-colors"><Counter end={10} suffix="+" /></div>
+                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-slate-400">Years Exp</div>
+                </div>
+                <div className="w-px h-10 bg-slate-200" />
+                <div className="group">
+                  <div className="text-4xl md:text-4xl font-black font-heading text-slate-900 mb-1 group-hover:text-brand-blue transition-colors"><Counter end={STATS.citiesCovered} /></div>
+                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-slate-400">Cities</div>
+                </div>
+                <div className="w-px h-10 bg-slate-200" />
+                <div className="group">
+                  <div className="text-4xl md:text-4xl font-black font-heading text-slate-900 mb-1 group-hover:text-brand-blue transition-colors"><Counter end={STATS.campaignsExecuted} suffix="+" /></div>
+                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-slate-400">Campaigns</div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Bento Gallery Side */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 mb-6"
+              transition={{ duration: 1, delay: 0.2 }}
+              className="w-full lg:w-7/12 relative grid grid-cols-2 gap-4 md:gap-6 h-[400px] md:h-[600px] mt-10 lg:mt-0"
             >
-              <Building className="w-4 h-4 text-brand-blue animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
-                Our Story
-              </span>
+              {/* Large vertical image */}
+              <motion.div 
+                whileHover={{ scale: 1.02, rotate: -1 }}
+                className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white"
+              >
+                <Image src="/images/Hero_image.jpeg" alt="Billboard" fill className="object-cover" priority />
+                <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply" />
+              </motion.div>
+              
+              <div className="flex flex-col gap-4 md:gap-6 h-full">
+                {/* Top right square */}
+                <motion.div 
+                  whileHover={{ scale: 1.02, rotate: 1 }}
+                  className="relative w-full h-1/2 rounded-[2rem] overflow-hidden shadow-xl border-4 border-white bg-slate-100"
+                >
+                  <Image src="/images/highway.png" alt="Highway Ads" fill className="object-cover" />
+                </motion.div>
+                
+                {/* Bottom right square */}
+                <motion.div 
+                  whileHover={{ scale: 1.02, rotate: -1 }}
+                  className="relative w-full h-1/2 rounded-[2rem] overflow-hidden shadow-xl border-4 border-white bg-slate-100"
+                >
+                  <Image src="/images/bus-shelter.png" alt="Bus Shelter Ads" fill className="object-cover" />
+                </motion.div>
+              </div>
+
+              {/* Decorative blue dot */}
+              <div className="absolute -top-10 -right-10 w-48 h-48 bg-brand-blue/10 rounded-full blur-3xl -z-10" />
             </motion.div>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-gray-900 mb-6"
-            >
-              Pioneering Urban <span className="text-brand-blue">Media.</span>
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-lg text-gray-500 max-w-2xl mx-auto"
-            >
-              For over a decade, we have been at the forefront of out-of-home advertising, connecting brands with their audiences through larger-than-life experiences.
-            </motion.p>
-          </div>
-          
-          {/* Corporate Stats Row Style */}
-          <div className="max-w-4xl mx-auto px-4 md:px-6 relative z-40 mb-12">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="flex flex-col md:flex-row items-center justify-between p-6 md:p-8 bg-white border border-gray-200 rounded-2xl shadow-sm gap-8 md:gap-0"
-            >
-              <div className="text-center group flex-1">
-                <span className="text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-1 group-hover:scale-110 transition-transform"><Counter end={10} suffix="+" /></span>
-                <span className="text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Years Exp</span>
-              </div>
-              
-              <div className="hidden md:block w-px h-16 bg-gray-200" />
-              
-              <div className="text-center group flex-1">
-                <span className="text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-1 group-hover:scale-110 transition-transform"><Counter end={STATS.citiesCovered} /></span>
-                <span className="text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Cities</span>
-              </div>
-              
-              <div className="hidden md:block w-px h-16 bg-gray-200" />
-              
-              <div className="text-center group flex-1">
-                <span className="text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-1 group-hover:scale-110 transition-transform"><Counter end={STATS.campaignsExecuted} suffix="+" /></span>
-                <span className="text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Campaigns</span>
-              </div>
-            </motion.div>
+
           </div>
         </div>
       </section>
@@ -305,7 +265,80 @@ export default function About() {
       <section className="relative z-10 py-32 bg-white">
         <div className="container mx-auto px-6 md:px-12 space-y-40">
           {storyHighlights.map((highlight, index) => (
-            <StoryHighlightItem key={highlight.id} highlight={highlight} index={index} />
+            <div key={highlight.id} className={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+              
+              {/* Image Side with 3D Hover Tilt */}
+              <motion.div 
+                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full lg:w-1/2 relative perspective-[1200px]"
+              >
+                <motion.div 
+                  whileHover={{ rotateY: index % 2 === 0 ? 5 : -5, rotateX: 2, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-slate-100/50"
+                >
+                  <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply z-10 group-hover:opacity-0 transition-opacity duration-700" />
+                  <Image 
+                    src={highlight.image} 
+                    alt={highlight.title} 
+                    fill 
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110" 
+                  />
+                  
+                  {/* Glassmorphism badge */}
+                  <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-xl p-5 rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center space-x-5 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 border border-white/20">
+                    <div className="p-4 bg-brand-blue/10 rounded-2xl text-brand-blue">
+                      {highlight.icon}
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-1">Core Pillar</p>
+                      <p className="text-base font-bold text-slate-900">{highlight.title}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Text Side */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full lg:w-1/2 space-y-8"
+              >
+                <div className="inline-flex items-center space-x-3 text-brand-blue mb-2">
+                  <div className="p-2 bg-brand-blue/10 rounded-lg">
+                    {highlight.icon}
+                  </div>
+                  <span className="text-sm font-bold uppercase tracking-[0.2em]">Purpose</span>
+                </div>
+                
+                <h2 className="text-5xl lg:text-6xl font-black font-heading text-slate-900 leading-tight tracking-tight">
+                  {highlight.title}
+                </h2>
+                
+                <p className="text-xl text-slate-600 leading-relaxed font-light">
+                  {highlight.description}
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-6 pt-6">
+                  {highlight.features.map((feature, i) => (
+                    <motion.div 
+                      key={i} 
+                      whileHover={{ x: 5 }}
+                      className="flex items-start space-x-3 cursor-default"
+                    >
+                      <CheckCircle2 className="w-6 h-6 text-brand-blue shrink-0 mt-0.5" />
+                      <span className="text-slate-700 font-semibold">{feature}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+            </div>
           ))}
         </div>
       </section>
@@ -343,9 +376,13 @@ export default function About() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -10, rotateX: 2, scale: 1.02 }}
-                className="group bg-white rounded-[2.5rem] p-10 border border-slate-100 hover:border-brand-blue shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)] transition-all duration-500 relative overflow-hidden"
+                className="group bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)] transition-all duration-500 relative overflow-hidden"
               >
-                <div className="w-16 h-16 rounded-2xl bg-brand-blue/5 flex items-center justify-center text-brand-blue mb-8 shadow-sm border border-brand-blue/10">
+                <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity duration-500 transform translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0">
+                   {value.icon}
+                </div>
+                
+                <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-600 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500 mb-8 shadow-sm">
                   {value.icon}
                 </div>
                 <h3 className="text-2xl font-bold font-heading text-slate-900 mb-4">{value.title}</h3>

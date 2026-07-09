@@ -1,10 +1,103 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { MonitorPlay, LayoutTemplate, BusFront, MapPin, Sparkles, BarChart3, Briefcase, ArrowRight, ArrowDown, CheckCircle2, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
+
+function ParallaxServiceCard({ service, index }: { service: any, index: number }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["-50%", "50%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["80px", "-80px"]);
+  const badgeY = useTransform(scrollYProgress, [0, 1], ["40px", "-40px"]);
+
+  return (
+    <div ref={ref} className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+      
+      {/* Image Side with Parallax */}
+      <motion.div 
+        initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full lg:w-1/2 relative perspective-[1200px]"
+      >
+        <motion.div 
+          whileHover={{ rotateY: index % 2 === 0 ? 5 : -5, rotateX: 2, scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl group border border-slate-100/50"
+        >
+          <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply z-10 group-hover:opacity-0 transition-opacity duration-700" />
+          
+          <motion.div style={{ y, height: "200%", top: "-50%" }} className="absolute inset-x-0">
+            <Image 
+              src={service.image} 
+              alt={service.title} 
+              fill 
+              className="object-cover transition-transform duration-1000 group-hover:scale-110" 
+            />
+          </motion.div>
+          
+          {/* Glassmorphism badge */}
+          <motion.div style={{ y: badgeY }} className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center space-x-4 transform opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div className="p-3 bg-brand-blue/10 rounded-xl text-brand-blue">
+              {service.icon}
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Format</p>
+              <p className="text-sm font-bold text-slate-900">{service.title}</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Text Side */}
+      <motion.div 
+        style={{ y: textY }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full lg:w-1/2 space-y-8"
+      >
+        <div className="inline-flex items-center space-x-2 text-brand-blue mb-2">
+          {service.icon}
+        </div>
+        
+        <h2 className="text-4xl lg:text-5xl font-black font-heading text-slate-900 leading-tight">
+          {service.title}
+        </h2>
+        
+        <p className="text-lg text-slate-600 leading-relaxed">
+          {service.description}
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 pt-4">
+          {service.features.map((feature: string, i: number) => (
+            <div key={i} className="flex items-start space-x-3">
+              <CheckCircle2 className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
+              <span className="text-slate-700 font-medium">{feature}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="pt-8">
+          <Link href="/inventory" className="inline-flex items-center space-x-2 text-brand-blue font-bold hover:text-blue-700 transition-colors group">
+            <span>View Available Inventory</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </motion.div>
+
+    </div>
+  );
+}
 
 export default function Services() {
   const [activeProcessStep, setActiveProcessStep] = useState(0);
@@ -84,86 +177,82 @@ export default function Services() {
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
       
-      {/* Minimalist Premium Hero */}
-      <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-white overflow-hidden min-h-[70vh] flex flex-col items-center justify-center">
-        {/* Very subtle ambient background */}
-        <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-brand-blue/[0.03] to-transparent pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-blue/[0.02] blur-[100px] rounded-full pointer-events-none" />
+      {/* Ultra Minimal Corporate Hero (Matching Showcase Page) */}
+      <section className="relative pt-32 pb-16 md:pb-24 bg-gray-50 overflow-hidden" id="services-list">
+        <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-gray-50 z-0 pointer-events-none" />
 
-        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
-          
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 text-slate-500 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-8"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-brand-blue" />
-            <span>Premium OOH Services</span>
-          </motion.div>
+        <div className="relative z-10">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 text-center mb-10">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 mb-6"
+            >
+              <Sparkles className="w-4 h-4 text-brand-blue animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                OOH Media Solutions
+              </span>
+            </motion.div>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-gray-900 mb-6"
+            >
+              Amplify Your Brand <span className="text-brand-blue">Everywhere.</span>
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-lg text-gray-500 max-w-2xl mx-auto"
+            >
+              From towering highway billboards to hyper-local street furniture, we offer a comprehensive suite of out-of-home formats to reach your audience everywhere.
+            </motion.p>
+          </div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-black font-heading text-slate-900 tracking-tight leading-[1.05] max-w-5xl mb-8"
-          >
-            Unmissable impact in the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-500">physical world.</span>
-          </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-2xl text-slate-500 font-light max-w-2xl mx-auto leading-relaxed mb-12"
-          >
-            We provide the ultimate canvas for your brand to dominate the urban landscape, from iconic highways to bustling city centers.
-          </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full max-w-3xl mx-auto"
-          >
-            <div className="flex flex-col sm:flex-row items-center bg-white p-2 md:p-2 rounded-[2rem] md:rounded-full shadow-[0_15px_40px_rgba(0,0,0,0.06)] border border-slate-100 gap-2 md:gap-0">
-              
-              <div className="flex-1 w-full px-5 py-3 border-b sm:border-b-0 sm:border-r border-slate-100 relative group">
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 text-left">Your Objective</label>
-                <div className="relative">
-                  <select className="w-full bg-transparent text-slate-900 font-bold focus:outline-none cursor-pointer appearance-none pr-8">
-                    <option>Mass Brand Awareness</option>
-                    <option>Local Market Domination</option>
-                    <option>Commuter Targeting</option>
-                    <option>High-Frequency Digital</option>
-                  </select>
-                  <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none group-hover:text-brand-blue transition-colors" />
+          {/* Corporate Filter Row Style */}
+          <div className="max-w-4xl mx-auto px-4 md:px-6 relative z-40 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="flex flex-col md:flex-row items-center justify-between p-2 bg-white border border-gray-200 rounded-2xl shadow-sm gap-2 md:gap-0"
+            >
+              <div className="flex flex-col sm:flex-row w-full md:w-auto items-center gap-1 flex-1">
+                <div className="flex items-center px-4 py-3 rounded-xl bg-white hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer w-full group relative">
+                  <div className="flex flex-col flex-1 text-left w-full">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 mb-0.5">Your Objective</span>
+                    <select className="w-full bg-transparent text-sm font-bold text-gray-900 focus:outline-none cursor-pointer appearance-none">
+                      <option>Mass Brand Awareness</option>
+                      <option>Local Market Domination</option>
+                      <option>Commuter Targeting</option>
+                    </select>
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-brand-blue transition-colors ml-2 pointer-events-none" />
+                </div>
+                
+                <div className="hidden sm:block w-px h-8 bg-gray-200 mx-2" />
+                
+                <div className="flex items-center px-4 py-3 rounded-xl bg-white hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer w-full group relative">
+                  <div className="flex flex-col flex-1 text-left w-full">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 mb-0.5">Location</span>
+                    <select className="w-full bg-transparent text-sm font-bold text-gray-900 focus:outline-none cursor-pointer appearance-none">
+                      <option>Highways & Arterials</option>
+                      <option>City Centers</option>
+                      <option>Transit Hubs</option>
+                    </select>
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-brand-blue transition-colors ml-2 pointer-events-none" />
                 </div>
               </div>
 
-              <div className="flex-1 w-full px-5 py-3 relative group">
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 text-left">Prime Location</label>
-                <div className="relative">
-                  <select className="w-full bg-transparent text-slate-900 font-bold focus:outline-none cursor-pointer appearance-none pr-8">
-                    <option>Highways & Arterials</option>
-                    <option>Downtown City Centers</option>
-                    <option>Transit & Bus Hubs</option>
-                    <option>Airports & Premium</option>
-                  </select>
-                  <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none group-hover:text-brand-blue transition-colors" />
-                </div>
+              <div className="w-full md:w-auto mt-2 md:mt-0 mx-2 flex items-center justify-center px-8 py-4 md:py-3 rounded-xl bg-brand-blue hover:bg-blue-700 text-white font-semibold transition-colors cursor-pointer shadow-sm group">
+                 Find Inventory
+                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </div>
-
-              <Link href="#services-list" className="w-full sm:w-auto mt-2 sm:mt-0 bg-brand-blue text-white px-8 py-4 md:py-5 rounded-full font-bold hover:bg-blue-600 transition-colors flex items-center justify-center gap-2 group shrink-0 shadow-lg hover:shadow-brand-blue/30">
-                Find Inventory
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-            
-            <div className="mt-6 text-sm text-slate-400 font-medium">
-              Over <span className="text-brand-blue font-bold">5,000+</span> premium locations available nationwide.
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -171,125 +260,85 @@ export default function Services() {
       <section className="relative z-10 py-24 bg-white">
         <div className="container mx-auto px-6 md:px-12 space-y-32">
           {premiumServices.map((service, index) => (
-            <div key={service.id} className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-              
-              {/* Image Side */}
-              <motion.div 
-                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full lg:w-1/2 relative"
-              >
-                <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl group">
-                  <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply z-10 group-hover:opacity-0 transition-opacity duration-700" />
-                  <Image 
-                    src={service.image} 
-                    alt={service.title} 
-                    fill 
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105" 
-                  />
-                  
-                  {/* Glassmorphism badge */}
-                  <div className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center space-x-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="p-3 bg-brand-blue/10 rounded-xl text-brand-blue">
-                      {service.icon}
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Format</p>
-                      <p className="text-sm font-bold text-slate-900">{service.title}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Text Side */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full lg:w-1/2 space-y-8"
-              >
-                <div className="inline-flex items-center space-x-2 text-brand-blue mb-2">
-                  {service.icon}
-                  <span className="text-sm font-bold uppercase tracking-widest">Premium Inventory</span>
-                </div>
-                
-                <h2 className="text-4xl lg:text-5xl font-black font-heading text-slate-900 leading-tight">
-                  {service.title}
-                </h2>
-                
-                <p className="text-lg text-slate-600 leading-relaxed">
-                  {service.description}
-                </p>
-
-                <div className="grid sm:grid-cols-2 gap-4 pt-4">
-                  {service.features.map((feature, i) => (
-                    <div key={i} className="flex items-start space-x-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
-                      <span className="text-slate-700 font-medium">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="pt-8">
-                  <Link href="/inventory" className="inline-flex items-center space-x-2 text-brand-blue font-bold hover:text-blue-700 transition-colors group">
-                    <span>View Available Inventory</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
-              </motion.div>
-
-            </div>
+            <ParallaxServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
       </section>
 
-      {/* Specialty Services Bento Grid */}
-      <section className="relative z-10 py-24 bg-slate-50 border-y border-slate-100">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-black font-heading text-slate-900 mb-6">Beyond the Billboard</h2>
-            <p className="text-slate-600 text-lg">
-              Specialized services designed to complete your 360-degree out-of-home strategy.
-            </p>
-          </div>
+      {/* Beyond the Billboard - Ultra Premium List Layout (Extremely Compact) */}
+      <section className="relative z-10 py-12 md:py-16 bg-black text-white overflow-hidden">
+        {/* Minimalist Grid Lines */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {additionalServices.map((service, index) => (
-              <motion.div
-                key={index}
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 gap-4">
+            <div className="max-w-3xl">
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-blue/20 transition-all duration-500"
+                className="inline-flex items-center space-x-2 bg-brand-blue/10 border border-brand-blue/20 px-3 py-1.5 rounded-full mb-4 backdrop-blur-md"
               >
-                <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-700 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500 mb-8">
-                  {service.icon}
+                <Sparkles className="w-3 h-3 text-brand-blue" />
+                <span className="text-[9px] font-bold uppercase tracking-widest text-brand-blue">
+                  360° Strategy
+                </span>
+              </motion.div>
+              <h2 className="text-3xl md:text-5xl font-black font-heading tracking-tight text-white leading-tight">
+                Beyond the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-400">Billboard</span>
+              </h2>
+            </div>
+            <p className="text-slate-400 text-sm md:text-base font-light max-w-sm lg:pb-2">
+              Specialized services designed to complete your out-of-home strategy and create unforgettable brand moments.
+            </p>
+          </div>
+
+          <div className="w-full h-px bg-white/10 mb-2" />
+
+          <div className="flex flex-col">
+            {additionalServices.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group border-b border-white/10 py-5 md:py-6 flex flex-col md:flex-row md:items-center justify-between transition-all duration-300 cursor-pointer border-l-2 border-l-transparent hover:border-l-brand-blue hover:bg-gradient-to-r hover:from-brand-blue/5 hover:to-transparent px-4 md:px-6 hover:pl-6 md:hover:pl-8"
+              >
+                <div className="flex items-center gap-4 md:gap-8 w-full md:w-1/2 mb-4 md:mb-0">
+                  <span className="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-b from-white/30 to-white/5 group-hover:from-brand-blue group-hover:to-blue-600 transition-all duration-500 font-heading">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-bold font-heading text-white mb-1">{service.title}</h3>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold font-heading text-slate-900 mb-4">{service.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{service.description}</p>
+                
+                <div className="w-full md:w-1/2 flex items-center justify-between gap-6 pl-10 md:pl-0">
+                  <p className="text-slate-400 text-sm font-light max-w-sm group-hover:text-slate-300 transition-colors duration-300">
+                    {service.description}
+                  </p>
+                  
+                  <div className="w-10 h-10 shrink-0 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-slate-300 group-hover:text-white group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 transform group-hover:scale-105">
+                    <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it Works / Process Section - Premium Original Layout */}
-      <section className="relative z-10 py-32 bg-white overflow-hidden">
-        {/* Very subtle architectural lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
+      {/* How it Works / Process Section - Ultra Premium Image Cards */}
+      <section className="relative z-10 py-32 bg-slate-50 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <div className="max-w-4xl">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center space-x-3 bg-slate-50 px-5 py-2.5 rounded-full border border-slate-200 shadow-sm mb-8"
+                className="inline-flex items-center space-x-3 bg-white px-5 py-2.5 rounded-full border border-slate-200 shadow-sm mb-8"
               >
                 <div className="w-2.5 h-2.5 rounded-full bg-brand-blue animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
@@ -299,42 +348,53 @@ export default function Services() {
               <h2 className="text-5xl md:text-7xl font-black font-heading tracking-tight mb-6 text-slate-900 leading-[1.1]">
                 How We Launch Your Campaign
               </h2>
-              <p className="text-xl md:text-2xl text-slate-500 font-light">
+              <p className="text-xl md:text-2xl text-slate-500 font-light max-w-2xl">
                 A seamless, data-driven journey from the first handshake to the final analytics report.
               </p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8 md:gap-12 relative">
-            {/* Connecting Line with animated gradient */}
-            <div className="hidden md:block absolute top-[3.5rem] left-14 right-14 h-[2px] bg-slate-100 overflow-hidden">
-              <motion.div 
-                initial={{ x: "-100%" }}
-                whileInView={{ x: "200%" }}
-                transition={{ duration: 2.5, ease: "linear", repeat: Infinity }}
-                className="w-1/2 h-full bg-gradient-to-r from-transparent via-brand-blue to-transparent" 
-              />
-            </div>
-
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="relative z-10 group"
+                whileHover={{ y: -10 }}
+                className="group relative h-[350px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900"
               >
-                <div className="w-28 h-28 bg-white rounded-full border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-center mb-8 relative group-hover:border-brand-blue group-hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)] transition-all duration-500 mx-auto md:mx-0">
-                  <span className="text-4xl font-black font-heading text-slate-300 group-hover:text-brand-blue transition-colors duration-500">
+                {/* Background Image */}
+                <Image 
+                  src={step.image || "/images/hero-bg.png"} 
+                  alt={step.title}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                />
+                
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/90 pointer-events-none transition-opacity duration-500 group-hover:opacity-80" />
+                <div className="absolute inset-0 bg-brand-blue/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Massive Step Number Top Right */}
+                <div className="absolute top-6 right-6">
+                  <span className="text-4xl md:text-5xl font-black font-heading text-white/50 group-hover:text-brand-blue transition-colors duration-500 drop-shadow-lg">
                     {step.step}
                   </span>
-                  {/* Subtle pulsing dot when active/hovered */}
-                  <div className="absolute top-2 right-2 w-3 h-3 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                
-                <h3 className="text-2xl font-bold mb-4 text-slate-900 group-hover:text-brand-blue transition-colors duration-500 text-center md:text-left">{step.title}</h3>
-                <p className="text-slate-500 leading-relaxed font-light text-center md:text-left">{step.description}</p>
+
+                {/* Content at Bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5">
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.1)] relative overflow-hidden group-hover:border-brand-blue/50 transition-colors duration-500 group-hover:bg-black/40">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-heading leading-tight group-hover:text-brand-blue transition-colors duration-300 relative z-10">
+                      {step.title}
+                    </h3>
+                    <p className="text-slate-300 text-xs md:text-sm font-light leading-relaxed relative z-10">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
