@@ -5,7 +5,7 @@ import { Shield, Target, Zap, Globe, Users, TrendingUp, Building, ArrowRight, Ch
 import Image from "next/image";
 import Link from "next/link";
 import { STATS } from "@/data";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 // Animated Counter Component
 function Counter({ end, suffix = "", prefix = "" }: { end: number, suffix?: string, prefix?: string }) {
@@ -40,7 +40,16 @@ function Counter({ end, suffix = "", prefix = "" }: { end: number, suffix?: stri
   );
 }
 
-function StoryHighlightItem({ highlight, index }: { highlight: any; index: number }) {
+interface StoryHighlight {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  image: string;
+  icon: React.ReactNode;
+}
+
+function StoryHighlightItem({ highlight, index }: { highlight: StoryHighlight; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -216,22 +225,6 @@ export default function About() {
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-    }
-  };
-
-  const wordVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: "spring", damping: 20, stiffness: 100 } 
-    }
-  } as any;
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">

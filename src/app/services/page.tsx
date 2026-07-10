@@ -1,12 +1,21 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { MonitorPlay, LayoutTemplate, BusFront, MapPin, Sparkles, BarChart3, Briefcase, ArrowRight, ArrowDown, CheckCircle2, ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { MonitorPlay, LayoutTemplate, BusFront, MapPin, Sparkles, BarChart3, ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import React, { useRef } from "react";
 
-function ParallaxServiceCard({ service, index }: { service: any, index: number }) {
+interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  image: string;
+  icon: React.ReactNode;
+}
+
+function ParallaxServiceCard({ service, index }: { service: ServiceItem, index: number }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -100,7 +109,6 @@ function ParallaxServiceCard({ service, index }: { service: any, index: number }
 }
 
 export default function Services() {
-  const [activeProcessStep, setActiveProcessStep] = useState(0);
 
   const premiumServices = [
     {

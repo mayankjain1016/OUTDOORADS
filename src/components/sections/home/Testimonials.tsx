@@ -99,7 +99,7 @@ export function Testimonials() {
               
               {/* Review Text */}
               <blockquote className="text-gray-600 leading-relaxed text-[15px]">
-                "{t.quote}"
+                &ldquo;{t.quote}&rdquo;
               </blockquote>
               
             </motion.div>
