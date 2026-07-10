@@ -13,7 +13,7 @@ export function FeaturedMedia() {
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-zinc-50 border-t border-zinc-100">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-zinc-100">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 pb-6 md:pb-8 border-b border-zinc-100">
           <SectionHeading 
             title="Premium Inventory" 
             subtitle="Explore our most sought-after media locations, meticulously selected for maximum brand visibility and prestige."
@@ -36,7 +36,7 @@ export function FeaturedMedia() {
               transition={{ delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="group flex flex-col bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-xl hover:border-zinc-300/80 overflow-hidden transition-all duration-500"
             >
-              <div className="relative h-64 w-full overflow-hidden bg-zinc-100 m-2 rounded-xl w-[calc(100%-16px)]">
+              <div className="relative aspect-video md:h-64 md:aspect-auto w-full overflow-hidden bg-zinc-100 m-2 rounded-xl w-[calc(100%-16px)]">
                 <Image 
                   src={media.imageUrl} 
                   alt={media.locationDetails} 
@@ -50,13 +50,13 @@ export function FeaturedMedia() {
                 </div>
               </div>
               
-              <div className="p-6 md:p-8 flex flex-col flex-grow">
-                <div className="flex items-center space-x-2 text-zinc-500 mb-3 text-xs font-bold tracking-widest uppercase">
-                  <MapPin className="h-3.5 w-3.5" />
+              <div className="p-5 md:p-8 flex flex-col flex-grow">
+                <div className="flex items-center space-x-2 text-zinc-500 mb-2 md:mb-3 text-[10px] md:text-xs font-bold tracking-widest uppercase">
+                  <MapPin className="h-3 w-3 md:h-3.5 md:w-3.5" />
                   <span>{media.cityName}, {media.area}</span>
                 </div>
                 
-                <h3 className="font-heading font-bold text-xl text-zinc-950 mb-6 leading-snug group-hover:text-zinc-700 transition-colors">
+                <h3 className="font-heading font-bold text-lg md:text-xl text-zinc-950 mb-4 md:mb-6 leading-snug group-hover:text-zinc-700 transition-colors">
                   {media.locationDetails}
                 </h3>
                 

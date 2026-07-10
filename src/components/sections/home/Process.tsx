@@ -36,11 +36,11 @@ export function Process() {
           subtitle="Our streamlined process ensures your campaign goes from concept to nationwide execution seamlessly, with precision at every step."
         />
 
-        <div className="mt-24 relative max-w-6xl mx-auto">
+        <div className="mt-12 md:mt-24 relative max-w-6xl mx-auto">
           {/* Main Connector Line (Horizontal) */}
           <div className="hidden lg:block absolute top-[1.5rem] left-[10%] right-[10%] h-px bg-zinc-200 z-0" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-8 relative z-10">
             {steps.map((step, i) => (
               <motion.div
                 key={i}

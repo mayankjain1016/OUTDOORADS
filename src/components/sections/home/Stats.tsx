@@ -15,7 +15,7 @@ function Counter({ end, suffix = "" }: { end: number, suffix?: string }) {
       let start = 0;
       const duration = 2000;
       const increment = end / (duration / 16);
-      
+
       const timer = setInterval(() => {
         start += increment;
         if (start > end) {
@@ -46,11 +46,11 @@ export function Stats() {
   ];
 
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-zinc-50">
+    <section className="py-8 md:py-24 lg:py-32 bg-zinc-50">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        
-        <div className="mb-20">
-          <motion.h2 
+
+        <div className="mb-8 md:mb-20">
+          <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -59,7 +59,7 @@ export function Stats() {
           >
             Unmatched Scale
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -70,9 +70,31 @@ export function Stats() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 lg:divide-x divide-zinc-200">
+        {/* Mobile: 4 items on ONE single row, no scroll, no wrap */}
+        <div className="grid md:hidden grid-cols-4 gap-1 divide-x divide-zinc-200">
           {statsList.map((stat, index) => (
             <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-center justify-start px-1"
+            >
+              <div className="text-xl sm:text-2xl font-bold font-heading text-zinc-950 tracking-tighter mb-1">
+                <Counter end={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="text-zinc-500 font-medium text-[9px] sm:text-[10px] tracking-tight text-center leading-tight">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop: original 4-column grid */}
+        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 lg:divide-x divide-zinc-200">
+          {statsList.map((stat, index) => (
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -27,7 +27,7 @@ function ParallaxServiceCard({ service, index }: { service: ServiceItem, index: 
   const badgeY = useTransform(scrollYProgress, [0, 1], ["40px", "-40px"]);
 
   return (
-    <div ref={ref} className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+    <div ref={ref} className={`flex flex-col lg:flex-row gap-8 lg:gap-24 items-start ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
       
       {/* Image Side with Parallax */}
       <motion.div 
@@ -54,13 +54,13 @@ function ParallaxServiceCard({ service, index }: { service: ServiceItem, index: 
           </motion.div>
           
           {/* Glassmorphism badge */}
-          <motion.div style={{ y: badgeY }} className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center space-x-4 transform opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div className="p-3 bg-brand-blue/10 rounded-xl text-brand-blue">
+          <motion.div style={{ y: badgeY }} className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-20 bg-white/90 backdrop-blur-md p-3 md:p-4 rounded-xl md:rounded-2xl shadow-xl flex items-center space-x-3 md:space-x-4 transform opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div className="p-2 md:p-3 bg-brand-blue/10 rounded-lg md:rounded-xl text-brand-blue">
               {service.icon}
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Format</p>
-              <p className="text-sm font-bold text-slate-900">{service.title}</p>
+              <p className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest">Format</p>
+              <p className="text-xs md:text-sm font-bold text-slate-900">{service.title}</p>
             </div>
           </motion.div>
         </motion.div>
@@ -73,25 +73,25 @@ function ParallaxServiceCard({ service, index }: { service: ServiceItem, index: 
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full lg:w-1/2 space-y-8"
+        className="w-full lg:w-1/2 space-y-4 md:space-y-8"
       >
-        <div className="inline-flex items-center space-x-2 text-brand-blue mb-2">
+        <div className="inline-flex items-center space-x-2 text-brand-blue mb-1 md:mb-2 [&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-6 md:[&>svg]:h-6">
           {service.icon}
         </div>
         
-        <h2 className="text-4xl lg:text-5xl font-black font-heading text-slate-900 leading-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-slate-900 leading-tight">
           {service.title}
         </h2>
         
-        <p className="text-lg text-slate-600 leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
           {service.description}
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-4 pt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 md:pt-4">
           {service.features.map((feature: string, i: number) => (
-            <div key={i} className="flex items-start space-x-3">
-              <CheckCircle2 className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
-              <span className="text-slate-700 font-medium">{feature}</span>
+            <div key={i} className="flex items-start space-x-2 md:space-x-3">
+              <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-brand-blue shrink-0 mt-0.5" />
+              <span className="text-sm md:text-base text-slate-700 font-medium">{feature}</span>
             </div>
           ))}
         </div>
@@ -186,18 +186,18 @@ export default function Services() {
     <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
       
       {/* Ultra Minimal Corporate Hero (Matching Showcase Page) */}
-      <section className="relative pt-32 pb-16 md:pb-24 bg-gray-50 overflow-hidden" id="services-list">
-        <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-gray-50 z-0 pointer-events-none" />
+      <section className="relative pt-24 md:pt-32 pb-12 md:pb-24 bg-gray-50 overflow-hidden" id="services-list">
+        <div className="absolute top-0 left-0 w-full h-[300px] md:h-[400px] bg-gradient-to-b from-white to-gray-50 z-0 pointer-events-none" />
 
         <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 text-center mb-10">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 text-center mb-8 md:mb-10">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 mb-6"
+              className="inline-flex items-center space-x-2 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm border border-gray-200 mb-4 md:mb-6"
             >
-              <Sparkles className="w-4 h-4 text-brand-blue animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+              <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-brand-blue animate-pulse" />
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-700">
                 OOH Media Solutions
               </span>
             </motion.div>
@@ -205,9 +205,9 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-gray-900 mb-6"
+              className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight text-gray-900 mb-4 md:mb-6"
             >
-              Amplify Your Brand <span className="text-brand-blue">Everywhere.</span>
+              Amplify Your Brand <br className="hidden sm:block lg:hidden" /><span className="text-brand-blue">Everywhere.</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -265,8 +265,8 @@ export default function Services() {
       </section>
 
       {/* Featured Services - Magazine Style Alternating Layout */}
-      <section className="relative z-10 py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12 space-y-16 md:space-y-32">
+      <section className="relative z-10 py-12 md:py-24 bg-white">
+        <div className="container mx-auto px-6 md:px-12 space-y-12 md:space-y-32">
           {premiumServices.map((service, index) => (
             <ParallaxServiceCard key={service.id} service={service} index={index} />
           ))}
@@ -311,14 +311,14 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="group border-b border-white/10 py-5 md:py-6 flex flex-col md:flex-row md:items-center justify-between transition-all duration-300 cursor-pointer border-l-2 border-l-transparent hover:border-l-brand-blue hover:bg-gradient-to-r hover:from-brand-blue/5 hover:to-transparent px-4 md:px-6 hover:pl-6 md:hover:pl-8"
+                className="group border-b border-white/10 py-4 md:py-6 flex flex-col md:flex-row md:items-center justify-between transition-all duration-300 cursor-pointer border-l-2 border-l-transparent hover:border-l-brand-blue hover:bg-gradient-to-r hover:from-brand-blue/5 hover:to-transparent px-4 md:px-6 hover:pl-6 md:hover:pl-8"
               >
-                <div className="flex items-center gap-4 md:gap-8 w-full md:w-1/2 mb-4 md:mb-0">
+                <div className="flex items-center gap-4 md:gap-8 w-full md:w-1/2 mb-2 md:mb-0">
                   <span className="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-b from-white/30 to-white/5 group-hover:from-brand-blue group-hover:to-blue-600 transition-all duration-500 font-heading">
                     0{index + 1}
                   </span>
                   <div>
-                    <h3 className="text-lg md:text-xl font-bold font-heading text-white mb-1">{service.title}</h3>
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold font-heading text-white mb-0.5 md:mb-1">{service.title}</h3>
                   </div>
                 </div>
                 
@@ -353,10 +353,10 @@ export default function Services() {
                   Our Process
                 </span>
               </motion.div>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight mb-6 text-slate-900 leading-[1.1]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight mb-4 md:mb-6 text-slate-900 leading-[1.1]">
                 How We Launch Your Campaign
               </h2>
-              <p className="text-xl md:text-2xl text-slate-500 font-light max-w-2xl">
+              <p className="text-lg md:text-xl lg:text-2xl text-slate-500 font-light max-w-2xl">
                 A seamless, data-driven journey from the first handshake to the final analytics report.
               </p>
             </div>
@@ -420,30 +420,30 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="bg-slate-50 rounded-[3rem] md:rounded-[4rem] p-10 md:p-20 border border-slate-100 shadow-[0_20px_80px_rgba(0,0,0,0.05)] relative overflow-hidden flex flex-col lg:flex-row items-center justify-between min-h-[500px]"
+              className="bg-slate-50 rounded-3xl md:rounded-[4rem] p-8 sm:p-10 md:p-20 border border-slate-100 shadow-[0_20px_80px_rgba(0,0,0,0.05)] relative overflow-hidden flex flex-col lg:flex-row items-center justify-between min-h-[400px] md:min-h-[500px]"
             >
               {/* Left Content */}
               <div className="w-full lg:w-3/5 relative z-10">
-                <div className="inline-flex items-center space-x-3 bg-white px-5 py-2.5 rounded-full border border-slate-200 shadow-sm mb-10">
-                  <div className="w-2.5 h-2.5 rounded-full bg-brand-blue animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                <div className="inline-flex items-center space-x-3 bg-white px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-slate-200 shadow-sm mb-6 md:mb-10">
+                  <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-brand-blue animate-pulse" />
+                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
                     Your Next Campaign
                   </span>
                 </div>
                 
-                <h2 className="text-5xl md:text-7xl font-black font-heading text-slate-900 mb-8 tracking-tight leading-[1.05]">
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-black font-heading text-slate-900 mb-6 md:mb-8 tracking-tight leading-[1.05]">
                   Ready to dominate <br/>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-500">the skyline?</span>
                 </h2>
                 
-                <p className="text-slate-500 text-lg md:text-xl max-w-lg mb-12 font-light leading-relaxed">
+                <p className="text-slate-500 text-base sm:text-lg md:text-xl max-w-lg mb-8 md:mb-12 font-light leading-relaxed">
                   Connect with our OOH experts to discover the perfect premium inventory for your next big move.
                 </p>
                 
-                <Link href="/contact" className="group relative inline-flex items-center justify-center px-10 py-5 bg-slate-900 text-white rounded-full font-bold text-lg overflow-hidden shadow-[0_20px_40px_rgba(15,23,42,0.2)] hover:shadow-[0_20px_60px_rgba(15,23,42,0.4)] hover:-translate-y-1 transition-all duration-300">
-                  <span className="relative z-10 flex items-center gap-3">
+                <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-5 bg-slate-900 text-white rounded-full font-bold text-base md:text-lg overflow-hidden shadow-[0_20px_40px_rgba(15,23,42,0.2)] hover:shadow-[0_20px_60px_rgba(15,23,42,0.4)] hover:-translate-y-1 transition-all duration-300">
+                  <span className="relative z-10 flex items-center gap-2 md:gap-3">
                     Start Your Campaign
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Link>
               </div>

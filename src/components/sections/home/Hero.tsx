@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { CITIES, MEDIA_INVENTORY } from "@/data";
 import { MediaType } from "@/types";
 
+// ─── Dropdown for desktop hero filter ───────────────────────────────────────
 function HeroDropdown({ 
   value, 
   options, 
@@ -89,6 +90,7 @@ function HeroDropdown({
   );
 }
 
+// ─── Hero Component ──────────────────────────────────────────────────────────
 export function Hero() {
   const router = useRouter();
   const [selectedCityId, setSelectedCityId] = useState<string | null>(null);
@@ -117,30 +119,29 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      
-      {/* Edge-to-Edge Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/images/Hero_image.jpeg"
-          alt="Premium Billboard Advertising"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* Left Aligned Text Content */}
-      <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col pt-24 pb-16 h-full justify-center">
+    <>
+      {/* Mobile-Only Wrapper: Image positioned behind content (edge-to-edge) */}
+      <section className="block md:hidden relative w-full min-h-[500px] flex flex-col pt-[90px] overflow-hidden">
+        {/* Absolute Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/images/Hero_image.jpeg"
+            alt="Premium Billboard Advertising"
+            fill
+            className="object-cover object-[70%_top]"
+            priority
+          />
+        </div>
         
-        <div className="max-w-3xl mr-auto text-left">
+        {/* Mobile Content (Overlays the image) */}
+        <div className="px-5 py-6 w-full text-center flex flex-col items-center z-10 relative">
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6 -ml-1 md:-ml-2"
+            className="text-4xl sm:text-5xl font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-4"
           >
-            Premium Outdoor <br className="hidden md:block" />
+            Premium Outdoor <br />
             <span className="text-brand-blue">Advertising.</span>
           </motion.h1>
 
@@ -148,67 +149,90 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base md:text-xl text-gray-900 font-medium leading-relaxed mb-12 md:mb-16"
+            className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed max-w-sm mx-auto"
           >
             Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
           </motion.p>
         </div>
+      </section>
 
-        {/* Ultra-Clean Dark Pill UI - Centered */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="w-full max-w-[800px] relative z-40 mx-auto"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between p-2 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] sm:rounded-full shadow-2xl">
+      {/* Desktop-Only Wrapper: Full screen exact layout */}
+      <section className="hidden md:flex relative overflow-hidden flex-col justify-end min-h-screen">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/images/Hero_image.jpeg"
+            alt="Premium Billboard Advertising"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+
+        <div className="relative z-10 flex flex-col justify-end w-full">
+          <div className="px-12 pb-16 max-w-7xl mx-auto w-full">
             
-            <div className="flex flex-col sm:flex-row items-center w-full md:w-auto flex-1 px-1">
-              <HeroDropdown 
-                value={selectedCityId}
-                options={CITIES}
-                onChange={(val) => {
-                  setSelectedCityId(val);
-                  setSelectedMediaType(null);
-                  setSelectedLocation(null);
-                }}
-                label="Location"
-                defaultLabel="Any City"
-              />
-              <div className="hidden sm:block w-[1px] h-10 bg-white/10 mx-1" />
-              <HeroDropdown 
-                value={selectedMediaType}
-                options={availableMediaTypes.map(t => ({ id: t, name: t }))}
-                onChange={(val) => {
-                  setSelectedMediaType(val ? (val as MediaType) : null);
-                  setSelectedLocation(null);
-                }}
-                label="Media Type"
-                defaultLabel="All Types"
-              />
-              <div className="hidden sm:block w-[1px] h-10 bg-white/10 mx-1" />
-              <HeroDropdown 
-                value={selectedLocation}
-                options={availableLocations.map(l => ({ id: l, name: l }))}
-                onChange={(val) => setSelectedLocation(val || null)}
-                label="Area"
-                defaultLabel="All Areas"
-              />
-            </div>
-
-            <div 
-              onClick={handleSearch}
-              className="mt-3 md:mt-0 ml-0 md:ml-3 flex w-full md:w-14 h-12 md:h-14 items-center justify-center gap-2 rounded-[1.5rem] md:rounded-full bg-brand-blue hover:bg-blue-500 text-white transition-colors duration-200 cursor-pointer shadow-lg shrink-0 font-bold text-sm px-4 md:px-0"
+            <motion.h1 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-6xl lg:text-7xl xl:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6"
             >
-               <Search className="w-5 h-5" />
-               <span className="md:hidden font-bold">Search Inventory</span>
-            </div>
-            
+              Premium Outdoor <br />
+              <span className="text-brand-blue">Advertising.</span>
+            </motion.h1>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-xl text-gray-900 font-medium leading-relaxed mb-12 max-w-2xl"
+            >
+              Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="w-full max-w-[800px] relative z-40"
+            >
+              <div className="flex flex-row items-center justify-between p-2 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full shadow-2xl">
+                <div className="flex flex-row items-center w-full flex-1 px-1">
+                  <HeroDropdown 
+                    value={selectedCityId}
+                    options={CITIES}
+                    onChange={(val) => { setSelectedCityId(val); setSelectedMediaType(null); setSelectedLocation(null); }}
+                    label="Location"
+                    defaultLabel="Any City"
+                  />
+                  <div className="w-[1px] h-10 bg-white/10 mx-1" />
+                  <HeroDropdown 
+                    value={selectedMediaType}
+                    options={availableMediaTypes.map(t => ({ id: t, name: t }))}
+                    onChange={(val) => { setSelectedMediaType(val ? (val as MediaType) : null); setSelectedLocation(null); }}
+                    label="Media Type"
+                    defaultLabel="All Types"
+                  />
+                  <div className="w-[1px] h-10 bg-white/10 mx-1" />
+                  <HeroDropdown 
+                    value={selectedLocation}
+                    options={availableLocations.map(l => ({ id: l, name: l }))}
+                    onChange={(val) => setSelectedLocation(val || null)}
+                    label="Area"
+                    defaultLabel="All Areas"
+                  />
+                </div>
+                <div 
+                  onClick={handleSearch}
+                  className="ml-3 flex w-14 h-14 items-center justify-center rounded-full bg-brand-blue hover:bg-blue-500 text-white transition-colors duration-200 cursor-pointer shadow-lg shrink-0"
+                >
+                  <Search className="w-5 h-5" />
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
-
-      </div>
-
-    </section>
+        </div>
+      </section>
+    </>
   );
 }

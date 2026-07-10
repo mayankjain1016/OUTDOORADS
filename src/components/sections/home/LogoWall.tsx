@@ -6,8 +6,8 @@ export function LogoWall() {
   const logos = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS];
 
   return (
-    <section className="py-24 bg-zinc-50 border-b border-zinc-200 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 mb-12 text-center">
+    <section className="py-10 md:py-24 bg-zinc-50 border-b border-zinc-200 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 mb-6 md:mb-12 text-center">
         <p className="text-zinc-500 font-medium tracking-[0.2em] uppercase text-xs">
           Trusted by industry-leading brands
         </p>

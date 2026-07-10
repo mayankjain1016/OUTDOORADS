@@ -34,7 +34,7 @@ export function Industries() {
           subtitle="Our tailored outdoor media solutions deliver high-impact results and unrivaled visibility across all major sectors."
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 mt-10 md:mt-20">
           {INDUSTRIES.map((industry, i) => (
             <Link key={industry.id} href={`/gallery?industry=${industry.name}`}>
               <motion.div
@@ -42,20 +42,20 @@ export function Industries() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative flex flex-col items-center justify-center p-8 md:p-10 bg-white rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 cursor-pointer overflow-hidden h-full"
+                className="group relative flex flex-col items-center justify-center py-6 px-4 md:p-10 bg-white rounded-2xl md:rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 cursor-pointer overflow-hidden h-full"
               >
                 {/* Background hover effect */}
                 <div className="absolute inset-0 bg-slate-950 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
 
-                <div className="relative z-10 text-slate-400 group-hover:text-white transition-all duration-300 mb-6 group-hover:scale-110">
+                <div className="relative z-10 text-slate-400 group-hover:text-white transition-all duration-300 mb-3 md:mb-6 group-hover:scale-110">
                   {getIndustryIcon(industry.name)}
                 </div>
                 
-                <h4 className="relative z-10 font-bold text-lg md:text-xl text-slate-900 group-hover:text-white transition-colors duration-300 text-center tracking-tight">
+                <h4 className="relative z-10 font-bold text-sm sm:text-base md:text-xl text-slate-900 group-hover:text-white transition-colors duration-300 text-center tracking-tight">
                   {industry.name}
                 </h4>
                 
-                <div className="relative z-10 mt-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center text-white text-sm font-semibold tracking-wide">
+                <div className="relative z-10 mt-2 md:mt-4 opacity-0 group-hover:opacity-100 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 hidden md:flex items-center text-white text-sm font-semibold tracking-wide">
                   View Gallery <ArrowRight className="w-4 h-4 ml-1.5" />
                 </div>
               </motion.div>

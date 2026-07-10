@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { TESTIMONIALS } from "@/data";
-import { Star, CheckCircle, ShieldCheck } from "lucide-react";
+import { Star, CheckCircle, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 // Custom Google 'G' Icon SVG
 const GoogleIcon = () => (
@@ -15,13 +16,157 @@ const GoogleIcon = () => (
   </svg>
 );
 
+// Single review card — shared between carousel and grid
+function ReviewCard({ t }: { t: typeof TESTIMONIALS[0] }) {
+  return (
+    <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-all duration-500 h-full flex flex-col">
+      {/* Header: User & Google Icon */}
+      <div className="flex items-start justify-between mb-5">
+        <div className="flex items-center space-x-3">
+          <div className="relative h-11 w-11 rounded-full overflow-hidden bg-gray-100 shrink-0">
+            <Image 
+              src={t.photoUrl} 
+              alt={t.name} 
+              fill 
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900 text-sm md:text-base">{t.name}</h4>
+            <p className="text-[12px] md:text-[13px] font-medium text-gray-400 mt-0.5">{t.role} at {t.company}</p>
+          </div>
+        </div>
+        <div className="opacity-90 shrink-0">
+          <GoogleIcon />
+        </div>
+      </div>
+      
+      {/* Rating & Verified Tag */}
+      <div className="flex items-center space-x-3 mb-4">
+        <div className="flex text-[#FBBC05] space-x-0.5">
+          {[...Array(t.rating || 5)].map((_, idx) => (
+            <Star key={idx} className="h-4 w-4 fill-current" />
+          ))}
+        </div>
+        <div className="w-1 h-1 rounded-full bg-gray-200" />
+        <div className="flex items-center space-x-1.5 text-gray-400 text-[12px] font-medium">
+          <CheckCircle className="h-3.5 w-3.5 text-[#34A853]" />
+          <span>Verified Client</span>
+        </div>
+      </div>
+      
+      {/* Review Text */}
+      <blockquote className="text-gray-600 leading-relaxed text-sm md:text-[15px] flex-1">
+        &ldquo;{t.quote}&rdquo;
+      </blockquote>
+    </div>
+  );
+}
+
+// Mobile carousel
+function MobileCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef(0);
+  const total = TESTIMONIALS.length;
+
+  const goTo = useCallback((idx: number, dir: number) => {
+    setDirection(dir);
+    setCurrent((idx + total) % total);
+  }, [total]);
+
+  const next = useCallback(() => goTo(current + 1, 1), [current, goTo]);
+  const prev = useCallback(() => goTo(current - 1, -1), [current, goTo]);
+
+  // Autoplay
+  useEffect(() => {
+    autoplayRef.current = setInterval(next, 5000);
+    return () => { if (autoplayRef.current) clearInterval(autoplayRef.current); };
+  }, [next]);
+
+  // Touch swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    if (autoplayRef.current) clearInterval(autoplayRef.current);
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { if (diff > 0) { next(); } else { prev(); } }
+    autoplayRef.current = setInterval(next, 5000);
+  };
+
+  const variants = {
+    enter: (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
+  };
+
+  return (
+    <div className="relative">
+      {/* Card */}
+      <div
+        className="overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <AnimatePresence custom={direction} mode="wait">
+          <motion.div
+            key={current}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <ReviewCard t={TESTIMONIALS[current]} />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Nav arrows */}
+      <div className="flex items-center justify-between mt-5">
+        <button
+          onClick={prev}
+          className="p-2.5 rounded-full bg-white border border-gray-200 shadow-sm text-gray-500 hover:text-gray-900 hover:border-gray-300 transition-colors"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+
+        {/* Dot pagination */}
+        <div className="flex items-center gap-2">
+          {TESTIMONIALS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i, i > current ? 1 : -1)}
+              className={`rounded-full transition-all duration-300 ${
+                i === current
+                  ? "w-5 h-2 bg-brand-blue"
+                  : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={next}
+          className="p-2.5 rounded-full bg-white border border-gray-200 shadow-sm text-gray-500 hover:text-gray-900 hover:border-gray-300 transition-colors"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function Testimonials() {
   return (
-    <section className="py-24 md:py-32 relative bg-gray-50 overflow-hidden border-t border-gray-200">
+    <section className="py-16 md:py-24 lg:py-32 relative bg-gray-50 overflow-hidden border-t border-gray-200">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 lg:mb-24">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +181,7 @@ export function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-gray-900 mb-6"
+            className="text-3xl md:text-4xl lg:text-6xl font-black font-heading tracking-tight text-gray-900 mb-4 md:mb-6"
           >
             Trusted by <span className="text-brand-blue">Top Brands</span>
           </motion.h2>
@@ -45,14 +190,19 @@ export function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-gray-500 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto"
           >
             See what our partners say about our premium out-of-home advertising solutions and campaign execution.
           </motion.p>
         </div>
 
-        {/* Premium Google-Style Review Grid (Masonry) */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
+        {/* Mobile: carousel */}
+        <div className="block md:hidden">
+          <MobileCarousel />
+        </div>
+
+        {/* Desktop: masonry grid */}
+        <div className="hidden md:block columns-2 lg:columns-3 gap-6 md:gap-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={t.id}
@@ -60,48 +210,9 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white p-8 rounded-[2rem] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-all duration-500 break-inside-avoid"
+              className="break-inside-avoid"
             >
-              {/* Header: User & Google Icon */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div className="relative h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    <Image 
-                      src={t.photoUrl} 
-                      alt={t.name} 
-                      fill 
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 text-base">{t.name}</h4>
-                    <p className="text-[13px] font-medium text-gray-400 mt-0.5">{t.role} at {t.company}</p>
-                  </div>
-                </div>
-                <div className="opacity-90">
-                  <GoogleIcon />
-                </div>
-              </div>
-              
-              {/* Rating & Verified Tag */}
-              <div className="flex items-center space-x-3 mb-5">
-                <div className="flex text-[#FBBC05] space-x-0.5">
-                  {[...Array(t.rating || 5)].map((_, idx) => (
-                    <Star key={idx} className="h-[18px] w-[18px] fill-current" />
-                  ))}
-                </div>
-                <div className="w-1 h-1 rounded-full bg-gray-200" />
-                <div className="flex items-center space-x-1.5 text-gray-400 text-[13px] font-medium">
-                  <CheckCircle className="h-4 w-4 text-[#34A853]" />
-                  <span>Verified Client</span>
-                </div>
-              </div>
-              
-              {/* Review Text */}
-              <blockquote className="text-gray-600 leading-relaxed text-[15px]">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              
+              <ReviewCard t={t} />
             </motion.div>
           ))}
         </div>

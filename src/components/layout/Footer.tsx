@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="bg-zinc-950 text-zinc-400 pt-20 pb-12 relative overflow-hidden border-t border-zinc-900">
+    <footer className="bg-zinc-950 text-zinc-400 pt-16 md:pt-20 pb-8 md:pb-12 relative overflow-hidden border-t border-zinc-900">
       {/* Decorative Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-brand-blue/10 blur-[150px] pointer-events-none rounded-full" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-blue/5 blur-[120px] pointer-events-none rounded-full" />
@@ -15,23 +15,23 @@ export function Footer() {
 
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10 md:gap-12 lg:gap-8 mb-12 md:mb-20">
           
           {/* Brand Col */}
-          <div className="lg:col-span-5 space-y-8 lg:pr-8">
+          <div className="col-span-2 lg:col-span-5 flex flex-col items-start text-left space-y-5 md:space-y-8 lg:pr-8">
             <Link href="/" className="inline-flex items-center group">
               <Image 
                 src="/LOGO.png"
                 alt="ApexOOH Logo"
                 width={200}
                 height={50}
-                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-xl"
+                className="h-10 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-xl"
               />
             </Link>
-            <p className="text-zinc-400 text-base leading-relaxed max-w-sm font-medium">
+            <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-sm font-medium">
               Command attention with India&apos;s most premium outdoor advertising network. We build landmarks, not just ads.
             </p>
-            <div className="flex items-center space-x-3 pt-4">
+            <div className="flex items-center justify-start space-x-3 md:space-x-4 pt-1 md:pt-4">
               {[
                 { icon: <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>, name: "Twitter" },
                 { icon: <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>, name: "LinkedIn" },
@@ -45,9 +45,9 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="lg:col-span-2 space-y-6">
-            <h4 className="text-white font-bold text-sm tracking-widest uppercase">Company</h4>
-            <ul className="space-y-4 text-sm font-medium">
+          <div className="col-span-1 lg:col-span-2 space-y-4 md:space-y-6">
+            <h4 className="text-white font-bold text-xs md:text-sm tracking-widest uppercase">Company</h4>
+            <ul className="space-y-3 md:space-y-4 text-xs md:text-sm font-medium">
               <li><Link href="/city-showcase" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Showcase</Link></li>
               <li><Link href="/inventory" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Inventory</Link></li>
               <li><Link href="/clients" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Our Clients</Link></li>
@@ -56,9 +56,9 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <div className="lg:col-span-2 space-y-6">
-            <h4 className="text-white font-bold text-sm tracking-widest uppercase">Services</h4>
-            <ul className="space-y-4 text-sm font-medium">
+          <div className="col-span-1 lg:col-span-2 space-y-4 md:space-y-6">
+            <h4 className="text-white font-bold text-xs md:text-sm tracking-widest uppercase">Services</h4>
+            <ul className="space-y-3 md:space-y-4 text-xs md:text-sm font-medium">
               <li><Link href="#" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Digital OOH</Link></li>
               <li><Link href="#" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Transit Media</Link></li>
               <li><Link href="#" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Airport Branding</Link></li>
@@ -67,19 +67,28 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="lg:col-span-3 space-y-6">
-            <h4 className="text-white font-bold text-sm tracking-widest uppercase">Contact</h4>
-            <ul className="space-y-5 text-sm font-medium">
-              <li className="flex flex-col"><span className="text-brand-blue/80 mb-1 text-[10px] font-bold uppercase tracking-widest">Office</span><span className="text-zinc-200">Level 4, Trade Centre, BKC, Bandra East, Mumbai, 400051</span></li>
-              <li className="flex flex-col"><span className="text-brand-blue/80 mb-1 text-[10px] font-bold uppercase tracking-widest">Phone</span><span className="text-zinc-200">+91 98765 43210</span></li>
-              <li className="flex flex-col"><span className="text-brand-blue/80 mb-1 text-[10px] font-bold uppercase tracking-widest">Email</span><span className="text-brand-blue">hello@apexooh.com</span></li>
+          <div className="col-span-2 lg:col-span-3 space-y-4 md:space-y-6 text-left mt-2 lg:mt-0">
+            <h4 className="text-white font-bold text-xs md:text-sm tracking-widest uppercase">Contact</h4>
+            <ul className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-5 text-xs md:text-sm font-medium text-left w-full">
+              <li className="col-span-1 min-[360px]:col-span-2 lg:col-span-1 flex flex-col items-start text-left">
+                <span className="text-brand-blue/80 mb-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Office</span>
+                <span className="text-zinc-200 leading-relaxed max-w-xs">Level 4, Trade Centre, BKC, Bandra East, Mumbai, 400051</span>
+              </li>
+              <li className="col-span-1 flex flex-col items-start text-left">
+                <span className="text-brand-blue/80 mb-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Phone</span>
+                <span className="text-zinc-200">+91 98765 43210</span>
+              </li>
+              <li className="col-span-1 flex flex-col items-start text-left">
+                <span className="text-brand-blue/80 mb-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Email</span>
+                <span className="text-brand-blue">hello@apexooh.com</span>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between text-xs font-medium text-zinc-500">
-          <p>© {new Date().getFullYear()} ApexOOH Media. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+        <div className="pt-6 md:pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-center md:justify-between text-[10px] md:text-xs font-medium text-zinc-500 gap-y-3">
+          <p className="text-center w-full md:w-auto">© {new Date().getFullYear()} ApexOOH Media. All rights reserved.</p>
+          <div className="flex flex-row items-center justify-center space-x-4 sm:space-x-6 w-full md:w-auto">
             <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link>
             <Link href="#" className="hover:text-white transition-colors duration-300">Terms of Service</Link>
           </div>

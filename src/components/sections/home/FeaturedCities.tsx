@@ -27,7 +27,7 @@ export function FeaturedCities() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-5">
           {topCities.map((city, i) => (
             <motion.div
               key={city.id}
@@ -35,11 +35,11 @@ export function FeaturedCities() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className={`group relative overflow-hidden bg-zinc-50 rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-xl hover:border-zinc-300/80 transition-all duration-500 ${
-                i === 0 ? "md:col-span-8 h-[450px]" : 
-                i === 1 ? "md:col-span-4 h-[450px]" : 
-                i === 2 ? "md:col-span-5 h-[350px]" : 
-                "md:col-span-7 h-[350px]"
+              className={`group relative overflow-hidden bg-zinc-50 rounded-xl md:rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-xl hover:border-zinc-300/80 transition-all duration-500 ${
+                i === 0 ? "col-span-1 md:col-span-8 h-[140px] md:h-[450px]" : 
+                i === 1 ? "col-span-1 md:col-span-4 h-[140px] md:h-[450px]" : 
+                i === 2 ? "col-span-1 md:col-span-5 h-[140px] md:h-[350px]" : 
+                "col-span-1 md:col-span-7 h-[140px] md:h-[350px]"
               }`}
             >
               <Image 
@@ -51,14 +51,14 @@ export function FeaturedCities() {
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none transition-opacity duration-500 group-hover:opacity-90" />
               
-              <div className="absolute inset-0 p-8 flex flex-col justify-end pointer-events-none">
+              <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-end pointer-events-none">
                 <motion.h3 
-                  className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 tracking-tight drop-shadow-md"
+                  className="text-base sm:text-lg md:text-3xl lg:text-4xl font-heading font-bold text-white mb-0.5 md:mb-2 tracking-tight drop-shadow-md"
                 >
                   {city.name}
                 </motion.h3>
-                <div className="flex items-center text-zinc-200 font-medium text-sm drop-shadow-sm group-hover:text-white transition-colors">
-                  <MapPin className="h-4 w-4 mr-2" />
+                <div className="flex items-center text-zinc-200 font-medium text-[10px] sm:text-xs md:text-sm drop-shadow-sm group-hover:text-white transition-colors">
+                  <MapPin className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
                   {city.mediaCount} Prime Locations
                 </div>
               </div>

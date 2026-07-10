@@ -55,10 +55,10 @@ export default function Inventory() {
   }, [cityMedia, selectedCategory]);
 
   return (
-    <div className="relative min-h-screen pt-32 pb-16 md:pb-24 bg-slate-50 overflow-hidden text-slate-900">
+    <div className="relative min-h-screen pt-24 md:pt-32 pb-12 md:pb-24 bg-slate-50 overflow-hidden text-slate-900">
       
       {/* Background Gradient */}
-      <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white to-slate-50 z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[300px] md:h-[400px] bg-gradient-to-b from-white to-slate-50 z-0 pointer-events-none" />
 
       {/* Hero Section */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 text-center mb-10">
@@ -77,11 +77,11 @@ export default function Inventory() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-black font-heading tracking-tight text-slate-900 mb-4"
+          className="text-3xl sm:text-4xl md:text-5xl font-black font-heading tracking-tight text-slate-900 mb-3 md:mb-4"
         >
           Premium <span className="text-brand-blue">Inventory</span>
         </motion.h2>
-        <p className="text-slate-500 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto font-light">
           Explore our nationwide network of exclusive outdoor advertising locations, carefully curated for maximum impact.
         </p>
 
@@ -97,9 +97,74 @@ export default function Inventory() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 mt-8 flex flex-col md:flex-row gap-8 relative z-10">
-        {/* Sidebar */}
-        <aside className={`w-full md:w-72 flex-shrink-0 ${isMobileSidebarOpen ? 'block' : 'hidden md:block'}`}>
+      <div className="container mx-auto px-4 md:px-8 mt-4 md:mt-8 flex flex-col md:flex-row gap-8 relative z-10">
+        
+        {/* Mobile Slide-Out Drawer (AnimatePresence) */}
+        <AnimatePresence>
+          {isMobileSidebarOpen && (
+            <div className="md:hidden fixed inset-0 z-[100] flex justify-end">
+              <motion.div 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                exit={{ opacity: 0 }} 
+                className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                onClick={() => setIsMobileSidebarOpen(false)}
+              />
+              <motion.div 
+                initial={{ x: "100%" }} 
+                animate={{ x: 0 }} 
+                exit={{ x: "100%" }} 
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="relative w-[85%] max-w-sm h-full bg-white shadow-2xl flex flex-col"
+              >
+                <div className="flex items-center justify-between p-5 sm:p-6 border-b border-slate-100">
+                  <h3 className="font-bold text-lg text-slate-900">Locations Filter</h3>
+                  <button onClick={() => setIsMobileSidebarOpen(false)} className="p-2 text-slate-400 hover:text-slate-700 bg-slate-50 rounded-full">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                
+                <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3">
+                  {CITIES.map((city) => (
+                     <button
+                       key={city.id}
+                       className={`group w-full flex items-center justify-between px-5 py-4 text-left transition-all duration-300 rounded-2xl border ${
+                         selectedCityId === city.id 
+                           ? 'bg-slate-900 text-white border-slate-900 shadow-md' 
+                           : 'bg-white text-slate-600 border-slate-100'
+                       }`}
+                       onClick={() => {
+                         setSelectedCityId(city.id);
+                         setSelectedCategory(null);
+                         setExpandedId(null);
+                       }}
+                     >
+                       <span className="font-semibold">{city.name}</span>
+                     </button>
+                  ))}
+                </div>
+
+                <div className="p-5 sm:p-6 border-t border-slate-100 flex items-center gap-3 bg-slate-50">
+                  <button 
+                     onClick={() => { setSelectedCityId("All"); setSelectedCategory(null); }}
+                     className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-slate-600 font-bold bg-white text-sm"
+                   >
+                    Reset
+                  </button>
+                  <button 
+                     onClick={() => setIsMobileSidebarOpen(false)}
+                     className="flex-[2] px-4 py-3 rounded-xl bg-brand-blue text-white font-bold text-sm shadow-md"
+                   >
+                    Apply Filters
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* Desktop Sidebar */}
+        <aside className="w-full md:w-72 flex-shrink-0 hidden md:block">
           <div className="sticky top-28 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm h-[calc(100vh-8rem)] overflow-y-auto no-scrollbar">
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-bold text-lg text-slate-900">Locations Filter</h3>
@@ -129,7 +194,6 @@ export default function Inventory() {
                       setSelectedCityId(city.id);
                       setSelectedCategory(null); // Reset category when changing city
                       setExpandedId(null);
-                      if (window.innerWidth < 768) setIsMobileSidebarOpen(false);
                     }}
                   >
                     <span className="font-semibold">{city.name}</span>
@@ -153,17 +217,17 @@ export default function Inventory() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="mb-8 flex items-center justify-between">
-                  <h3 className="text-2xl font-black font-heading text-slate-900">
+                <div className="mb-6 md:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h3 className="text-xl sm:text-2xl font-black font-heading text-slate-900">
                     {selectedCityId === "All" ? "All Locations" : CITIES.find(c => c.id === selectedCityId)?.name} Categories
                   </h3>
-                  <div className="text-sm text-slate-500 font-medium">
+                  <div className="text-xs sm:text-sm text-slate-500 font-medium">
                     <span className="text-slate-900 font-bold">{categories.length}</span> categories found
                   </div>
                 </div>
 
                 {categories.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                     {categories.map((category, index) => (
                       <motion.div
                         key={category.name}
@@ -171,25 +235,25 @@ export default function Inventory() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
                         onClick={() => setSelectedCategory(category.name)}
-                        className="group cursor-pointer bg-white rounded-3xl p-8 border border-slate-200 hover:border-brand-blue/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col relative overflow-hidden"
+                        className="group cursor-pointer bg-white rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 border border-slate-200 hover:border-brand-blue/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col relative overflow-hidden"
                       >
                         {/* Subtle background gradient on hover */}
                         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         
-                        <div className="relative z-10 flex items-center justify-between mb-6">
-                          <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300 shadow-sm shrink-0">
+                        <div className="relative z-10 flex items-center justify-between mb-4 md:mb-6">
+                          <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300 shadow-sm shrink-0 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8">
                             {getCategoryIcon(category.name)}
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-blue/10 group-hover:text-brand-blue transition-colors duration-300">
-                            <Eye className="w-5 h-5" />
+                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-blue/10 group-hover:text-brand-blue transition-colors duration-300">
+                            <Eye className="w-4 h-4 md:w-5 md:h-5" />
                           </div>
                         </div>
 
                         <div className="relative z-10 mt-auto">
-                          <h4 className="font-bold font-heading text-2xl text-slate-900 mb-2 group-hover:text-brand-blue transition-colors duration-300">
+                          <h4 className="font-bold font-heading text-base sm:text-lg md:text-2xl text-slate-900 mb-1 md:mb-2 group-hover:text-brand-blue transition-colors duration-300 leading-tight">
                             {category.name}
                           </h4>
-                          <p className="text-slate-500 font-medium">
+                          <p className="text-slate-500 font-medium text-xs md:text-sm">
                             {category.count} {category.count === 1 ? 'Location' : 'Locations'}
                           </p>
                         </div>
@@ -219,21 +283,21 @@ export default function Inventory() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <button 
                       onClick={() => {
                         setSelectedCategory(null);
                         setExpandedId(null);
                       }}
-                      className="inline-flex items-center text-sm font-bold text-slate-500 hover:text-brand-blue transition-colors mb-2 group"
+                      className="inline-flex items-center text-xs md:text-sm font-bold text-slate-500 hover:text-brand-blue transition-colors mb-1 md:mb-2 group"
                     >
-                      <ArrowLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
+                      <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
                       Back to Categories
                     </button>
-                    <h3 className="text-2xl font-black font-heading text-slate-900 flex items-center gap-3">
+                    <h3 className="text-xl sm:text-2xl font-black font-heading text-slate-900 flex items-center gap-2 md:gap-3">
                       {selectedCategory}
-                      <span className="text-sm font-medium px-3 py-1 bg-brand-blue/10 text-brand-blue rounded-full">
+                      <span className="text-[10px] md:text-sm font-medium px-2.5 py-0.5 md:px-3 md:py-1 bg-brand-blue/10 text-brand-blue rounded-full">
                         {holdings.length} {holdings.length === 1 ? 'Location' : 'Locations'}
                       </span>
                     </h3>
@@ -261,20 +325,20 @@ export default function Inventory() {
                         >
                           <div className={`flex ${isExpanded ? 'flex-col md:flex-row' : 'flex-col'} w-full`}>
                             {/* Image Section */}
-                            <div className={`relative overflow-hidden bg-slate-100 ${isExpanded ? 'h-64 md:h-auto md:w-5/12 lg:w-1/3 shrink-0' : 'h-60 w-full'}`}>
+                            <div className={`relative overflow-hidden bg-slate-100 shrink-0 ${isExpanded ? 'h-56 sm:h-64 md:h-auto md:w-5/12 lg:w-1/3' : 'h-48 sm:h-52 md:h-60 w-full'}`}>
                               <Image 
                                 src={media.imageUrl} 
                                 alt={media.locationDetails} 
                                 fill
                                 className={`object-cover transition-transform duration-[1500ms] ease-out ${isExpanded ? '' : 'group-hover:scale-105'}`}
                               />
-                              <div className="absolute top-4 left-4 flex flex-col gap-2">
-                                <span className="inline-block px-3 py-1.5 bg-white/95 backdrop-blur-md text-slate-900 rounded-full text-xs font-bold tracking-widest uppercase shadow-sm border border-white/20">
+                              <div className="absolute top-3 md:top-4 left-3 md:left-4 flex flex-col gap-2">
+                                <span className="inline-block px-2.5 py-1 md:px-3 md:py-1.5 bg-white/95 backdrop-blur-md text-slate-900 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm border border-white/20">
                                   {media.size}
                                 </span>
                               </div>
-                              <div className="absolute top-4 right-4">
-                                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm border ${status.bg} ${status.color} ${status.border}`}>
+                              <div className="absolute top-3 md:top-4 right-3 md:right-4">
+                                <span className={`inline-flex items-center gap-1 md:gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-sm border ${status.bg} ${status.color} ${status.border}`}>
                                   {status.icon}
                                   {media.availability}
                                 </span>
@@ -282,37 +346,37 @@ export default function Inventory() {
                             </div>
                             
                             {/* Content Section */}
-                            <div className={`p-6 md:p-8 flex flex-col flex-1 relative ${isExpanded ? 'bg-slate-50' : ''}`}>
+                            <div className={`p-4 sm:p-5 md:p-8 flex flex-col flex-1 relative ${isExpanded ? 'bg-slate-50' : ''}`}>
                               {isExpanded && (
                                 <button 
                                   onClick={() => setExpandedId(null)}
-                                  className="absolute top-6 right-6 p-2 bg-white border border-slate-200 rounded-full text-slate-500 hover:bg-slate-900 hover:text-white transition-colors shadow-sm"
+                                  className="absolute top-4 right-4 md:top-6 md:right-6 p-1.5 md:p-2 bg-white border border-slate-200 rounded-full text-slate-500 hover:bg-slate-900 hover:text-white transition-colors shadow-sm"
                                 >
-                                  <X className="w-5 h-5" />
+                                  <X className="w-4 h-4 md:w-5 md:h-5" />
                                 </button>
                               )}
-                              <div className="flex items-center space-x-2 text-slate-500 mb-4 text-xs font-bold uppercase tracking-wider">
-                                <MapPin className="h-4 w-4 text-brand-blue" />
+                              <div className="flex items-center space-x-1.5 md:space-x-2 text-slate-500 mb-2 md:mb-4 text-[10px] md:text-xs font-bold uppercase tracking-wider">
+                                <MapPin className="h-3.5 w-3.5 md:h-4 md:w-4 text-brand-blue" />
                                 <span>{media.cityName} &bull; {media.area}</span>
                               </div>
                               
-                              <h3 className={`font-black font-heading text-slate-900 tracking-tight ${isExpanded ? 'mb-4 text-3xl lg:text-4xl pr-12' : 'mb-6 text-2xl line-clamp-2'}`}>
+                              <h3 className={`font-black font-heading text-slate-900 tracking-tight ${isExpanded ? 'mb-3 md:mb-4 text-2xl md:text-3xl lg:text-4xl pr-10 md:pr-12' : 'mb-4 md:mb-6 text-lg sm:text-xl md:text-2xl line-clamp-2 leading-tight'}`}>
                                 {media.locationDetails}
                               </h3>
 
                               {isExpanded && (
-                                <p className="text-slate-600 text-base leading-relaxed mb-8 max-w-2xl">{media.description}</p>
+                                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 md:mb-8 max-w-2xl">{media.description}</p>
                               )}
                               
-                              <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
-                                <div className="text-sm font-medium text-slate-500">
+                              <div className="mt-auto pt-4 md:pt-6 border-t border-slate-100 flex items-center justify-between">
+                                <div className="text-xs md:text-sm font-medium text-slate-500">
                                   ID: <span className="text-slate-900 font-bold uppercase">{media.id}</span>
                                 </div>
                                 <button 
                                   onClick={() => setExpandedId(isExpanded ? null : media.id)}
-                                  className="flex items-center justify-center px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold shadow-md hover:bg-brand-blue hover:shadow-lg transition-all duration-300"
+                                  className="flex items-center justify-center px-4 py-2 md:px-6 md:py-2.5 rounded-full bg-slate-900 text-white text-xs md:text-sm font-bold shadow-md hover:bg-brand-blue hover:shadow-lg transition-all duration-300"
                                 >
-                                  {isExpanded ? 'Close Details' : 'View Details'}
+                                  {isExpanded ? 'Close' : 'Details'}
                                 </button>
                               </div>
                             </div>
