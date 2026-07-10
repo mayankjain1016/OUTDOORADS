@@ -24,7 +24,6 @@ const NAV_LINKS = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedCityId, setSelectedCityId] = useState<string | null>(null);
   const [selectedMediaType, setSelectedMediaType] = useState<MediaType | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
@@ -48,7 +47,6 @@ export function Navbar() {
     : [];
 
   const handleSearch = () => {
-    setIsFilterOpen(false);
     window.location.href = "/city-showcase";
   };
 
@@ -110,15 +108,8 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu & Filter Toggles */}
+          {/* Mobile Menu Toggle */}
           <div className="flex items-center lg:hidden mr-2">
-            <button
-              className="p-2.5 rounded-full transition-colors bg-brand-blue/10 text-brand-blue hover:bg-brand-blue/20 mr-2"
-              onClick={() => setIsFilterOpen(true)}
-              aria-label="Filter Inventory"
-            >
-              <MoreVertical className="h-5 w-5" />
-            </button>
             <button
               className="p-2.5 rounded-full transition-colors bg-zinc-100 text-zinc-900 hover:bg-zinc-200"
               onClick={() => setIsMobileMenuOpen(true)}
@@ -171,119 +162,6 @@ export function Navbar() {
               ))}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Filter Drawer (Bottom Sheet) */}
-      <AnimatePresence>
-        {isFilterOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsFilterOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] lg:hidden"
-            />
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 28, stiffness: 300 }}
-              className="fixed bottom-0 left-0 right-0 z-[101] bg-zinc-950 rounded-t-[2rem] border-t border-white/10 overflow-hidden lg:hidden max-h-[85vh] flex flex-col"
-            >
-              <div className="flex justify-center pt-4 pb-2 shrink-0">
-                <div className="w-10 h-1 bg-white/20 rounded-full" />
-              </div>
-              <div className="px-6 pb-8 pt-2 space-y-6 overflow-y-auto no-scrollbar flex-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-white font-bold text-lg">Filter Inventory</h3>
-                  <button onClick={() => setIsFilterOpen(false)} className="p-2 rounded-full bg-white/10 text-white/70 hover:text-white">
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <div>
-                  <label className="flex items-center gap-2 text-white/50 text-xs font-bold uppercase tracking-widest mb-3">
-                    <MapPin className="w-3.5 h-3.5" /> Location
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => { setSelectedCityId(null); setSelectedMediaType(null); setSelectedLocation(null); }}
-                      className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${!selectedCityId ? "bg-brand-blue text-white" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                    >
-                      Any City
-                    </button>
-                    {CITIES.map(c => (
-                      <button
-                        key={c.id}
-                        onClick={() => { setSelectedCityId(c.id); setSelectedMediaType(null); setSelectedLocation(null); }}
-                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${selectedCityId === c.id ? "bg-brand-blue text-white" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                      >
-                        {c.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="flex items-center gap-2 text-white/50 text-xs font-bold uppercase tracking-widest mb-3">
-                    <Layers className="w-3.5 h-3.5" /> Media Type
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => { setSelectedMediaType(null); setSelectedLocation(null); }}
-                      className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${!selectedMediaType ? "bg-brand-blue text-white" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                    >
-                      All Types
-                    </button>
-                    {availableMediaTypes.map(t => (
-                      <button
-                        key={t}
-                        onClick={() => { setSelectedMediaType(t as MediaType); setSelectedLocation(null); }}
-                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${selectedMediaType === t ? "bg-brand-blue text-white" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                      >
-                        {t}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {availableLocations.length > 0 && (
-                  <div>
-                    <label className="flex items-center gap-2 text-white/50 text-xs font-bold uppercase tracking-widest mb-3">
-                      <Navigation2 className="w-3.5 h-3.5" /> Area
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={() => setSelectedLocation(null)}
-                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${!selectedLocation ? "bg-brand-blue text-white" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                      >
-                        All Areas
-                      </button>
-                      {availableLocations.map(l => (
-                        <button
-                          key={l}
-                          onClick={() => setSelectedLocation(l)}
-                          className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${selectedLocation === l ? "bg-brand-blue text-white" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                        >
-                          {l}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <button
-                  onClick={handleSearch}
-                  className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-brand-blue hover:bg-blue-500 text-white font-bold text-base transition-colors shadow-lg mt-4"
-                >
-                  <Search className="w-5 h-5" />
-                  Search Inventory
-                </button>
-              </div>
-            </motion.div>
-          </>
         )}
       </AnimatePresence>
     </>

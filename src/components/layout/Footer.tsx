@@ -90,7 +90,7 @@ export function Footer() {
           <div className="text-center w-full md:w-auto flex flex-col md:flex-row items-center gap-1 md:gap-2">
             <p>© {new Date().getFullYear()} ApexOOH Media. All rights reserved.</p>
             <span className="hidden md:inline text-zinc-700">|</span>
-            <p>Developed by <span className="text-brand-blue font-bold tracking-wide hover:text-white transition-colors cursor-pointer">AFFOBE</span></p>
+            <p>Developed by <a href="https://www.affobe.com/" target="_blank" rel="noopener noreferrer" className="text-brand-blue font-bold tracking-wide hover:text-white transition-colors cursor-pointer">AFFOBE</a></p>
           </div>
           <div className="flex flex-row items-center justify-center space-x-4 sm:space-x-6 w-full md:w-auto">
             <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link>

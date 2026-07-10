@@ -7,20 +7,20 @@ import { MapPin, Phone, Clock, Send, MessageSquare } from "lucide-react";
 
 export default function Contact() {
   return (
-    <div className="min-h-screen pt-32 pb-24 bg-primary-foreground">
+    <div className="min-h-screen pt-24 md:pt-32 pb-12 md:pb-24 bg-primary-foreground">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         
         {/* Header Section */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-10 md:mb-16">
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold font-heading text-primary-900 mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold font-heading text-primary-900 mb-4 md:mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Let&apos;s Plan Your Next <span className="text-brand-blue">Big Campaign</span>
           </motion.h1>
           <motion.p 
-            className="text-lg text-primary-600"
+            className="text-sm sm:text-base md:text-lg text-primary-600"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -39,13 +39,13 @@ export default function Contact() {
               transition={{ delay: 0.2 }}
             >
               <Card className="border-none shadow-md overflow-hidden group">
-                <CardContent className="p-8 flex items-start space-x-5">
-                  <div className="h-12 w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                    <MapPin className="h-6 w-6" />
+                <CardContent className="p-5 sm:p-6 md:p-8 flex items-start space-x-4 md:space-x-5">
+                  <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
+                    <MapPin className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-xl text-primary-900 mb-2">Headquarters</h3>
-                    <p className="text-primary-600">Level 4, Trade Centre, BKC<br/>Bandra East, Mumbai<br/>Maharashtra 400051</p>
+                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Headquarters</h3>
+                    <p className="text-primary-600 text-sm md:text-base">Level 4, Trade Centre, BKC<br/>Bandra East, Mumbai<br/>Maharashtra 400051</p>
                   </div>
                 </CardContent>
               </Card>
@@ -57,14 +57,14 @@ export default function Contact() {
               transition={{ delay: 0.3 }}
             >
               <Card className="border-none shadow-md overflow-hidden group">
-                <CardContent className="p-8 flex items-start space-x-5">
-                  <div className="h-12 w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                    <Phone className="h-6 w-6" />
+                <CardContent className="p-5 sm:p-6 md:p-8 flex items-start space-x-4 md:space-x-5">
+                  <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
+                    <Phone className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-xl text-primary-900 mb-2">Call Us</h3>
-                    <p className="text-primary-600 mb-1">+91 98765 43210</p>
-                    <p className="text-primary-600">1800-OOH-APEX (Toll Free)</p>
+                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Call Us</h3>
+                    <p className="text-primary-600 text-sm md:text-base mb-1">+91 98765 43210</p>
+                    <p className="text-primary-600 text-sm md:text-base">1800-OOH-APEX (Toll Free)</p>
                   </div>
                 </CardContent>
               </Card>
@@ -76,14 +76,14 @@ export default function Contact() {
               transition={{ delay: 0.4 }}
             >
               <Card className="border-none shadow-md overflow-hidden group">
-                <CardContent className="p-8 flex items-start space-x-5">
-                  <div className="h-12 w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                    <Clock className="h-6 w-6" />
+                <CardContent className="p-5 sm:p-6 md:p-8 flex items-start space-x-4 md:space-x-5">
+                  <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
+                    <Clock className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-xl text-primary-900 mb-2">Business Hours</h3>
-                    <p className="text-primary-600 mb-1">Monday - Friday</p>
-                    <p className="text-primary-900 font-medium">9:00 AM - 6:30 PM</p>
+                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Business Hours</h3>
+                    <p className="text-primary-600 text-sm md:text-base mb-1">Monday - Friday</p>
+                    <p className="text-primary-900 text-sm md:text-base font-medium">9:00 AM - 6:30 PM</p>
                   </div>
                 </CardContent>
               </Card>
@@ -98,10 +98,10 @@ export default function Contact() {
             transition={{ delay: 0.4 }}
           >
             <Card className="h-full border-none shadow-xl shadow-primary-900/5">
-              <CardContent className="p-8 md:p-12">
-                <div className="flex items-center space-x-3 mb-8">
-                  <MessageSquare className="h-8 w-8 text-brand-blue" />
-                  <h2 className="text-3xl font-heading font-bold text-primary-900">Send an Inquiry</h2>
+              <CardContent className="p-6 sm:p-8 md:p-12">
+                <div className="flex items-center space-x-3 mb-6 md:mb-8">
+                  <MessageSquare className="h-6 w-6 md:h-8 md:w-8 text-brand-blue" />
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary-900">Send an Inquiry</h2>
                 </div>
                 
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
@@ -167,14 +167,14 @@ export default function Contact() {
                     <textarea 
                       id="message" 
                       rows={4}
-                      className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all resize-none"
+                      className="w-full px-4 py-2.5 md:py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all resize-none text-sm md:text-base"
                       placeholder="Tell us about your campaign goals..."
                     ></textarea>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full md:w-auto px-10 h-14 rounded-full text-lg shadow-lg hover:shadow-xl transition-all">
+                  <Button type="submit" size="lg" className="w-full md:w-auto px-10 h-12 md:h-14 rounded-full text-base md:text-lg shadow-lg hover:shadow-xl transition-all">
                     Send Message
-                    <Send className="ml-2 h-5 w-5" />
+                    <Send className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </form>
               </CardContent>
@@ -184,20 +184,20 @@ export default function Contact() {
 
         {/* Map Placeholder */}
         <motion.div 
-          className="mt-20 w-full h-[400px] rounded-3xl overflow-hidden relative bg-primary-100 border border-primary-200"
+          className="mt-12 md:mt-20 w-full h-[250px] sm:h-[300px] md:h-[400px] rounded-2xl md:rounded-3xl overflow-hidden relative bg-primary-100 border border-primary-200"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           {/* This represents where a Google Map iframe would go */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1600&q=80')] bg-cover bg-center grayscale opacity-50" />
-          <div className="absolute inset-0 flex items-center justify-center flex-col p-6 text-center">
-            <div className="bg-white p-4 rounded-full shadow-2xl mb-4 text-brand-blue">
-              <MapPin className="h-10 w-10" />
+          <div className="absolute inset-0 flex items-center justify-center flex-col p-4 md:p-6 text-center">
+            <div className="bg-white p-3 md:p-4 rounded-full shadow-2xl mb-3 md:mb-4 text-brand-blue">
+              <MapPin className="h-8 w-8 md:h-10 md:w-10" />
             </div>
-            <div className="bg-white/90 backdrop-blur-md px-6 py-4 rounded-xl shadow-lg border border-white/20">
-              <h4 className="font-heading font-bold text-xl text-primary-900 mb-1">ApexOOH Headquarters</h4>
-              <p className="text-primary-600">BKC, Mumbai</p>
+            <div className="bg-white/90 backdrop-blur-md px-4 py-3 md:px-6 md:py-4 rounded-xl shadow-lg border border-white/20">
+              <h4 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-0.5 md:mb-1">ApexOOH Headquarters</h4>
+              <p className="text-primary-600 text-sm md:text-base">BKC, Mumbai</p>
             </div>
           </div>
         </motion.div>

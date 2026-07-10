@@ -134,7 +134,7 @@ export function Hero() {
         </div>
         
         {/* Mobile Content (Overlays the image) */}
-        <div className="px-5 py-6 w-full text-center flex flex-col items-center z-10 relative">
+        <div className="px-4 py-6 w-full text-center flex flex-col items-center z-10 relative">
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,7 +159,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-            className="w-full max-w-[95%] sm:max-w-[90%] mx-auto mt-8 relative z-40"
+            className="w-full mt-8 relative z-40"
           >
             <div className="flex flex-row items-center justify-between p-1 sm:p-1.5 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full shadow-2xl">
               <div className="flex flex-row items-center w-full flex-1 px-0.5 sm:px-1 min-w-0">

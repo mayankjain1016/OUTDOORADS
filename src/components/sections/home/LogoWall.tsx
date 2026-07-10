@@ -18,7 +18,7 @@ export function LogoWall() {
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-50 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 to-transparent z-10 pointer-events-none" />
 
-        <div className="flex animate-[scroll_40s_linear_infinite] w-[300%] gap-16 lg:gap-32 items-center justify-around px-8">
+        <div className="flex animate-[scroll_15s_linear_infinite] md:animate-[scroll_40s_linear_infinite] w-[300%] gap-16 lg:gap-32 items-center justify-around px-8">
           {logos.map((client, i) => (
             <div key={`${client.id}-${i}`} className="flex-shrink-0">
               <div className="flex items-center justify-center text-zinc-400 font-heading font-bold text-xl md:text-2xl tracking-tight grayscale transition-colors duration-300 hover:text-zinc-800 cursor-default">
