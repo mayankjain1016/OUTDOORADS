@@ -4,12 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Home, Map, LayoutGrid, Users, ImageIcon, Phone, Info, Briefcase, Search, MapPin, Layers, Navigation2, MoreVertical } from "lucide-react";
+import { Menu, X, Home, Map, LayoutGrid, Users, ImageIcon, Phone, Info, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
-import { CITIES, MEDIA_INVENTORY } from "@/data";
-import { MediaType } from "@/types";
 
 const NAV_LINKS = [
   { name: "Home", href: "/", icon: <Home className="w-4 h-4" /> },
@@ -24,9 +22,6 @@ const NAV_LINKS = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [selectedCityId, setSelectedCityId] = useState<string | null>(null);
-  const [selectedMediaType, setSelectedMediaType] = useState<MediaType | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const pathname = usePathname();
 
 
@@ -37,18 +32,6 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const availableMediaTypes = CITIES && selectedCityId 
-    ? Array.from(new Set(MEDIA_INVENTORY.filter(m => m.cityId === selectedCityId).map(m => m.type))) 
-    : [];
-
-  const availableLocations = CITIES && selectedCityId
-    ? Array.from(new Set(MEDIA_INVENTORY.filter(m => m.cityId === selectedCityId && (!selectedMediaType || m.type === selectedMediaType)).map(m => m.area)))
-    : [];
-
-  const handleSearch = () => {
-    window.location.href = "/city-showcase";
-  };
 
   return (
     <>
