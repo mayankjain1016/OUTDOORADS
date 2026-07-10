@@ -67,7 +67,7 @@ export function Testimonials() {
                 <div className="flex items-center space-x-4">
                   <div className="relative h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                     <Image 
-                      src={t.image} 
+                      src={t.photoUrl} 
                       alt={t.name} 
                       fill 
                       className="object-cover"
