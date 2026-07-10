@@ -87,7 +87,11 @@ export function Footer() {
         </div>
 
         <div className="pt-6 md:pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-center md:justify-between text-[10px] md:text-xs font-medium text-zinc-500 gap-y-3">
-          <p className="text-center w-full md:w-auto">© {new Date().getFullYear()} ApexOOH Media. All rights reserved.</p>
+          <div className="text-center w-full md:w-auto flex flex-col md:flex-row items-center gap-1 md:gap-2">
+            <p>© {new Date().getFullYear()} ApexOOH Media. All rights reserved.</p>
+            <span className="hidden md:inline text-zinc-700">|</span>
+            <p>Developed by <span className="text-brand-blue font-bold tracking-wide hover:text-white transition-colors cursor-pointer">AFFOBE</span></p>
+          </div>
           <div className="flex flex-row items-center justify-center space-x-4 sm:space-x-6 w-full md:w-auto">
             <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link>
             <Link href="#" className="hover:text-white transition-colors duration-300">Terms of Service</Link>
