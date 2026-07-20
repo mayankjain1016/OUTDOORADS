@@ -93,7 +93,9 @@ export default function Gallery() {
   }, []);
   
   const filteredGallery = selectedIndustry === "All" 
-    ? GALLERY 
+    ? GALLERY.filter((item, index, self) => 
+        index === self.findIndex((t) => t.industryName === item.industryName)
+      )
     : GALLERY.filter(item => item.industryName === selectedIndustry);
 
   return (
@@ -156,6 +158,11 @@ export default function Gallery() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.4 }}
+                    onClick={() => {
+                      if (selectedIndustry === "All") {
+                        setSelectedIndustry(item.industryName);
+                      }
+                    }}
                     className="group relative aspect-[4/5] rounded-2xl md:rounded-[2rem] overflow-hidden bg-slate-100 cursor-pointer shadow-sm hover:shadow-2xl transition-shadow duration-500"
                   >
                   {/* Image */}
