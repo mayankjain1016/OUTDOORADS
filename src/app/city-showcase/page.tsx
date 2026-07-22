@@ -98,7 +98,7 @@ export default function CityShowcase() {
 
   const availableLocations = useMemo(() => {
     if (!selectedCityId) return [];
-    let media = MEDIA_INVENTORY.filter((m) => m.cityId === selectedCityId);
+    const media = MEDIA_INVENTORY.filter((m) => m.cityId === selectedCityId);
     const locations = new Set(media.map((m) => m.area));
     return Array.from(locations);
   }, [selectedCityId]);
