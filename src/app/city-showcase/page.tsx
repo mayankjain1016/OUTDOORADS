@@ -3,8 +3,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CITIES, MEDIA_INVENTORY } from "@/data";
-import { MediaType } from "@/types";
-import { MapPin, Search, Maximize, Activity, Navigation2, ChevronDown, Monitor, Check } from "lucide-react";
+import { MapPin, Search, Maximize, Activity, Navigation2, ChevronDown, Check } from "lucide-react";
 import Image from "next/image";
 
 function CustomDropdown({ 
@@ -95,44 +94,25 @@ function CustomDropdown({
 
 export default function CityShowcase() {
   const [selectedCityId, setSelectedCityId] = useState<string | null>(CITIES[0].id);
-  const [selectedMediaType, setSelectedMediaType] = useState<MediaType | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
-
-  const availableMediaTypes = useMemo(() => {
-    return [
-      "Hoarding",
-      "Unipole",
-      "Pole Kiosk",
-      "Traffic Booth",
-      "Billboard",
-      "Digital Screen",
-      "Bus Shelter",
-      "Wall Wrap"
-    ];
-  }, []);
 
   const availableLocations = useMemo(() => {
     if (!selectedCityId) return [];
     let media = MEDIA_INVENTORY.filter((m) => m.cityId === selectedCityId);
-    if (selectedMediaType) {
-      media = media.filter((m) => m.type === selectedMediaType);
-    }
     const locations = new Set(media.map((m) => m.area));
     return Array.from(locations);
-  }, [selectedCityId, selectedMediaType]);
+  }, [selectedCityId]);
 
   const results = useMemo(() => {
     return MEDIA_INVENTORY.filter((m) => {
       if (selectedCityId && m.cityId !== selectedCityId) return false;
-      if (selectedMediaType && m.type !== selectedMediaType) return false;
       if (selectedLocation && m.area !== selectedLocation) return false;
       return true;
     });
-  }, [selectedCityId, selectedMediaType, selectedLocation]);
+  }, [selectedCityId, selectedLocation]);
 
   const handleCitySelect = (cityId: string) => {
     setSelectedCityId(cityId);
-    setSelectedMediaType(null);
     setSelectedLocation(null);
   };
 
