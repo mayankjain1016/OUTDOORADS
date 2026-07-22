@@ -41,7 +41,7 @@ export function Stats() {
   const statsList = [
     { label: "Campaigns Executed", value: STATS.campaignsExecuted, suffix: "+" },
     { label: "Premium Locations", value: STATS.premiumLocations, suffix: "+" },
-    { label: "Cities Covered", value: STATS.citiesCovered, suffix: "" },
+    { label: "Cities Covered", value: STATS.citiesCovered, suffix: "+" },
     { label: "Brand Partners", value: STATS.happyClients, suffix: "+" },
   ];
 

@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GALLERY, INDUSTRIES } from "@/data";
-import { MapPin, ChevronDown, Check, ImageIcon } from "lucide-react";
+import { GALLERY, INDUSTRIES, type GalleryItem } from "@/data";
+import { MapPin, ChevronDown, Check, ImageIcon, X } from "lucide-react";
 import Image from "next/image";
 
 function GalleryFilterDropdown({ 
@@ -81,6 +81,7 @@ function GalleryFilterDropdown({
 
 export default function Gallery() {
   const [selectedIndustry, setSelectedIndustry] = useState<string>("All");
+  const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null);
   
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -161,6 +162,8 @@ export default function Gallery() {
                     onClick={() => {
                       if (selectedIndustry === "All") {
                         setSelectedIndustry(item.industryName);
+                      } else {
+                        setLightboxImage(item);
                       }
                     }}
                     className="group relative aspect-[4/5] rounded-2xl md:rounded-[2rem] overflow-hidden bg-slate-100 cursor-pointer shadow-sm hover:shadow-2xl transition-shadow duration-500"
@@ -200,6 +203,46 @@ export default function Gallery() {
         </motion.div>
       </section>
 
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+            onClick={() => setLightboxImage(null)}
+          >
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors z-[60]"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="relative w-full max-w-5xl aspect-video md:aspect-[4/3] lg:aspect-[16/9] bg-slate-900 rounded-xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={lightboxImage.imageUrl}
+                alt={lightboxImage.campaignTitle}
+                fill
+                className="object-contain"
+              />
+              <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                <h3 className="text-white text-xl md:text-3xl font-bold">{lightboxImage.campaignTitle}</h3>
+                <p className="text-white/80 text-sm md:text-base mt-2 flex items-center">
+                  <MapPin className="w-4 h-4 mr-1.5" />
+                  {lightboxImage.cityName} &bull; {lightboxImage.industryName}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
