@@ -139,7 +139,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg sm:text-xl font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-4"
+            className="text-3xl sm:text-4xl font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-4"
           >
             Premium Outdoor <br />
             <span className="text-brand-blue">Advertising.</span>
