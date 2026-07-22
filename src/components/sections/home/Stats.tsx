@@ -79,26 +79,26 @@ export function Stats() {
           className="md:hidden flex flex-row items-center justify-between sm:justify-evenly gap-x-1 sm:gap-x-6 bg-white border border-slate-100 rounded-2xl px-3 sm:px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full mx-auto max-w-[360px] sm:max-w-max"
         >
           <div className="text-center flex-1">
-            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.happyClients} suffix="+" /></span>
-            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Active Clients</span>
-          </div>
-          <div className="w-px h-6 sm:h-8 bg-slate-100" />
-          
-          <div className="text-center flex-1">
             <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.campaignsExecuted} suffix="+" /></span>
             <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Campaigns</span>
           </div>
           <div className="w-px h-6 sm:h-8 bg-slate-100" />
           
           <div className="text-center flex-1">
-            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={98} suffix="%" /></span>
-            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Retention</span>
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.premiumLocations} suffix="+" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Premium Locations</span>
           </div>
           <div className="w-px h-6 sm:h-8 bg-slate-100" />
           
           <div className="text-center flex-1">
-            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.yearsOfExperience} suffix="" /></span>
-            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Years Exp.</span>
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.citiesCovered} suffix="+" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Cities Covered</span>
+          </div>
+          <div className="w-px h-6 sm:h-8 bg-slate-100" />
+          
+          <div className="text-center flex-1">
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.happyClients} suffix="+" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Brand Partners</span>
           </div>
         </motion.div>
 
