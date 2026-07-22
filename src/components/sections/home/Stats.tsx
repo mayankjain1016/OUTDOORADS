@@ -70,26 +70,37 @@ export function Stats() {
           </motion.p>
         </div>
 
-        {/* Mobile: 4 items on ONE single row, no scroll, no wrap */}
-        <div className="grid md:hidden grid-cols-4 gap-1 divide-x divide-zinc-200">
-          {statsList.map((stat, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center justify-start px-1"
-            >
-              <div className="text-xl sm:text-2xl font-bold font-heading text-zinc-950 tracking-tighter mb-1">
-                <Counter end={stat.value} suffix={stat.suffix} />
-              </div>
-              <div className="text-zinc-500 font-medium text-[9px] sm:text-[10px] tracking-tight text-center leading-tight">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Mobile: Clean Centered Metrics Pill adapted from Clients page */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="md:hidden flex flex-row items-center justify-between sm:justify-evenly gap-x-1 sm:gap-x-6 bg-white border border-slate-100 rounded-2xl px-3 sm:px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full mx-auto max-w-[360px] sm:max-w-max"
+        >
+          <div className="text-center flex-1">
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.happyClients} suffix="+" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Active Clients</span>
+          </div>
+          <div className="w-px h-6 sm:h-8 bg-slate-100" />
+          
+          <div className="text-center flex-1">
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.campaignsExecuted} suffix="+" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Campaigns</span>
+          </div>
+          <div className="w-px h-6 sm:h-8 bg-slate-100" />
+          
+          <div className="text-center flex-1">
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={98} suffix="%" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Retention</span>
+          </div>
+          <div className="w-px h-6 sm:h-8 bg-slate-100" />
+          
+          <div className="text-center flex-1">
+            <span className="text-[1.1rem] sm:text-3xl font-light text-slate-900 block mb-0.5"><Counter end={STATS.yearsOfExperience} suffix="" /></span>
+            <span className="text-[6px] sm:text-[9px] font-semibold uppercase tracking-widest text-slate-400">Years Exp.</span>
+          </div>
+        </motion.div>
 
         {/* Desktop: original 4-column grid */}
         <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 lg:divide-x divide-zinc-200">
