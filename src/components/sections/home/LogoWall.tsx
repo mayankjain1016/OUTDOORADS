@@ -19,10 +19,10 @@ export function LogoWall() {
         <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-zinc-50 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-zinc-50 to-transparent z-10 pointer-events-none" />
 
-        <div className="flex animate-[scroll_40s_linear_infinite] md:animate-[scroll_80s_linear_infinite] w-[300%] gap-12 lg:gap-24 items-center justify-around px-8">
+        <div className="flex animate-[scroll_40s_linear_infinite] md:animate-[scroll_80s_linear_infinite] w-max gap-12 lg:gap-24 items-center px-8">
           {logos.map((client, i) => (
             <div key={`${client.id}-${i}`} className="flex-shrink-0">
-              <div className="relative w-24 h-12 md:w-36 md:h-16 grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 cursor-default flex items-center justify-center">
+              <div className="relative w-32 h-16 md:w-48 md:h-24 transition-transform duration-300 hover:scale-105 cursor-default flex items-center justify-center">
                 {client.logoUrl ? (
                   <Image
                     src={client.logoUrl}

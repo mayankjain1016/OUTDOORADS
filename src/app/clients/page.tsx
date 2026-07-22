@@ -94,8 +94,8 @@ export default function Clients() {
                   key={`r1-${client.id}-${i}`}
                   className="mx-4 md:mx-6 flex items-center justify-center p-3 sm:p-4 md:p-6 rounded-full bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all duration-500 cursor-pointer hover:shadow-xl hover:-translate-y-1"
                 >
-                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 md:h-28 md:w-28 rounded-full overflow-hidden grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                    <Image src={client.logoUrl} alt="Partner Logo" fill className="object-cover" />
+                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 md:h-28 md:w-28 rounded-full overflow-hidden transition-all duration-500 bg-white">
+                    <Image src={client.logoUrl} alt="Partner Logo" fill className="object-contain p-2" />
                   </div>
                 </div>
               ))}
@@ -110,8 +110,8 @@ export default function Clients() {
                   key={`r2-${client.id}-${i}`}
                   className="mx-4 md:mx-6 flex items-center justify-center p-3 sm:p-4 md:p-6 rounded-full bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all duration-500 cursor-pointer hover:shadow-xl hover:-translate-y-1"
                 >
-                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 md:h-28 md:w-28 rounded-full overflow-hidden grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                    <Image src={client.logoUrl} alt="Partner Logo" fill className="object-cover" />
+                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 md:h-28 md:w-28 rounded-full overflow-hidden transition-all duration-500 bg-white">
+                    <Image src={client.logoUrl} alt="Partner Logo" fill className="object-contain p-2" />
                   </div>
                 </div>
               ))}

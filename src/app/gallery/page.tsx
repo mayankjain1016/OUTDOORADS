@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GALLERY, INDUSTRIES, type GalleryItem } from "@/data";
+import { GALLERY, INDUSTRIES } from "@/data";
+import { type GalleryItem } from "@/types";
 import { MapPin, ChevronDown, Check, ImageIcon, X } from "lucide-react";
 import Image from "next/image";
 
