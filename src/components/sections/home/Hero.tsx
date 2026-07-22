@@ -121,7 +121,7 @@ export function Hero() {
   return (
     <>
       {/* Mobile-Only Wrapper: Image positioned behind content (edge-to-edge) */}
-      <section className="block md:hidden relative w-full min-h-[500px] flex flex-col pt-[90px] overflow-hidden">
+      <section className="block md:hidden relative w-full min-h-[500px] flex flex-col pt-[90px] overflow-visible z-20">
         {/* Absolute Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
@@ -134,12 +134,12 @@ export function Hero() {
         </div>
         
         {/* Mobile Content (Overlays the image) */}
-        <div className="px-4 py-6 w-full text-center flex flex-col items-center z-10 relative">
+        <div className="px-4 py-6 w-full text-left flex flex-col items-start z-10 relative">
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-4"
+            className="text-lg sm:text-xl font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-4"
           >
             Premium Outdoor <br />
             <span className="text-brand-blue">Advertising.</span>
@@ -149,7 +149,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed max-w-sm mx-auto"
+            className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed max-w-sm"
           >
             Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
           </motion.p>
@@ -199,7 +199,7 @@ export function Hero() {
       </section>
 
       {/* Desktop-Only Wrapper: Full screen exact layout */}
-      <section className="hidden md:flex relative overflow-hidden flex-col justify-end min-h-screen">
+      <section className="hidden md:flex relative overflow-visible flex-col justify-end min-h-screen z-20">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/images/Hero_image.jpeg"
@@ -217,7 +217,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-6xl lg:text-7xl xl:text-[7.5rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6"
+              className="text-[2.8rem] lg:text-[3.8rem] xl:text-[5.8rem] font-black font-heading tracking-tight text-gray-900 leading-[1.05] mb-6"
             >
               Premium Outdoor <br />
               <span className="text-brand-blue">Advertising.</span>

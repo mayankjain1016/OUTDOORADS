@@ -38,10 +38,10 @@ function CustomDropdown({
   const selectedOption = options.find(opt => opt.id === value) || { id: "", name: defaultLabel };
 
   return (
-    <div className="relative group w-full sm:w-auto" ref={dropdownRef}>
+    <div className="relative group w-full flex-1" ref={dropdownRef}>
       <div 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center px-4 py-3 rounded-xl bg-white hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer w-full sm:w-[220px]"
+        className="flex items-center px-4 py-3 rounded-xl bg-white hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer w-full"
       >
         <div className="p-2 bg-brand-blue/10 rounded-lg mr-3 text-brand-blue">
           <Icon className="w-4 h-4" />
@@ -167,9 +167,9 @@ export default function CityShowcase() {
 
         {/* Corporate Filter Row */}
         <div className="max-w-5xl mx-auto px-4 md:px-0 mb-12 relative z-40">
-          <div className="flex flex-col md:flex-row items-center justify-between p-2 bg-white border border-gray-200 rounded-2xl shadow-sm">
+          <div className="flex flex-col md:flex-row items-center justify-center p-2 bg-white border border-gray-200 rounded-2xl shadow-sm">
             
-            <div className="flex flex-col sm:flex-row items-center w-full md:w-auto gap-1">
+            <div className="flex flex-col sm:flex-row items-center justify-center w-full gap-1 md:gap-4">
               <CustomDropdown 
                 value={selectedCityId}
                 options={CITIES}
@@ -178,18 +178,7 @@ export default function CityShowcase() {
                 label="City"
                 defaultLabel="Any City"
               />
-              <div className="hidden sm:block w-px h-8 bg-gray-200 mx-2" />
-              <CustomDropdown 
-                value={selectedMediaType}
-                options={availableMediaTypes.map(t => ({ id: t, name: t }))}
-                onChange={(val) => {
-                  setSelectedMediaType(val ? (val as MediaType) : null);
-                  setSelectedLocation(null);
-                }}
-                icon={Monitor}
-                label="Media Type"
-                defaultLabel="All Types"
-              />
+
               <div className="hidden sm:block w-px h-8 bg-gray-200 mx-2" />
               <CustomDropdown 
                 value={selectedLocation}
@@ -201,11 +190,7 @@ export default function CityShowcase() {
               />
             </div>
 
-            <div className="mt-3 md:mt-0 mx-2 flex items-center justify-center w-full md:w-auto px-6 py-3 rounded-xl bg-brand-blue hover:bg-blue-700 text-white font-semibold transition-colors cursor-pointer shadow-sm">
-               <Search className="w-4 h-4 mr-2" />
-               Search
-            </div>
-            
+
           </div>
         </div>
 
