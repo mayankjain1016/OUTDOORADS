@@ -72,15 +72,15 @@ export function Footer() {
             <ul className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-5 text-xs md:text-sm font-medium text-left w-full">
               <li className="col-span-1 min-[360px]:col-span-2 lg:col-span-1 flex flex-col items-start text-left">
                 <span className="text-brand-blue/80 mb-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Office</span>
-                <span className="text-zinc-200 leading-relaxed max-w-xs">Level 4, Trade Centre, BKC, Bandra East, Mumbai, 400051</span>
+                <span className="text-zinc-200 leading-relaxed max-w-xs">5th floor Corporate Park, Sanjay Place Agra</span>
               </li>
               <li className="col-span-1 flex flex-col items-start text-left">
                 <span className="text-brand-blue/80 mb-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Phone</span>
-                <span className="text-zinc-200">+91 98765 43210</span>
+                <span className="text-zinc-200">9997927300</span>
               </li>
               <li className="col-span-1 flex flex-col items-start text-left">
                 <span className="text-brand-blue/80 mb-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Email</span>
-                <span className="text-brand-blue">hello@apexooh.com</span>
+                <span className="text-brand-blue">oohadexpo@gmail.com</span>
               </li>
             </ul>
           </div>

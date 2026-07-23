@@ -6,7 +6,9 @@ export type MediaType =
   | "Billboard"
   | "Digital Screen"
   | "Bus Shelter"
-  | "Wall Wrap";
+  | "Wall Wrap"
+  | "Traffic Island"
+  | "Metro Pillers";
 
 export interface City {
   id: string;

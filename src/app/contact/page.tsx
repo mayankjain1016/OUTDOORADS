@@ -1,13 +1,105 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
-import { MapPin, Phone, Clock, Send, MessageSquare } from "lucide-react";
+import { MapPin, Phone, Clock, Send, MessageSquare, Mail, CheckCircle, XCircle, X } from "lucide-react";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
+  const [popup, setPopup] = useState<{ show: boolean; type: "success" | "error"; message: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("fullName") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      number: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      interest: (form.elements.namedItem("interest") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setPopup({ show: true, type: "success", message: "Thank you! Your message has been sent successfully. We will get back to you soon." });
+        form.reset();
+      } else {
+        console.error("API Error Response:", result);
+        setPopup({ show: true, type: "error", message: `Failed to send message: ${result.message || "Unknown error"}` });
+      }
+    } catch (error: any) {
+      console.error("Fetch Error!", error);
+      setPopup({ show: true, type: "error", message: `Something went wrong connecting to the server: ${error.message || error}` });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen pt-24 md:pt-32 pb-12 md:pb-24 bg-primary-foreground">
+    <div className="min-h-screen pt-24 md:pt-32 pb-12 md:pb-24 bg-primary-foreground relative">
+      <AnimatePresence>
+        {popup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden relative"
+            >
+              <button
+                onClick={() => setPopup(null)}
+                className="absolute top-4 right-4 text-primary-400 hover:text-primary-900 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              
+              <div className="p-8 text-center">
+                <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full mb-6 bg-primary-50">
+                  {popup.type === "success" ? (
+                    <CheckCircle className="h-8 w-8 text-green-500" />
+                  ) : (
+                    <XCircle className="h-8 w-8 text-red-500" />
+                  )}
+                </div>
+                
+                <h3 className="text-2xl font-bold font-heading text-primary-900 mb-2">
+                  {popup.type === "success" ? "Success!" : "Oops!"}
+                </h3>
+                
+                <p className="text-primary-600 mb-8">
+                  {popup.message}
+                </p>
+                
+                <Button 
+                  onClick={() => setPopup(null)}
+                  className="w-full h-12 rounded-xl"
+                  variant={popup.type === "success" ? "primary" : "outline"}
+                >
+                  {popup.type === "success" ? "Done" : "Try Again"}
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         
         {/* Header Section */}
@@ -44,8 +136,8 @@ export default function Contact() {
                     <MapPin className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Headquarters</h3>
-                    <p className="text-primary-600 text-sm md:text-base">Level 4, Trade Centre, BKC<br/>Bandra East, Mumbai<br/>Maharashtra 400051</p>
+                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Office</h3>
+                    <p className="text-primary-600 text-sm md:text-base">5th floor Corporate Park<br/>Sanjay Place<br/>Agra</p>
                   </div>
                 </CardContent>
               </Card>
@@ -63,8 +155,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Call Us</h3>
-                    <p className="text-primary-600 text-sm md:text-base mb-1">+91 98765 43210</p>
-                    <p className="text-primary-600 text-sm md:text-base">1800-OOH-APEX (Toll Free)</p>
+                    <p className="text-primary-600 text-sm md:text-base mb-1">9997927300</p>
                   </div>
                 </CardContent>
               </Card>
@@ -78,12 +169,11 @@ export default function Contact() {
               <Card className="border-none shadow-md overflow-hidden group">
                 <CardContent className="p-5 sm:p-6 md:p-8 flex items-start space-x-4 md:space-x-5">
                   <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                    <Clock className="h-5 w-5 md:h-6 md:w-6" />
+                    <Mail className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Business Hours</h3>
-                    <p className="text-primary-600 text-sm md:text-base mb-1">Monday - Friday</p>
-                    <p className="text-primary-900 text-sm md:text-base font-medium">9:00 AM - 6:30 PM</p>
+                    <h3 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-1 md:mb-2">Email Us</h3>
+                    <p className="text-primary-600 text-sm md:text-base mb-1">oohadexpo@gmail.com</p>
                   </div>
                 </CardContent>
               </Card>
@@ -104,26 +194,17 @@ export default function Contact() {
                   <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary-900">Send an Inquiry</h2>
                 </div>
                 
-                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="firstName" className="text-sm font-medium text-primary-700">First Name</label>
-                      <input 
-                        type="text" 
-                        id="firstName" 
-                        className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all"
-                        placeholder="John"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="lastName" className="text-sm font-medium text-primary-700">Last Name</label>
-                      <input 
-                        type="text" 
-                        id="lastName" 
-                        className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all"
-                        placeholder="Doe"
-                      />
-                    </div>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="space-y-2">
+                    <label htmlFor="fullName" className="text-sm font-medium text-primary-700">Full Name</label>
+                    <input 
+                      type="text" 
+                      id="fullName" 
+                      name="fullName"
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all text-black"
+                      placeholder="John Doe"
+                    />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -131,7 +212,9 @@ export default function Contact() {
                       <label htmlFor="email" className="text-sm font-medium text-primary-700">Work Email</label>
                       <input 
                         type="email" 
-                        id="email" 
+                        id="email"
+                        name="email"
+                        required 
                         className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all"
                         placeholder="john@company.com"
                       />
@@ -140,7 +223,9 @@ export default function Contact() {
                       <label htmlFor="phone" className="text-sm font-medium text-primary-700">Phone Number</label>
                       <input 
                         type="tel" 
-                        id="phone" 
+                        id="phone"
+                        name="phone"
+                        required 
                         className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all"
                         placeholder="+91 98765 43210"
                       />
@@ -150,7 +235,8 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label htmlFor="interest" className="text-sm font-medium text-primary-700">Primary Interest</label>
                     <select 
-                      id="interest" 
+                      id="interest"
+                      name="interest" 
                       className="w-full px-4 py-3 rounded-xl border border-primary-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 bg-primary-50 transition-all appearance-none"
                     >
                       <option value="">Select an option...</option>
@@ -196,8 +282,8 @@ export default function Contact() {
               <MapPin className="h-8 w-8 md:h-10 md:w-10" />
             </div>
             <div className="bg-white/90 backdrop-blur-md px-4 py-3 md:px-6 md:py-4 rounded-xl shadow-lg border border-white/20">
-              <h4 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-0.5 md:mb-1">ApexOOH Headquarters</h4>
-              <p className="text-primary-600 text-sm md:text-base">BKC, Mumbai</p>
+              <h4 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-0.5 md:mb-1">Adexpo Office</h4>
+              <p className="text-primary-600 text-sm md:text-base">Sanjay Place, Agra</p>
             </div>
           </div>
         </motion.div>
