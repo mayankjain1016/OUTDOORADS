@@ -236,8 +236,6 @@ export const GALLERY: GalleryItem[] = [
   { id: "gal-119", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/f068f03f-0b04-404b-a063-87a0c88aaa30.jpg" },
   { id: "gal-122", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/fd101efd-70ad-4f08-a545-8e199c5d75a5.jpg" },
   { id: "gal-103", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/42fc7baa-d005-49b4-baea-4a1171f8d6f0.jpg" },
-  { id: "gal-106", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/6e3e3d04-17ab-4219-8573-fb45c8ee7468 (1).jpg" },
-  { id: "gal-107", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/6e3e3d04-17ab-4219-8573-fb45c8ee7468.jpg" },
   { id: "gal-112", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/bb3cd107-80bd-4081-bcd1-2e4fe9582eba.jpg" },
   { id: "gal-113", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/bc37dad4-6ac6-4dfc-b867-2942a78bc343.jpg" },
   { id: "gal-114", campaignTitle: "Education Campaign", industryId: "ind-10", industryName: "Education", cityName: "Agra", imageUrl: "/Gellary/Education/c0b279f7-6084-4cd0-8baf-39d3b54b66b4.jpg" },

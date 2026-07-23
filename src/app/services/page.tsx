@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MonitorPlay, LayoutTemplate, BusFront, MapPin, Sparkles, BarChart3, ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
+import { MonitorPlay, LayoutTemplate, BusFront, MapPin, Sparkles, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef } from "react";
@@ -219,48 +219,7 @@ export default function Services() {
             </motion.p>
           </div>
 
-          {/* Corporate Filter Row Style */}
-          <div className="max-w-4xl mx-auto px-4 md:px-6 relative z-40 mb-12">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="flex flex-col md:flex-row items-center justify-between p-2 bg-white border border-gray-200 rounded-2xl shadow-sm gap-2 md:gap-0"
-            >
-              <div className="flex flex-col sm:flex-row w-full md:w-auto items-center gap-1 flex-1">
-                <div className="flex items-center px-4 py-3 rounded-xl bg-white hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer w-full group relative">
-                  <div className="flex flex-col flex-1 text-left w-full">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 mb-0.5">Your Objective</span>
-                    <select className="w-full bg-transparent text-sm font-bold text-gray-900 focus:outline-none cursor-pointer appearance-none">
-                      <option>Mass Brand Awareness</option>
-                      <option>Local Market Domination</option>
-                      <option>Commuter Targeting</option>
-                    </select>
-                  </div>
-                  <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-brand-blue transition-colors ml-2 pointer-events-none" />
-                </div>
-                
-                <div className="hidden sm:block w-px h-8 bg-gray-200 mx-2" />
-                
-                <div className="flex items-center px-4 py-3 rounded-xl bg-white hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer w-full group relative">
-                  <div className="flex flex-col flex-1 text-left w-full">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 mb-0.5">Location</span>
-                    <select className="w-full bg-transparent text-sm font-bold text-gray-900 focus:outline-none cursor-pointer appearance-none">
-                      <option>Highways & Arterials</option>
-                      <option>City Centers</option>
-                      <option>Transit Hubs</option>
-                    </select>
-                  </div>
-                  <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-brand-blue transition-colors ml-2 pointer-events-none" />
-                </div>
-              </div>
 
-              <div className="w-full md:w-auto mt-2 md:mt-0 mx-2 flex items-center justify-center px-8 py-4 md:py-3 rounded-xl bg-brand-blue hover:bg-blue-700 text-white font-semibold transition-colors cursor-pointer shadow-sm group">
-                 Find Inventory
-                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 

@@ -157,15 +157,15 @@ export default function About() {
       id: "mission",
       title: "Our Mission",
       description: "To empower brands to make bold statements in the real world. We strive to provide premium outdoor advertising solutions that are highly visible and contextually relevant, elevating the urban environment while delivering exceptional value to our clients.",
-      features: ["Premium Inventory Access", "Contextually Relevant Ads", "Urban Environment Enhancement", "Client-Centric Value"],
+      features: ["Strategic Ad Placements", "High Footfall Locations", "End-to-End Campaign Management", "Client-Centric Value"],
       image: "/images/highway.png",
       icon: <Target className="w-6 h-6" />
     },
     {
       id: "vision",
       title: "Our Vision",
-      description: "To be the undisputed leader in out-of-home media innovation, seamlessly blending technology with physical structures to create immersive, data-driven, and sustainable advertising experiences that shape the future of urban communication.",
-      features: ["Technological Integration", "Immersive Experiences", "Data-Driven Approach", "Sustainable Practices"],
+      description: "To be the most trusted and innovative out-of-home media agency, transforming urban landscapes with dynamic, data-driven, and highly engaging advertising experiences that bridge the gap between brands and consumers.",
+      features: ["Prime Location Network", "Data-Driven Targeting", "Creative Excellence", "Transparent Reporting"],
       image: "/images/hoarding.png",
       icon: <Globe className="w-6 h-6" />
     }
@@ -174,33 +174,33 @@ export default function About() {
   const values = [
     {
       icon: <Globe className="w-8 h-8" />,
-      title: "Nationwide Reach",
-      description: "Extensive network covering prime locations across major cities, ensuring maximum visibility."
+      title: "Extensive Reach",
+      description: "A robust network of premium hoardings and digital screens across key locations, ensuring maximum audience visibility."
     },
     {
       icon: <Target className="w-8 h-8" />,
       title: "Targeted Impact",
-      description: "Strategic placements designed to capture the right audience at the perfect moment."
+      description: "Data-backed site selection designed to capture the attention of your target demographics at the perfect moment."
     },
     {
       icon: <Zap className="w-8 h-8" />,
       title: "Dynamic Solutions",
-      description: "From classic billboards to cutting-edge digital displays, offering versatile formats."
+      description: "Offering a versatile portfolio from classic unipoles and hoardings to modern digital OOH screens and transit media."
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: "Audience First",
-      description: "Data-driven insights to understand audience behavior and optimize your advertising ROI."
+      description: "We prioritize audience engagement, helping you maximize your campaign ROI through smart geographic targeting."
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: "Premium Quality",
-      description: "Impeccably maintained assets and high-resolution displays reflecting premium brand standards."
+      description: "Impeccably maintained physical assets and high-resolution flex prints that reflect your brand's premium standards."
     },
     {
       icon: <TrendingUp className="w-8 h-8" />,
       title: "Proven Results",
-      description: "Decades of expertise delivering measurable success for local businesses and global enterprises."
+      description: "Years of on-ground expertise delivering highly successful campaigns for both local businesses and national enterprises."
     }
   ];
 
@@ -208,7 +208,7 @@ export default function About() {
     {
       step: "SJ",
       title: "Sarah Jenkins",
-      description: "Chief Executive Officer. Driving the strategic vision and nationwide expansion of ApexOOH.",
+      description: "Chief Executive Officer. Driving the strategic vision and nationwide expansion of OOH Ad Expo.",
       role: "CEO"
     },
     {
@@ -251,7 +251,7 @@ export default function About() {
               transition={{ delay: 0.1, duration: 0.5 }}
               className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight text-gray-900 mb-4 md:mb-6"
             >
-              Pioneering Urban <br className="hidden sm:block lg:hidden" /><span className="text-brand-blue">Media.</span>
+              Your Partner in <br className="hidden sm:block lg:hidden" /><span className="text-brand-blue">Media.</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -259,7 +259,7 @@ export default function About() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-lg text-gray-500 max-w-2xl mx-auto"
             >
-              For five decades, we have been at the forefront of out-of-home advertising, connecting brands with their audiences through larger-than-life experiences.
+              With extensive local expertise and a growing network across major cities, OOH Ad Expo connects brands with their audiences through high-impact, real-world advertising.
             </motion.p>
           </div>
           
@@ -314,7 +314,7 @@ export default function About() {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl lg:text-6xl font-black font-heading text-slate-900 mb-4 md:mb-6 tracking-tight"
             >
-              The Apex Advantage
+              The OOH Ad Expo Advantage
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -370,7 +370,7 @@ export default function About() {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-slate-900 mb-4 md:mb-6"
             >
-              Meet the Visionaries
+              Meet the Experts Behind the Boards
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -379,7 +379,7 @@ export default function About() {
               transition={{ delay: 0.1 }}
               className="text-xl text-slate-600 font-light"
             >
-              The minds driving the future of urban media and brand experiences.
+              The dedicated professionals driving flawless execution and high-impact brand experiences.
             </motion.p>
           </div>
 
@@ -461,10 +461,10 @@ export default function About() {
               </div>
               
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-heading text-white mb-6 md:mb-8 tracking-tight max-w-4xl mx-auto leading-tight">
-                Ready to make <br className="md:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-400">history?</span>
+                Ready to launch your <br className="md:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-400">campaign?</span>
               </h2>
               <p className="text-zinc-400 text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto mb-8 md:mb-12 font-light leading-relaxed">
-                Join the hundreds of brands that trust ApexOOH to elevate their presence in the physical world.
+                Join the growing list of brands that trust OOH Ad Expo to elevate their presence in the physical world.
               </p>
               
               <Link href="/contact" className="relative overflow-hidden inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-5 text-white bg-brand-blue rounded-full font-bold text-base md:text-lg hover:bg-blue-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300 shadow-[0_10px_30px_rgba(37,99,235,0.3)] group border border-blue-400/50 z-30">
