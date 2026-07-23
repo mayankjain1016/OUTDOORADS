@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
-import { MapPin, Phone, Clock, Send, MessageSquare, Mail, CheckCircle, XCircle, X } from "lucide-react";
+import { MapPin, Phone, Send, MessageSquare, Mail, CheckCircle, XCircle, X } from "lucide-react";
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
@@ -39,9 +39,10 @@ export default function Contact() {
         console.error("API Error Response:", result);
         setPopup({ show: true, type: "error", message: `Failed to send message: ${result.message || "Unknown error"}` });
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Fetch Error!", error);
-      setPopup({ show: true, type: "error", message: `Something went wrong connecting to the server: ${error.message || error}` });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      setPopup({ show: true, type: "error", message: `Something went wrong connecting to the server: ${errorMessage}` });
     } finally {
       setLoading(false);
     }
@@ -258,8 +259,8 @@ export default function Contact() {
                     ></textarea>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full md:w-auto px-10 h-12 md:h-14 rounded-full text-base md:text-lg shadow-lg hover:shadow-xl transition-all">
-                    Send Message
+                  <Button disabled={loading} type="submit" size="lg" className="w-full md:w-auto px-10 h-12 md:h-14 rounded-full text-base md:text-lg shadow-lg hover:shadow-xl transition-all">
+                    {loading ? "Sending..." : "Send Message"}
                     <Send className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </form>

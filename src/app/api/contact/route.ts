@@ -37,16 +37,17 @@ export async function POST(request: Request) {
         console.error("API Route Error: Google Script returned a logical error:", parsedResponse.error);
         return NextResponse.json({ success: false, message: `Google Script Error: ${parsedResponse.error}` }, { status: 400 });
       }
-    } catch (e) {
+    } catch {
       console.log("Google response was not JSON or failed to parse. Proceeding as success anyway.");
     }
 
     return NextResponse.json({ success: true, message: "Message sent successfully" }, { status: 200 });
-  } catch (error: any) {
+  } catch (error) {
     console.error("=== API ROUTE CRITICAL ERROR ===");
     console.error(error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to send message due to a server error.";
     return NextResponse.json(
-      { success: false, message: error.message || "Failed to send message due to a server error." },
+      { success: false, message: errorMessage },
       { status: 500 }
     );
   }
