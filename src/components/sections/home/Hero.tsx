@@ -151,7 +151,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed max-w-sm"
           >
-            Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
+            Connect with your audience in the real world. Elevate your brand with our premium outdoor advertising network.
           </motion.p>
 
           {/* Mobile Horizontal Search Bar */}
@@ -229,7 +229,7 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-xl text-gray-900 font-medium leading-relaxed mb-12 max-w-2xl"
             >
-              Command attention in the physical world. Access India&apos;s most premium, high-traffic advertising network.
+              Connect with your audience in the real world. Elevate your brand with our premium outdoor advertising network.
             </motion.p>
 
             <motion.div 

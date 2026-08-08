@@ -208,7 +208,7 @@ export default function About() {
     {
       step: "SJ",
       title: "Sarah Jenkins",
-      description: "Chief Executive Officer. Driving the strategic vision and nationwide expansion of OOH Ad Expo.",
+      description: "Chief Executive Officer. Driving the strategic vision and nationwide expansion of OOH ADExpo.",
       role: "CEO"
     },
     {
@@ -259,7 +259,7 @@ export default function About() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-lg text-gray-500 max-w-2xl mx-auto"
             >
-              With extensive local expertise and a growing network across major cities, OOH Ad Expo connects brands with their audiences through high-impact, real-world advertising.
+              With extensive local expertise and a growing network across major cities, OOH ADExpo connects brands with their audiences through high-impact, real-world advertising.
             </motion.p>
           </div>
           
@@ -314,7 +314,7 @@ export default function About() {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl lg:text-6xl font-black font-heading text-slate-900 mb-4 md:mb-6 tracking-tight"
             >
-              The OOH Ad Expo Advantage
+              The OOH ADExpo Advantage
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -464,7 +464,7 @@ export default function About() {
                 Ready to launch your <br className="md:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-400">campaign?</span>
               </h2>
               <p className="text-zinc-400 text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto mb-8 md:mb-12 font-light leading-relaxed">
-                Join the growing list of brands that trust OOH Ad Expo to elevate their presence in the physical world.
+                Join the growing list of brands that trust OOH ADExpo to elevate their presence in the physical world.
               </p>
               
               <Link href="/contact" className="relative overflow-hidden inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-5 text-white bg-brand-blue rounded-full font-bold text-base md:text-lg hover:bg-blue-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300 shadow-[0_10px_30px_rgba(37,99,235,0.3)] group border border-blue-400/50 z-30">

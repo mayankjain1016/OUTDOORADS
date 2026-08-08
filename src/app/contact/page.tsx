@@ -283,7 +283,7 @@ export default function Contact() {
               <MapPin className="h-8 w-8 md:h-10 md:w-10" />
             </div>
             <div className="bg-white/90 backdrop-blur-md px-4 py-3 md:px-6 md:py-4 rounded-xl shadow-lg border border-white/20">
-              <h4 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-0.5 md:mb-1">Adexpo Office</h4>
+              <h4 className="font-heading font-bold text-lg md:text-xl text-primary-900 mb-0.5 md:mb-1">ADExpo Office</h4>
               <p className="text-primary-600 text-sm md:text-base">Sanjay Place, Agra</p>
             </div>
           </div>

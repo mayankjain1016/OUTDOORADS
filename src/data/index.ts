@@ -344,6 +344,6 @@ export const STATS: Statistics = {
   happyClients: 850,
   premiumLocations: 450,
   citiesCovered: 119,
-  yearsOfExperience: 50,
+  yearsOfExperience: 10,
   teamMembers: 120,
 };
