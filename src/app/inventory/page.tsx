@@ -18,7 +18,6 @@ import {
   CheckCircle2, 
   Clock, 
   Wrench,
-  Check,
   PhoneCall,
   Sparkles
 } from "lucide-react";
