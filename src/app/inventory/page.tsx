@@ -136,7 +136,7 @@ export default function Inventory() {
           Premium <span className="text-brand-blue">Inventory</span>
         </motion.h1>
         <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto font-light">
-          Explore our extensive outdoor advertising network across major strategic markets with live category breakdowns.
+          Where Visibility Meets Impact
         </p>
 
         {/* Mobile Sidebar Toggle */}
