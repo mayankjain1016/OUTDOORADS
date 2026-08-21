@@ -1,14 +1,27 @@
 export type MediaType = 
   | "Hoarding"
   | "Unipole"
+  | "Unipoles"
   | "Pole Kiosk"
   | "Traffic Booth"
   | "Billboard"
+  | "Billboards"
   | "Digital Screen"
   | "Bus Shelter"
+  | "BQS (Bus Shelters)"
+  | "Gantry"
+  | "Cantilever"
+  | "Cantiliver"
   | "Wall Wrap"
   | "Traffic Island"
-  | "Metro Pillers";
+  | "Metro Pillars"
+  | "Metro Pillers"
+  | string;
+
+export interface CityCategoryData {
+  category: string;
+  count: number;
+}
 
 export interface City {
   id: string;
