@@ -141,11 +141,11 @@ export default function Inventory() {
         {/* Mobile Sidebar Toggle */}
         <div className="flex justify-center mt-8 md:hidden relative z-40">
           <button 
-            className="flex items-center px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-sm font-semibold text-slate-700"
+            className="flex items-center px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-sm font-semibold text-slate-700 hover:border-slate-300 transition-colors cursor-pointer"
             onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           >
             <SlidersHorizontal className="h-4 w-4 mr-2 text-brand-blue" />
-            Locations Filter ({activeCityName})
+            <span>{activeCityName}</span>
           </button>
         </div>
       </div>
