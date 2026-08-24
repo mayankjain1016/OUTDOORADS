@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CITIES, MEDIA_INVENTORY } from "@/data";
 import { MediaType } from "@/types";
+import { BillboardSlideshow } from "./BillboardSlideshow";
 
 // ─── Dropdown for desktop hero filter ───────────────────────────────────────
 function HeroDropdown({ 
@@ -125,7 +126,7 @@ export function Hero() {
         {/* Absolute Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/Hero_image.jpeg"
+            src="/HeroBG.jpeg"
             alt="Premium Billboard Advertising"
             fill
             className="object-cover object-[70%_top]"
@@ -202,12 +203,14 @@ export function Hero() {
       <section className="hidden md:flex relative overflow-visible flex-col justify-end min-h-screen z-20">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/Hero_image.jpeg"
+            src="/HeroBG.jpeg"
             alt="Premium Billboard Advertising"
             fill
             className="object-cover object-center"
             priority
           />
+          {/* Billboard Slideshow Overlay on Building */}
+          <BillboardSlideshow />
         </div>
 
         <div className="relative z-10 flex flex-col justify-end w-full">

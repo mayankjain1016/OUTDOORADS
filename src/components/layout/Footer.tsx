@@ -20,13 +20,15 @@ export function Footer() {
           {/* Brand Col */}
           <div className="col-span-2 lg:col-span-5 flex flex-col items-start text-left space-y-5 md:space-y-8 lg:pr-8">
             <Link href="/" className="inline-flex items-center group">
-              <Image 
-                src="/LOGO.png"
-                alt="ApexOOH Logo"
-                width={200}
-                height={50}
-                className="h-10 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-xl"
-              />
+              <div className="bg-white px-3.5 py-1.5 rounded-xl shadow-md border border-white/20 transition-all duration-300 group-hover:scale-105">
+                <Image 
+                  src="/LOGO.png"
+                  alt="Logo"
+                  width={180}
+                  height={45}
+                  className="h-8 md:h-9 w-auto object-contain"
+                />
+              </div>
             </Link>
             <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-sm font-medium">
               Command attention with India&apos;s most premium outdoor advertising network. We build landmarks, not just ads.

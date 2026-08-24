@@ -116,7 +116,7 @@ export default function Services() {
       title: "Classic Billboards",
       description: "Command attention with high-impact static displays on major highways and arterial roads. Unbeatable for brand building and long-term presence. Our premium locations ensure your message is seen by thousands of commuters daily.",
       features: ["Strategic Highway Locations", "High Traffic Volume", "24/7 Brand Exposure", "Massive Canvas for Creative"],
-      image: "/images/highway.png",
+      image: "/images/service_classic_billboard.jpg",
       icon: <LayoutTemplate className="w-6 h-6" />
     },
     {
@@ -124,7 +124,7 @@ export default function Services() {
       title: "Transit & Street Furniture",
       description: "Take your message to the streets. High-visibility transit shelters and wraps that move with your audience, connecting with pedestrians and local traffic at a granular level.",
       features: ["Eye-Level Engagement", "Commuter Audience", "Point-of-Sale Proximity", "Hyper-local Reach"],
-      image: "/images/bus-shelter.png",
+      image: "/images/service_transit_shelter.jpg",
       icon: <BusFront className="w-6 h-6" />
     },
     {
@@ -132,7 +132,7 @@ export default function Services() {
       title: "Digital Out-of-Home (DOOH)",
       description: "Dynamic, bright, and engaging. Our digital displays allow for day-parting, real-time updates, and highly contextual messaging. Perfect for time-sensitive campaigns.",
       features: ["Real-time Updates", "Video & Motion Graphics", "Programmatic Buying Ready", "Contextual Triggers"],
-      image: "/images/hoarding.png",
+      image: "/images/service_digital_dooh.jpg",
       icon: <MonitorPlay className="w-6 h-6" />
     }
   ];

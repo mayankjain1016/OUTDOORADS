@@ -1,7 +1,19 @@
 "use client";
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Shield, Target, Zap, Globe, Users, TrendingUp, Building, ArrowRight, CheckCircle2, Mail, Link as LinkIcon } from "lucide-react";
+import { 
+  Shield, 
+  Target, 
+  Zap, 
+  Globe, 
+  Users, 
+  TrendingUp, 
+  Building, 
+  ArrowRight, 
+  CheckCircle2, 
+  Mail, 
+  Link as LinkIcon 
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { STATS } from "@/data";
@@ -72,26 +84,27 @@ function StoryHighlightItem({ highlight, index }: { highlight: StoryHighlight; i
         <motion.div 
           whileHover={{ rotateY: index % 2 === 0 ? 5 : -5, rotateX: 2, scale: 1.02 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
-          className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-slate-100/50"
+          className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-slate-100/50 bg-slate-900"
         >
-          <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply z-10 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
           <motion.div style={{ y: yImage }} className="absolute inset-0 -top-[20%] h-[140%] w-full">
             <Image 
               src={highlight.image} 
               alt={highlight.title} 
               fill 
+              priority
               className="object-cover transition-transform duration-1000 group-hover:scale-110" 
             />
           </motion.div>
           
           {/* Glassmorphism badge */}
-          <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-20 bg-white/90 backdrop-blur-xl p-3 md:p-5 rounded-2xl md:rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center space-x-3 md:space-x-5 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 border border-white/20">
-            <div className="p-3 md:p-4 bg-brand-blue/10 rounded-xl md:rounded-2xl text-brand-blue">
+          <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-20 bg-slate-900/80 backdrop-blur-xl p-3 md:p-5 rounded-2xl md:rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center space-x-3 md:space-x-5 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 border border-white/20">
+            <div className="p-3 md:p-4 bg-brand-blue/20 rounded-xl md:rounded-2xl text-brand-blue border border-brand-blue/30 shadow-inner">
               {highlight.icon}
             </div>
             <div>
-              <p className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-0.5 md:mb-1">Core Pillar</p>
-              <p className="text-sm md:text-base font-bold text-slate-900">{highlight.title}</p>
+              <p className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-0.5 md:mb-1">Core Pillar</p>
+              <p className="text-sm md:text-base font-bold text-white">{highlight.title}</p>
             </div>
           </div>
         </motion.div>
@@ -158,7 +171,7 @@ export default function About() {
       title: "Our Mission",
       description: "To empower brands to make bold statements in the real world. We strive to provide premium outdoor advertising solutions that are highly visible and contextually relevant, elevating the urban environment while delivering exceptional value to our clients.",
       features: ["Strategic Ad Placements", "High Footfall Locations", "End-to-End Campaign Management", "Client-Centric Value"],
-      image: "/images/highway.png",
+      image: "/images/our_mission.jpg",
       icon: <Target className="w-6 h-6" />
     },
     {
@@ -166,41 +179,47 @@ export default function About() {
       title: "Our Vision",
       description: "To be the most trusted and innovative out-of-home media agency, transforming urban landscapes with dynamic, data-driven, and highly engaging advertising experiences that bridge the gap between brands and consumers.",
       features: ["Prime Location Network", "Data-Driven Targeting", "Creative Excellence", "Transparent Reporting"],
-      image: "/images/hoarding.png",
+      image: "/images/our_vision.jpg",
       icon: <Globe className="w-6 h-6" />
     }
   ];
 
   const values = [
     {
-      icon: <Globe className="w-8 h-8" />,
+      step: "01",
       title: "Extensive Reach",
-      description: "A robust network of premium hoardings and digital screens across key locations, ensuring maximum audience visibility."
+      description: "A robust network of premium hoardings and digital screens across key locations, ensuring maximum audience visibility.",
+      image: "/Inventory/Agra/Unipole/8f04924c-cec4-43be-9b6d-14ed7518fc9e.jpg"
     },
     {
-      icon: <Target className="w-8 h-8" />,
+      step: "02",
       title: "Targeted Impact",
-      description: "Data-backed site selection designed to capture the attention of your target demographics at the perfect moment."
+      description: "Data-backed site selection designed to capture the attention of your target demographics at the perfect moment.",
+      image: "/Inventory/Lucknow/UniPole/image12.jpeg"
     },
     {
-      icon: <Zap className="w-8 h-8" />,
+      step: "03",
       title: "Dynamic Solutions",
-      description: "Offering a versatile portfolio from classic unipoles and hoardings to modern digital OOH screens and transit media."
+      description: "Offering a versatile portfolio from classic unipoles and hoardings to modern digital OOH screens and transit media.",
+      image: "/Inventory/Bhopal/Bus%20Shelter/image22.jpeg"
     },
     {
-      icon: <Users className="w-8 h-8" />,
+      step: "04",
       title: "Audience First",
-      description: "We prioritize audience engagement, helping you maximize your campaign ROI through smart geographic targeting."
+      description: "We prioritize audience engagement, helping you maximize your campaign ROI through smart geographic targeting.",
+      image: "/Inventory/Kanpur/UniPole/image10.jpeg"
     },
     {
-      icon: <Shield className="w-8 h-8" />,
+      step: "05",
       title: "Premium Quality",
-      description: "Impeccably maintained physical assets and high-resolution flex prints that reflect your brand's premium standards."
+      description: "Impeccably maintained physical assets and high-resolution flex prints that reflect your brand's premium standards.",
+      image: "/Inventory/Allahabad/UniPole/image14.jpeg"
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
+      step: "06",
       title: "Proven Results",
-      description: "Years of on-ground expertise delivering highly successful campaigns for both local businesses and national enterprises."
+      description: "Years of on-ground expertise delivering highly successful campaigns for both local businesses and national enterprises.",
+      image: "/images/hero-bg.png"
     }
   ];
 
@@ -303,11 +322,22 @@ export default function About() {
         </div>
       </section>
 
-      {/* Specialty Services Bento Grid style for Core Values */}
-      <section className="relative z-10 py-16 md:py-32 bg-slate-50 border-y border-slate-100">
+      {/* Specialty Services - The OOH ADExpo Advantage Section */}
+      <section className="relative z-10 py-16 md:py-32 bg-slate-50 border-y border-slate-100 overflow-hidden">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-        <div className="container mx-auto px-6 md:px-12">
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center space-x-3 bg-white px-5 py-2.5 rounded-full border border-slate-200 shadow-sm mb-6"
+            >
+              <div className="w-2.5 h-2.5 rounded-full bg-brand-blue animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                Why Choose Us
+              </span>
+            </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -321,28 +351,53 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-slate-600 text-xl font-light"
+              className="text-slate-600 text-lg md:text-xl font-light"
             >
               What sets us apart in the competitive landscape of out-of-home advertising.
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8 perspective-[1000px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10, rotateX: 2, scale: 1.02 }}
-                className="group bg-white rounded-2xl md:rounded-[2.5rem] p-5 md:p-10 border border-slate-100 hover:border-brand-blue shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)] transition-all duration-500 relative overflow-hidden"
+                whileHover={{ y: -10 }}
+                className="group relative h-[340px] sm:h-[380px] md:h-[420px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900"
               >
-                <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-brand-blue/5 flex items-center justify-center text-brand-blue mb-4 md:mb-8 shadow-sm border border-brand-blue/10 [&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-8 md:[&>svg]:h-8">
-                  {value.icon}
+                {/* Background Image */}
+                <Image 
+                  src={value.image} 
+                  alt={value.title}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                />
+                
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/90 pointer-events-none transition-opacity duration-500 group-hover:opacity-80" />
+                <div className="absolute inset-0 bg-brand-blue/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Massive Step Number Top Right */}
+                <div className="absolute top-6 right-6">
+                  <span className="text-4xl md:text-5xl font-black font-heading text-white/50 group-hover:text-brand-blue transition-colors duration-500 drop-shadow-lg">
+                    {value.step}
+                  </span>
                 </div>
-                <h3 className="text-sm sm:text-base md:text-2xl font-bold font-heading text-slate-900 mb-2 md:mb-4">{value.title}</h3>
-                <p className="text-slate-500 text-[10px] sm:text-xs md:text-base leading-tight md:leading-relaxed font-medium">{value.description}</p>
+
+                {/* Content at Bottom with Frosted Glassmorphism Card */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5">
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.1)] relative overflow-hidden group-hover:border-brand-blue/50 transition-colors duration-500 group-hover:bg-black/40">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-heading leading-tight group-hover:text-brand-blue transition-colors duration-300 relative z-10">
+                      {value.title}
+                    </h3>
+                    <p className="text-slate-300 text-xs md:text-sm font-light leading-relaxed relative z-10">
+                      {value.description}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>

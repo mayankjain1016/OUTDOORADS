@@ -48,10 +48,11 @@ export function Navbar() {
           <Link href="/" className="flex items-center pl-4 pr-6 group">
             <Image 
               src="/LOGO.png"
-              alt="ApexOOH Logo"
+              alt="Logo"
               width={160}
               height={40}
-              className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              priority
+              className="h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
@@ -117,9 +118,9 @@ export function Navbar() {
             <div className="flex items-center justify-between p-6 border-b border-zinc-100">
               <Image 
                 src="/LOGO.png"
-                alt="ApexOOH Logo"
-                width={120}
-                height={30}
+                alt="Logo"
+                width={140}
+                height={35}
                 className="h-8 w-auto object-contain"
               />
               <button
