@@ -18,6 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { STATS } from "@/data";
 import React, { useState, useRef, useEffect } from "react";
+import { AboutHeroSlideshow } from "@/components/sections/about/AboutHeroSlideshow";
 
 // Animated Counter Component
 function Counter({ end, suffix = "", prefix = "" }: { end: number, suffix?: string, prefix?: string }) {
@@ -45,7 +46,7 @@ function Counter({ end, suffix = "", prefix = "" }: { end: number, suffix?: stri
   }, [isInView, end]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} suppressHydrationWarning>
       {prefix}{count}
       <span className="text-slate-400 font-bold">{suffix}</span>
     </span>
@@ -119,13 +120,6 @@ function StoryHighlightItem({ highlight, index }: { highlight: StoryHighlight; i
         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="w-full lg:w-1/2 space-y-6 md:space-y-8 bg-white/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none p-6 rounded-3xl lg:p-0 lg:rounded-none z-10 shadow-[0_-20px_40px_rgba(255,255,255,1)] lg:shadow-none"
       >
-        <div className="inline-flex items-center space-x-3 text-brand-blue mb-2">
-          <div className="p-2 bg-brand-blue/10 rounded-lg">
-            {highlight.icon}
-          </div>
-          <span className="text-sm font-bold uppercase tracking-[0.2em]">Purpose</span>
-        </div>
-        
         <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black font-heading text-slate-900 leading-tight tracking-tight">
           {highlight.title}
         </h2>
@@ -152,19 +146,6 @@ function StoryHighlightItem({ highlight, index }: { highlight: StoryHighlight; i
 }
 
 export default function About() {
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (ctaRef.current) {
-      const rect = ctaRef.current.getBoundingClientRect();
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
-  };
-
   const storyHighlights = [
     {
       id: "mission",
@@ -189,37 +170,37 @@ export default function About() {
       step: "01",
       title: "Extensive Reach",
       description: "A robust network of premium hoardings and digital screens across key locations, ensuring maximum audience visibility.",
-      image: "/Inventory/Agra/Unipole/8f04924c-cec4-43be-9b6d-14ed7518fc9e.jpg"
+      image: "/images/adv_reach.jpg"
     },
     {
       step: "02",
       title: "Targeted Impact",
       description: "Data-backed site selection designed to capture the attention of your target demographics at the perfect moment.",
-      image: "/Inventory/Lucknow/UniPole/image12.jpeg"
+      image: "/images/adv_impact.jpg"
     },
     {
       step: "03",
       title: "Dynamic Solutions",
       description: "Offering a versatile portfolio from classic unipoles and hoardings to modern digital OOH screens and transit media.",
-      image: "/Inventory/Bhopal/Bus%20Shelter/image22.jpeg"
+      image: "/images/adv_solutions.jpg"
     },
     {
       step: "04",
       title: "Audience First",
       description: "We prioritize audience engagement, helping you maximize your campaign ROI through smart geographic targeting.",
-      image: "/Inventory/Kanpur/UniPole/image10.jpeg"
+      image: "/images/adv_audience.jpg"
     },
     {
       step: "05",
       title: "Premium Quality",
       description: "Impeccably maintained physical assets and high-resolution flex prints that reflect your brand's premium standards.",
-      image: "/Inventory/Allahabad/UniPole/image14.jpeg"
+      image: "/images/adv_quality.jpg"
     },
     {
       step: "06",
       title: "Proven Results",
       description: "Years of on-ground expertise delivering highly successful campaigns for both local businesses and national enterprises.",
-      image: "/images/hero-bg.png"
+      image: "/images/adv_results.jpg"
     }
   ];
 
@@ -248,65 +229,70 @@ export default function About() {
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
       
-      {/* Centered Showcase-Style Hero */}
-      <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 bg-gray-50 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[300px] md:h-[400px] bg-gradient-to-b from-white to-gray-50 z-0 pointer-events-none" />
+      {/* ─── Hero Section with 3D Page-Flip Background Carousel (Full Viewport Height) ─── */}
+      <section className="relative min-h-screen min-h-[100dvh] w-full pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden flex flex-col justify-center items-center z-20">
+        
+        {/* Background Slideshow Layer */}
+        <AboutHeroSlideshow />
 
-        <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-4 md:px-0 text-center mb-8 md:mb-10">
+        {/* Hero Content Overlay */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 md:px-8 w-full text-center">
+          <div className="max-w-4xl mx-auto mb-8 md:mb-12">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm border border-gray-200 mb-4 md:mb-6"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm border border-white/20 mb-4 md:mb-6"
             >
               <Building className="w-3.5 h-3.5 md:w-4 md:h-4 text-brand-blue animate-pulse" />
-              <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-700">
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-slate-200">
                 Our Story
               </span>
             </motion.div>
-            <motion.h2 
+
+            <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight text-gray-900 mb-4 md:mb-6"
+              className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight text-white mb-4 md:mb-6 drop-shadow-md"
             >
-              Your Partner in <br className="hidden sm:block lg:hidden" /><span className="text-brand-blue">Media.</span>
-            </motion.h2>
+              Your Partner in <br className="hidden sm:block lg:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-brand-blue">Media.</span>
+            </motion.h1>
+
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-lg text-gray-500 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed drop-shadow"
             >
               With extensive local expertise and a growing network across major cities, OOH ADExpo connects brands with their audiences through high-impact, real-world advertising.
             </motion.p>
           </div>
           
-          {/* Corporate Stats Row Style */}
-          <div className="max-w-4xl mx-auto px-2 md:px-6 relative z-40 mb-8 md:mb-12">
+          {/* Corporate Stats Row Style (Glassmorphism on Dark Hero) */}
+          <div className="max-w-4xl mx-auto px-2 md:px-6 relative z-30">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="flex flex-row items-center justify-between p-4 md:p-8 bg-white border border-gray-200 rounded-xl md:rounded-2xl shadow-sm gap-2 md:gap-0"
+              className="flex flex-row items-center justify-between p-4 md:p-8 bg-black/40 backdrop-blur-2xl border border-white/15 rounded-2xl md:rounded-3xl shadow-2xl gap-2 md:gap-0"
             >
               <div className="text-center group flex-1 w-full">
                 <span className="text-2xl sm:text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-0.5 md:mb-1 group-hover:scale-110 transition-transform"><Counter end={STATS.yearsOfExperience} suffix="+" /></span>
-                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Years Exp</span>
+                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.15em] text-slate-300">Years Exp</span>
               </div>
               
-              <div className="w-px h-10 md:h-16 bg-gray-200 shrink-0" />
+              <div className="w-px h-10 md:h-16 bg-white/15 shrink-0" />
               
               <div className="text-center group flex-1 w-full">
                 <span className="text-2xl sm:text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-0.5 md:mb-1 group-hover:scale-110 transition-transform"><Counter end={STATS.citiesCovered} /></span>
-                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Cities</span>
+                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.15em] text-slate-300">Cities</span>
               </div>
               
-              <div className="w-px h-10 md:h-16 bg-gray-200 shrink-0" />
+              <div className="w-px h-10 md:h-16 bg-white/15 shrink-0" />
               
               <div className="text-center group flex-1 w-full">
                 <span className="text-2xl sm:text-4xl md:text-5xl font-black font-heading text-brand-blue block mb-0.5 md:mb-1 group-hover:scale-110 transition-transform"><Counter end={STATS.campaignsExecuted} suffix="+" /></span>
-                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.1em] text-gray-400">Campaigns</span>
+                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.15em] text-slate-300">Campaigns</span>
               </div>
             </motion.div>
           </div>
@@ -323,10 +309,10 @@ export default function About() {
       </section>
 
       {/* Specialty Services - The OOH ADExpo Advantage Section */}
-      <section className="relative z-10 py-16 md:py-32 bg-slate-50 border-y border-slate-100 overflow-hidden">
+      <section className="relative z-10 py-14 md:py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -357,23 +343,23 @@ export default function About() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="group relative h-[340px] sm:h-[380px] md:h-[420px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900"
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                whileHover={{ y: -6 }}
+                className="group relative h-[250px] sm:h-[270px] md:h-[290px] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 bg-slate-900"
               >
                 {/* Background Image */}
                 <Image 
                   src={value.image} 
                   alt={value.title}
                   fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-75 group-hover:opacity-90"
                 />
                 
                 {/* Gradient Overlays */}
@@ -381,19 +367,19 @@ export default function About() {
                 <div className="absolute inset-0 bg-brand-blue/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Massive Step Number Top Right */}
-                <div className="absolute top-6 right-6">
-                  <span className="text-4xl md:text-5xl font-black font-heading text-white/50 group-hover:text-brand-blue transition-colors duration-500 drop-shadow-lg">
+                <div className="absolute top-4 right-4">
+                  <span className="text-3xl md:text-4xl font-black font-heading text-white/40 group-hover:text-brand-blue transition-colors duration-500 drop-shadow-md">
                     {value.step}
                   </span>
                 </div>
 
                 {/* Content at Bottom with Frosted Glassmorphism Card */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5">
-                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.1)] relative overflow-hidden group-hover:border-brand-blue/50 transition-colors duration-500 group-hover:bg-black/40">
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-heading leading-tight group-hover:text-brand-blue transition-colors duration-300 relative z-10">
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-3.5 sm:p-4 shadow-[0_8px_30px_rgb(0,0,0,0.1)] relative overflow-hidden group-hover:border-brand-blue/50 transition-colors duration-500 group-hover:bg-black/40">
+                    <h3 className="text-base sm:text-lg font-bold text-white mb-1 font-heading leading-tight group-hover:text-brand-blue transition-colors duration-300 relative z-10">
                       {value.title}
                     </h3>
-                    <p className="text-slate-300 text-xs md:text-sm font-light leading-relaxed relative z-10">
+                    <p className="text-slate-300 text-xs sm:text-[13px] font-light leading-relaxed relative z-10 line-clamp-2">
                       {value.description}
                     </p>
                   </div>
@@ -480,57 +466,76 @@ export default function About() {
         </div>
       </section>
 
-      {/* Floating Contained Interactive CTA Section */}
-      <section className="relative z-10 py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <motion.div 
-            ref={ctaRef}
-            onMouseMove={handleMouseMove}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8 }}
-            className="group relative rounded-3xl md:rounded-[3rem] bg-zinc-950 overflow-hidden px-6 py-16 md:py-32 text-center flex flex-col items-center shadow-2xl border border-zinc-800"
-          >
-            {/* Spotlight Hover Effect */}
-            <div 
-              className="pointer-events-none absolute -inset-px rounded-3xl md:rounded-[3rem] opacity-0 transition duration-500 group-hover:opacity-100 z-10"
-              style={{
-                background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(37,99,235,0.15), transparent 40%)`
-              }}
-            />
+      {/* ─── Ready to Launch Your Campaign Section (Full-Bleed Boardroom Feature) ─── */}
+      <section className="relative z-10 py-20 md:py-32 lg:py-36 overflow-hidden bg-slate-950 text-white group">
+        {/* Full-Bleed Strategic Boardroom Background Image (Sharp & Clear, No Blur) */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/group-at-large.jpg"
+            alt="Strategic Boardroom"
+            fill
+            className="object-cover object-center scale-105 transition-transform duration-1000 group-hover:scale-100 opacity-85"
+          />
+          {/* Clean Dark Gradient Overlay for Text Readability - Zero Blur */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/80 pointer-events-none" />
+        </div>
 
-            {/* Premium Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-            {/* Background glowing orbs */}
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px] bg-brand-blue/30 rounded-full blur-[80px] md:blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3 animate-[pulse_8s_ease-in-out_infinite]" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-blue-500/20 rounded-full blur-[60px] md:blur-[100px] pointer-events-none translate-y-1/2 -translate-x-1/3 animate-[pulse_10s_ease-in-out_infinite_reverse]" />
-
-            <div className="relative z-20">
-              <div className="inline-flex items-center space-x-2 bg-zinc-900/80 backdrop-blur-md px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-zinc-800 mb-6 md:mb-8">
-                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-brand-blue animate-pulse" />
-                <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-zinc-300">
-                  Take Action
-                </span>
-              </div>
-              
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-heading text-white mb-6 md:mb-8 tracking-tight max-w-4xl mx-auto leading-tight">
-                Ready to launch your <br className="md:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-400">campaign?</span>
+        <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">
+            
+            {/* Left: Headline */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="lg:col-span-5"
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight leading-[1.15] text-white">
+                Ready to launch your campaign?
               </h2>
-              <p className="text-zinc-400 text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto mb-8 md:mb-12 font-light leading-relaxed">
+            </motion.div>
+
+            {/* Middle: Narrative */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="lg:col-span-4"
+            >
+              <p className="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
                 Join the growing list of brands that trust OOH ADExpo to elevate their presence in the physical world.
               </p>
-              
-              <Link href="/contact" className="relative overflow-hidden inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-5 text-white bg-brand-blue rounded-full font-bold text-base md:text-lg hover:bg-blue-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300 shadow-[0_10px_30px_rgba(37,99,235,0.3)] group border border-blue-400/50 z-30">
-                {/* Button shine effect */}
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+            </motion.div>
+
+            {/* Right: Interactive Action & Arrow */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="lg:col-span-3 lg:pl-4"
+            >
+              <Link
+                href="/contact"
+                className="group/link flex flex-col items-start lg:items-start space-y-4 cursor-pointer"
+              >
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover/link:text-brand-blue transition-colors duration-300">
+                  Start Your Campaign
+                </span>
                 
-                <span className="relative z-10">Start Your Campaign</span>
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 relative z-10 group-hover:translate-x-2 transition-transform" />
+                {/* Horizontal Divider Line */}
+                <div className="w-full h-px bg-white/30 group-hover/link:bg-brand-blue/70 transition-colors duration-300" />
+                
+                {/* Animated Bold Arrow */}
+                <div className="flex items-center text-white group-hover/link:text-brand-blue transition-colors duration-300 pt-1">
+                  <ArrowRight className="w-10 h-10 sm:w-12 sm:h-12 transform group-hover/link:translate-x-3 transition-transform duration-300 stroke-[2.5]" />
+                </div>
               </Link>
-            </div>
-          </motion.div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
       
