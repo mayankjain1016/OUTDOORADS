@@ -4,7 +4,7 @@ export const CITIES: City[] = [
   { 
     id: "lucknow", 
     name: "Lucknow", 
-    image: "https://images.unsplash.com/photo-1624018532214-6d9cfe04f3a1?w=800&q=80", 
+    image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80", 
     mediaCount: 106, 
     areas: ["Hazratganj", "Gomti Nagar", "Aliganj", "Charbagh", "Indira Nagar"] 
   },
@@ -25,7 +25,7 @@ export const CITIES: City[] = [
   { 
     id: "bhopal", 
     name: "Bhopal", 
-    image: "https://images.unsplash.com/photo-1622329312157-124b85c8808d?w=800&q=80", 
+    image: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?w=800&q=80", 
     mediaCount: 284, 
     areas: ["MP Nagar", "Arera Colony", "New Market", "Hoshangabad Road", "Bairagarh"] 
   },
