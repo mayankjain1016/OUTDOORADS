@@ -19,11 +19,11 @@ const GoogleIcon = () => (
 // Single review card — shared between carousel and grid
 function ReviewCard({ t }: { t: typeof TESTIMONIALS[0] }) {
   return (
-    <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-all duration-500 h-full flex flex-col">
+    <div className="bg-white p-8 md:p-10 rounded-sm shadow-sm hover:shadow-premium-hover transition-all duration-500 ease-premium h-full flex flex-col border border-border">
       {/* Header: User & Google Icon */}
-      <div className="flex items-start justify-between mb-5">
-        <div className="flex items-center space-x-3">
-          <div className="relative h-11 w-11 rounded-full overflow-hidden bg-gray-100 shrink-0">
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex items-center space-x-4">
+          <div className="relative h-12 w-12 rounded-sm overflow-hidden bg-brand-light shrink-0">
             <Image 
               src={t.photoUrl} 
               alt={t.name} 
@@ -32,8 +32,8 @@ function ReviewCard({ t }: { t: typeof TESTIMONIALS[0] }) {
             />
           </div>
           <div>
-            <h4 className="font-bold text-gray-900 text-sm md:text-base">{t.name}</h4>
-            <p className="text-[12px] md:text-[13px] font-medium text-gray-400 mt-0.5">{t.role} at {t.company}</p>
+            <h4 className="font-bold font-heading text-brand-navy text-base md:text-lg">{t.name}</h4>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-brand-orange mt-1">{t.role} at {t.company}</p>
           </div>
         </div>
         <div className="opacity-90 shrink-0">
@@ -42,21 +42,21 @@ function ReviewCard({ t }: { t: typeof TESTIMONIALS[0] }) {
       </div>
       
       {/* Rating & Verified Tag */}
-      <div className="flex items-center space-x-3 mb-4">
+      <div className="flex items-center space-x-3 mb-6">
         <div className="flex text-[#FBBC05] space-x-0.5">
           {[...Array(t.rating || 5)].map((_, idx) => (
             <Star key={idx} className="h-4 w-4 fill-current" />
           ))}
         </div>
-        <div className="w-1 h-1 rounded-full bg-gray-200" />
-        <div className="flex items-center space-x-1.5 text-gray-400 text-[12px] font-medium">
+        <div className="w-1 h-1 rounded-sm bg-border" />
+        <div className="flex items-center space-x-1.5 text-brand-navy/60 text-[11px] font-bold uppercase tracking-widest">
           <CheckCircle className="h-3.5 w-3.5 text-[#34A853]" />
           <span>Verified Client</span>
         </div>
       </div>
       
       {/* Review Text */}
-      <blockquote className="text-gray-600 leading-relaxed text-sm md:text-[15px] flex-1">
+      <blockquote className="text-brand-navy/80 leading-relaxed text-sm md:text-base flex-1 italic">
         &ldquo;{t.quote}&rdquo;
       </blockquote>
     </div>
@@ -106,7 +106,7 @@ function MobileCarousel() {
     <div className="relative">
       {/* Card */}
       <div
-        className="overflow-hidden"
+        className="overflow-hidden p-1"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -126,10 +126,10 @@ function MobileCarousel() {
       </div>
 
       {/* Nav arrows */}
-      <div className="flex items-center justify-between mt-5">
+      <div className="flex items-center justify-between mt-8">
         <button
           onClick={prev}
-          className="p-2.5 rounded-full bg-white border border-gray-200 shadow-sm text-gray-500 hover:text-gray-900 hover:border-gray-300 transition-colors"
+          className="p-3 rounded-sm bg-white border border-border shadow-sm text-brand-navy hover:text-brand-orange hover:border-brand-orange transition-colors duration-300"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -140,10 +140,10 @@ function MobileCarousel() {
             <button
               key={i}
               onClick={() => goTo(i, i > current ? 1 : -1)}
-              className={`rounded-full transition-all duration-300 ${
+              className={`rounded-sm transition-all duration-300 ${
                 i === current
-                  ? "w-5 h-2 bg-brand-blue"
-                  : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
+                  ? "w-6 h-2 bg-brand-orange"
+                  : "w-2 h-2 bg-border hover:bg-brand-navy/20"
               }`}
             />
           ))}
@@ -151,7 +151,7 @@ function MobileCarousel() {
 
         <button
           onClick={next}
-          className="p-2.5 rounded-full bg-white border border-gray-200 shadow-sm text-gray-500 hover:text-gray-900 hover:border-gray-300 transition-colors"
+          className="p-3 rounded-sm bg-white border border-border shadow-sm text-brand-navy hover:text-brand-orange hover:border-brand-orange transition-colors duration-300"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -162,18 +162,18 @@ function MobileCarousel() {
 
 export function Testimonials() {
   return (
-    <section className="py-16 md:py-24 lg:py-32 relative bg-gray-50 overflow-hidden border-t border-gray-200">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+    <section className="py-20 md:py-32 relative bg-brand-light overflow-hidden border-t border-border">
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 lg:mb-24">
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white border border-gray-200 shadow-sm px-4 py-2 rounded-full text-gray-700 text-xs font-bold tracking-widest uppercase mb-6"
+            className="inline-flex items-center space-x-2 bg-white border border-border shadow-sm px-4 py-2 rounded-sm text-brand-navy text-xs font-bold tracking-widest uppercase mb-6"
           >
-            <ShieldCheck className="h-4 w-4 text-brand-blue" />
+            <ShieldCheck className="h-4 w-4 text-brand-orange" />
             <span>Verified Reviews</span>
           </motion.div>
           <motion.h2 
@@ -181,16 +181,16 @@ export function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-6xl font-black font-heading tracking-tight text-gray-900 mb-4 md:mb-6"
+            className="text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight text-brand-navy mb-6"
           >
-            Trusted by <span className="text-brand-blue">Top Brands</span>
+            Trusted by <span className="text-brand-orange italic">Top Brands</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-brand-navy/60 font-medium max-w-2xl mx-auto"
           >
             See what our partners say about our premium out-of-home advertising solutions and campaign execution.
           </motion.p>
@@ -202,7 +202,7 @@ export function Testimonials() {
         </div>
 
         {/* Desktop: masonry grid */}
-        <div className="hidden md:block columns-2 lg:columns-3 gap-6 md:gap-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
+        <div className="hidden md:block columns-2 lg:columns-3 gap-8 max-w-7xl mx-auto space-y-8">
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={t.id}

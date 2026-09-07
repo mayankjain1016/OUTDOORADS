@@ -4,21 +4,21 @@ export const CITIES: City[] = [
   { 
     id: "lucknow", 
     name: "Lucknow", 
-    image: "https://images.unsplash.com/photo-1590050752117-238cb12db5a3?w=800&q=80", 
+    image: "https://images.unsplash.com/photo-1624018532214-6d9cfe04f3a1?w=800&q=80", 
     mediaCount: 106, 
     areas: ["Hazratganj", "Gomti Nagar", "Aliganj", "Charbagh", "Indira Nagar"] 
   },
   { 
     id: "kanpur", 
     name: "Kanpur", 
-    image: "https://images.unsplash.com/photo-1587588354456-ae376af71a25?w=800&q=80", 
+    image: "https://images.unsplash.com/photo-1595776613215-fe04b78de7d0?w=800&q=80", 
     mediaCount: 270, 
     areas: ["Civil Lines", "Swaroop Nagar", "Mall Road", "Kakadeo", "GT Road"] 
   },
   { 
     id: "allahabad", 
     name: "Allahabad", 
-    image: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800&q=80", 
+    image: "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=800&q=80", 
     mediaCount: 183, 
     areas: ["Civil Lines", "Katra", "George Town", "Naini", "Tagore Town"] 
   },

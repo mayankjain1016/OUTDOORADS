@@ -1,22 +1,22 @@
 import { Hero } from "@/components/sections/home/Hero";
-import { Stats } from "@/components/sections/home/Stats";
-import { FeaturedMedia } from "@/components/sections/home/FeaturedMedia";
-import { FeaturedCities } from "@/components/sections/home/FeaturedCities";
-import { Industries } from "@/components/sections/home/Industries";
+import { MediaMarquee } from "@/components/sections/home/MediaMarquee";
 import { LogoWall } from "@/components/sections/home/LogoWall";
-import { Testimonials } from "@/components/sections/home/Testimonials";
+import { BentoReach } from "@/components/sections/home/BentoReach";
+import { FeaturedMedia } from "@/components/sections/home/FeaturedMedia";
+import { InteractiveIndustries } from "@/components/sections/home/InteractiveIndustries";
 import { Process } from "@/components/sections/home/Process";
+import { Testimonials } from "@/components/sections/home/Testimonials";
 import { CTA } from "@/components/sections/home/CTA";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <MediaMarquee />
       <LogoWall />
-      <Stats />
-      <FeaturedCities />
+      <BentoReach />
       <FeaturedMedia />
-      <Industries />
+      <InteractiveIndustries />
       <Process />
       <Testimonials />
       <CTA />

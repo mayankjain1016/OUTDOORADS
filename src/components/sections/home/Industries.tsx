@@ -24,17 +24,14 @@ const getIndustryIcon = (name: string) => {
 
 export function Industries() {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-100 via-slate-50 to-slate-50 pointer-events-none" />
-
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+    <section className="py-20 md:py-32 bg-white relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
         <SectionHeading 
           title="Industries We Dominate" 
           subtitle="Our tailored outdoor media solutions deliver high-impact results and unrivaled visibility across all major sectors."
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 mt-10 md:mt-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-12 md:mt-24">
           {INDUSTRIES.map((industry, i) => (
             <Link key={industry.id} href={`/gallery?industry=${industry.name}`}>
               <motion.div
@@ -42,20 +39,20 @@ export function Industries() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative flex flex-col items-center justify-center py-6 px-4 md:p-10 bg-white rounded-2xl md:rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 cursor-pointer overflow-hidden h-full"
+                className="group relative flex flex-col items-center justify-center py-8 px-4 md:p-12 bg-white rounded-sm shadow-sm hover:shadow-premium-hover transition-all duration-500 hover:-translate-y-2 border border-border cursor-pointer overflow-hidden h-full ease-premium"
               >
                 {/* Background hover effect */}
-                <div className="absolute inset-0 bg-slate-950 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                <div className="absolute inset-0 bg-brand-navy translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-premium" />
 
-                <div className="relative z-10 text-slate-400 group-hover:text-white transition-all duration-300 mb-3 md:mb-6 group-hover:scale-110">
+                <div className="relative z-10 text-brand-navy/50 group-hover:text-brand-orange transition-all duration-500 mb-4 md:mb-6 group-hover:scale-110 ease-premium">
                   {getIndustryIcon(industry.name)}
                 </div>
                 
-                <h4 className="relative z-10 font-bold text-sm sm:text-base md:text-xl text-slate-900 group-hover:text-white transition-colors duration-300 text-center tracking-tight">
+                <h4 className="relative z-10 font-bold text-sm sm:text-base md:text-lg text-brand-navy group-hover:text-white transition-colors duration-300 text-center tracking-tight">
                   {industry.name}
                 </h4>
                 
-                <div className="relative z-10 mt-2 md:mt-4 opacity-0 group-hover:opacity-100 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 hidden md:flex items-center text-white text-sm font-semibold tracking-wide">
+                <div className="relative z-10 mt-3 md:mt-5 opacity-0 group-hover:opacity-100 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 hidden md:flex items-center text-brand-orange text-xs font-bold uppercase tracking-widest">
                   View Gallery <ArrowRight className="w-4 h-4 ml-1.5" />
                 </div>
               </motion.div>
