@@ -4,21 +4,21 @@ export const CITIES: City[] = [
   { 
     id: "lucknow", 
     name: "Lucknow", 
-    image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80", 
+    image: "/images/cities/lucknow.jpg", 
     mediaCount: 106, 
     areas: ["Hazratganj", "Gomti Nagar", "Aliganj", "Charbagh", "Indira Nagar"] 
   },
   { 
     id: "kanpur", 
     name: "Kanpur", 
-    image: "https://images.unsplash.com/photo-1595776613215-fe04b78de7d0?w=800&q=80", 
+    image: "/images/cities/kanpur.jpg", 
     mediaCount: 270, 
     areas: ["Civil Lines", "Swaroop Nagar", "Mall Road", "Kakadeo", "GT Road"] 
   },
   { 
     id: "allahabad", 
     name: "Allahabad", 
-    image: "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=800&q=80", 
+    image: "/images/cities/allahabad.jpg", 
     mediaCount: 183, 
     areas: ["Civil Lines", "Katra", "George Town", "Naini", "Tagore Town"] 
   },
@@ -2232,7 +2232,7 @@ export const CLIENTS: Client[] = [
 
 export const TESTIMONIALS: Testimonial[] = [
   { id: "tst-1", name: "Aarav Sharma", company: "AutoCorp India", role: "Marketing Director", quote: "Their premium inventory in Mumbai helped us achieve a 40% increase in showroom footfall during our launch month.", rating: 5, photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" },
-  { id: "tst-2", name: "Priya Patel", company: "TechGiant", role: "VP Brand Strategy", quote: "The DOOH screens provided exceptional visibility. Their programmatic approach to outdoor is truly next-gen.", rating: 5, photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" },
+  { id: "tst-2", name: "Priya Patel", company: "TechGiant", role: "VP Brand Strategy", quote: "The transit media network provided exceptional visibility. Their strategic approach to outdoor is truly next-gen.", rating: 5, photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" },
 ];
 
 export const STATS: Statistics = {

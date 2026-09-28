@@ -52,7 +52,6 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-6">
             <h4 className="text-white font-bold text-xs tracking-widest uppercase mb-8 opacity-50">Services</h4>
             <ul className="space-y-4 text-sm font-semibold tracking-wide">
-              <li><Link href="#" className="hover:text-brand-orange inline-flex items-center group transition-colors duration-300">Digital OOH <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" /></Link></li>
               <li><Link href="#" className="hover:text-brand-orange inline-flex items-center group transition-colors duration-300">Transit Media <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" /></Link></li>
               <li><Link href="#" className="hover:text-brand-orange inline-flex items-center group transition-colors duration-300">Airport Branding <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" /></Link></li>
               <li><Link href="#" className="hover:text-brand-orange inline-flex items-center group transition-colors duration-300">Mall Activations <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" /></Link></li>

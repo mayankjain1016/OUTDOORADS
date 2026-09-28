@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/home/Hero";
-import { MediaMarquee } from "@/components/sections/home/MediaMarquee";
 import { LogoWall } from "@/components/sections/home/LogoWall";
 import { BentoReach } from "@/components/sections/home/BentoReach";
 import { FeaturedMedia } from "@/components/sections/home/FeaturedMedia";
@@ -12,7 +11,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <MediaMarquee />
       <LogoWall />
       <BentoReach />
       <FeaturedMedia />

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import {
@@ -152,7 +152,7 @@ const highlights = [
 const advantages = [
   { number: "01", title: "Extensive Reach", description: "A robust network of premium hoardings across key locations, ensuring maximum audience visibility.", image: "/images/adv_reach.jpg" },
   { number: "02", title: "Targeted Impact", description: "Data-backed site selection designed to capture your target demographics at the perfect moment.", image: "/images/adv_impact.jpg" },
-  { number: "03", title: "Dynamic Solutions", description: "From classic unipoles to modern digital OOH screens and transit media � we have it all.", image: "/images/adv_solutions.jpg" },
+  { number: "03", title: "Dynamic Solutions", description: "From classic unipoles to transit media – we have it all.", image: "/images/adv_solutions.jpg" },
   { number: "04", title: "Audience First", description: "We prioritize audience engagement, maximizing your ROI through smart geographic targeting.", image: "/images/adv_audience.jpg" },
   { number: "05", title: "Premium Quality", description: "Impeccably maintained assets and high-resolution prints that reflect your brand standards.", image: "/images/adv_quality.jpg" },
   { number: "06", title: "Proven Results", description: "Years of on-ground expertise delivering successful campaigns for local and national brands.", image: "/images/adv_results.jpg" },
@@ -171,7 +171,7 @@ const milestones = [
   { year: "2010", icon: MapPin, title: "Founded in Lucknow", description: "Started with a vision to revolutionize OOH advertising in tier-2 cities." },
   { year: "2014", icon: Globe, title: "Expanded to 3 Cities", description: "Grew our network to Kanpur and Allahabad, tripling our media assets." },
   { year: "2018", icon: Award, title: "500+ Campaigns", description: "Crossed 500 successful campaigns and earned best OOH agency recognition." },
-  { year: "2022", icon: Eye, title: "Digital OOH Launch", description: "Pioneered digital OOH screens in prime locations across our city network." },
+  { year: "2022", icon: Eye, title: "Prime Locations", description: "Secured premium media assets across the most sought-after commercial hubs." },
   { year: "2024", icon: Calendar, title: "1000+ Media Assets", description: "A milestone network covering 6+ cities with 1000+ premium media assets." },
 ];
 

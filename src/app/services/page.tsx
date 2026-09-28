@@ -43,17 +43,8 @@ const SERVICES = [
     image: "/images/service_transit_shelter.jpg",
   },
   {
-    id: "dooh",
-    index: "03",
-    title: "Digital OOH",
-    subtitle: "Dynamic & contextual.",
-    description: "The future of outdoor. Vibrant, motion-ready digital screens that allow for real-time updates, day-parting, and contextual triggers that static media simply cannot match.",
-    details: ["Video Ready", "Day-parting", "Real-time Updates", "Dynamic Content"],
-    image: "/images/service_digital_dooh.jpg",
-  },
-  {
     id: "custom",
-    index: "04",
+    index: "03",
     title: "Experiential",
     subtitle: "Unconventional formats.",
     description: "Break the mold. We build 3D installations, metro pillar takeovers, and custom gantries that transform ordinary spaces into memorable brand experiences.",

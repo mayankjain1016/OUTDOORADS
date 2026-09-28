@@ -242,7 +242,7 @@ export function Hero() {
               {/* Refined Quick Links */}
               <div className="flex flex-wrap items-center gap-4 mt-8">
                 <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Trending</span>
-                {["Lucknow", "Digital OOH", "Agra", "Transit"].map((tag) => (
+                {["Lucknow", "Agra", "Transit"].map((tag) => (
                   <button
                     key={tag}
                     onClick={handleSearch}

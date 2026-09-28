@@ -276,7 +276,6 @@ export default function Contact() {
                   >
                     <option value="">Select an option...</option>
                     <option value="hoardings">Hoardings & Billboards</option>
-                    <option value="digital">Digital OOH Screens</option>
                     <option value="transit">Transit Media (Buses, Metro)</option>
                     <option value="campaign">Full Nationwide Campaign</option>
                     <option value="other">Other</option>
