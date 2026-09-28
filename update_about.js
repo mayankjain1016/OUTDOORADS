@@ -38,7 +38,7 @@ content = content.replace(
 
 content = content.replace(
   `From classic billboards to cutting-edge digital displays, offering versatile formats.`,
-  `Offering a versatile portfolio from classic unipoles and hoardings to modern digital OOH screens and transit media.`
+  `Offering a versatile portfolio from classic unipoles and hoardings to transit media.`
 );
 
 content = content.replace(
