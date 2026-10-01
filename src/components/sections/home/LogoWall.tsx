@@ -22,7 +22,7 @@ export function LogoWall() {
         <div className="flex animate-[scroll_40s_linear_infinite] md:animate-[scroll_80s_linear_infinite] w-max gap-12 lg:gap-24 items-center px-8">
           {logos.map((client, i) => (
             <div key={`${client.id}-${i}`} className="flex-shrink-0">
-              <div className="relative w-32 h-16 md:w-48 md:h-24 transition-transform duration-500 ease-premium hover:scale-105 cursor-default flex items-center justify-center grayscale-[1] hover:grayscale-0 opacity-60 hover:opacity-100">
+              <div className="relative w-32 h-16 md:w-48 md:h-24 transition-transform duration-500 ease-premium hover:scale-105 cursor-default flex items-center justify-center opacity-100">
                 {client.logoUrl ? (
                   <Image
                     src={client.logoUrl}

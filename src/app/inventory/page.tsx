@@ -404,7 +404,7 @@ export default function Inventory() {
                     <AnimatePresence mode="wait">
                       {holdings.map((media) => {
                         const isExpanded = expandedId === media.id;
-                        const status = getStatusConfig(media.availability);
+
                         
                         return (
                           <motion.div 
@@ -436,12 +436,7 @@ export default function Inventory() {
                                     {media.size}
                                   </span>
                                 </div>
-                                <div className="absolute top-4 right-4">
-                                  <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-[9px] font-black uppercase tracking-[0.1em] shadow-sm border ${status.bg} ${status.color} ${status.border}`}>
-                                    {status.icon}
-                                    {media.availability}
-                                  </span>
-                                </div>
+
                               </div>
                               
                               {/* Content Section */}

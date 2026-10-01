@@ -259,7 +259,7 @@ export function Hero() {
 
       {/* Solid sharp break to light theme with an ultra-minimal marquee */}
       <div className="w-full bg-white py-5 overflow-hidden border-b border-gray-200 relative z-30">
-        <div className="flex whitespace-nowrap animate-marquee-left">
+        <div className="flex whitespace-nowrap animate-marquee-right">
           {[...Array(10)].map((_, i) => (
             <div key={i} className="flex items-center mx-10">
               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-400">Elevate Your Brand</span>
@@ -271,12 +271,12 @@ export function Hero() {
         </div>
       </div>
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes marqueeLeft {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
+        @keyframes marqueeRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0%); }
         }
-        .animate-marquee-left {
-          animation: marqueeLeft 30s linear infinite;
+        .animate-marquee-right {
+          animation: marqueeRight 30s linear infinite;
         }
       `}} />
     </>

@@ -259,9 +259,7 @@ export default function CityShowcase() {
                             <Maximize className="w-3.5 h-3.5 mr-2 text-gray-300" />
                             {media.size}
                           </div>
-                          <div className={`text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-sm ${media.availability === 'Available' ? 'bg-green-50 text-green-600 border border-green-200' : 'bg-gray-50 text-gray-500 border border-gray-200'}`}>
-                            {media.availability}
-                          </div>
+
                         </div>
                       </div>
 
